@@ -1,12 +1,45 @@
-// Update this page (the content is just a fallback if you fail to update the page)
+import { useState } from "react";
+import { Header } from "@/components/Header";
+import { Footer } from "@/components/Footer";
+import { HomePage } from "@/pages/HomePage";
+import { ProgramsPage } from "@/pages/ProgramsPage";
+import { SermonsPage } from "@/pages/SermonsPage";
+import { EventsPage } from "@/pages/EventsPage";
+import { NewsPage } from "@/pages/NewsPage";
+import { AboutPage } from "@/pages/AboutPage";
+import { ContactPage } from "@/pages/ContactPage";
 
 const Index = () => {
+  const [currentPage, setCurrentPage] = useState("home");
+
+  const renderPage = () => {
+    switch (currentPage) {
+      case "home":
+        return <HomePage />;
+      case "programs":
+        return <ProgramsPage />;
+      case "sermons":
+        return <SermonsPage />;
+      case "events":
+        return <EventsPage />;
+      case "news":
+        return <NewsPage />;
+      case "about":
+        return <AboutPage />;
+      case "contact":
+        return <ContactPage />;
+      default:
+        return <HomePage />;
+    }
+  };
+
   return (
-    <div className="flex min-h-screen items-center justify-center bg-background">
-      <div className="text-center">
-        <h1 className="mb-4 text-4xl font-bold">Welcome to Your Blank App</h1>
-        <p className="text-xl text-muted-foreground">Start building your amazing project here!</p>
-      </div>
+    <div className="min-h-screen bg-background">
+      <Header currentPage={currentPage} onPageChange={setCurrentPage} />
+      <main>
+        {renderPage()}
+      </main>
+      <Footer />
     </div>
   );
 };
