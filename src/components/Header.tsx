@@ -1,5 +1,5 @@
 import { useState } from "react";
-import { Facebook, Twitter, Youtube, Instagram, PlayCircle, Menu, X } from "lucide-react";
+import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
@@ -12,13 +12,12 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigationItems = [
-    { id: "home", label: "Home" },
+    { id: "home", label: "AGTV" },
     { id: "programs", label: "Programs" },
     { id: "sermons", label: "Sermons" },
     { id: "events", label: "Events" },
     { id: "news", label: "News" },
     { id: "about", label: "About" },
-    { id: "contact", label: "Contact" },
   ];
 
   const handleNavClick = (pageId: string) => {
@@ -28,30 +27,6 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
 
   return (
     <>
-      {/* Top Bar */}
-      <div className="bg-gradient-to-r from-dark to-zinc-800 py-2 text-xs">
-        <div className="container mx-auto px-4 flex justify-between items-center text-white">
-          <div className="flex items-center gap-2">
-            <span>📺</span>
-            <span>Watch AGTV Live 24/7 | Faith That Transforms</span>
-          </div>
-          <div className="social-links flex gap-3">
-            <a href="#" className="text-white hover:text-primary transition-all duration-300 hover:transform hover:translate-y-[-2px]">
-              <Facebook size={14} />
-            </a>
-            <a href="#" className="text-white hover:text-primary transition-all duration-300 hover:transform hover:translate-y-[-2px]">
-              <Twitter size={14} />
-            </a>
-            <a href="#" className="text-white hover:text-primary transition-all duration-300 hover:transform hover:translate-y-[-2px]">
-              <Youtube size={14} />
-            </a>
-            <a href="#" className="text-white hover:text-primary transition-all duration-300 hover:transform hover:translate-y-[-2px]">
-              <Instagram size={14} />
-            </a>
-          </div>
-        </div>
-      </div>
-
       {/* Main Header */}
       <header className="bg-background shadow-[0_2px_15px_rgba(0,0,0,0.1)] sticky top-0 z-50">
         <div className="container mx-auto px-4">
@@ -90,14 +65,6 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
               </ul>
             </nav>
 
-            {/* Watch Live Button */}
-            <div className="hidden lg:block">
-              <Button className="btn-live">
-                <PlayCircle className="mr-2 h-4 w-4" />
-                WATCH LIVE
-              </Button>
-            </div>
-
             {/* Mobile Menu Button */}
             <Button
               variant="ghost"
@@ -127,10 +94,6 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
                     {item.label}
                   </button>
                 ))}
-                <Button className="btn-live mt-4">
-                  <PlayCircle className="mr-2 h-4 w-4" />
-                  WATCH LIVE
-                </Button>
               </nav>
             </div>
           )}
