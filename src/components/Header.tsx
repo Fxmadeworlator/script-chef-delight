@@ -2,8 +2,7 @@ import { useState } from "react";
 import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-// Force refresh to resolve Button import issue
+import agLogo from "@/assets/ag-logo.png";
 
 interface HeaderProps {
   currentPage: string;
@@ -20,6 +19,7 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
     { id: "events", label: "Events" },
     { id: "news", label: "News" },
     { id: "about", label: "About" },
+    { id: "live", label: "Watch Live" },
   ];
 
   const handleNavClick = (pageId: string) => {
@@ -38,9 +38,11 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
               className="flex items-center cursor-pointer" 
               onClick={() => handleNavClick('home')}
             >
-              <div className="w-15 h-15 bg-gradient-to-br from-primary to-primary-dark rounded-lg flex items-center justify-center mr-4 text-primary-foreground font-bold text-2xl shadow-[0_4px_10px_rgba(255,215,0,0.3)]">
-                ✝
-              </div>
+              <img 
+                src={agLogo} 
+                alt="Assemblies of God" 
+                className="h-12 w-auto mr-3"
+              />
               <div className="text-3xl font-bold text-foreground font-display drop-shadow-sm">
                 AGTV
               </div>
