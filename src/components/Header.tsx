@@ -3,6 +3,8 @@ import { Menu, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
+// Force refresh to resolve Button import issue
+
 interface HeaderProps {
   currentPage: string;
   onPageChange: (page: string) => void;
