@@ -51,7 +51,7 @@ export const HeroSection = () => {
   }, [api]);
 
   return (
-    <section className="relative h-[80vh]">
+    <section className="relative h-[80vh] px-20">
       <Carousel 
         setApi={setApi}
         className="w-full h-full"
@@ -72,22 +72,22 @@ export const HeroSection = () => {
                   backgroundPosition: 'center',
                  }}
                >
-                 <div className="absolute bottom-8 left-8 max-w-lg">
-                   <h1 className="text-2xl md:text-3xl lg:text-4xl font-bold mb-3 leading-tight font-display drop-shadow-lg">
+                 <div className="absolute bottom-8 left-8 max-w-lg text-left">
+                   <h1 className="text-xl md:text-2xl lg:text-3xl font-bold mb-2 leading-tight font-display drop-shadow-lg">
                      {slide.title.split(' ').map((word, i) => 
                        word === 'AGTV' || word === 'Christ' || word === 'News' ? (
                          <span key={i} className="text-primary drop-shadow-[0_0_10px_rgba(255,215,0,0.5)]">{word} </span>
                        ) : word + ' '
                      )}
                    </h1>
-                   <p className="text-lg md:text-xl mb-2 text-primary-glow font-semibold">
+                   <p className="text-base md:text-lg mb-2 text-primary-glow font-semibold">
                      {slide.subtitle}
                    </p>
-                   <p className="text-sm md:text-base mb-4 opacity-90 leading-relaxed">
+                   <p className="text-xs md:text-sm mb-3 opacity-90 leading-relaxed">
                      {slide.description}
                    </p>
                    <div className="flex justify-start">
-                     <Button className="btn-hero">
+                     <Button className="btn-live">
                        <slide.primaryButton.icon className="mr-2 h-4 w-4" />
                        {slide.primaryButton.text}
                      </Button>
@@ -98,17 +98,36 @@ export const HeroSection = () => {
           ))}
         </CarouselContent>
         
-        {/* Slide indicators */}
-        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex space-x-2">
-          {Array.from({ length: count }, (_, index) => (
-            <button
-              key={index}
-              className={`w-3 h-3 rounded-full transition-all duration-300 ${
-                index + 1 === current ? 'bg-primary' : 'bg-white/50'
-              }`}
-              onClick={() => api?.scrollTo(index)}
-            />
-          ))}
+        {/* Navigation arrows and slide indicators */}
+        <div className="absolute bottom-4 left-1/2 transform -translate-x-1/2 flex items-center space-x-4">
+          {/* Previous button */}
+          <button
+            onClick={() => api?.scrollPrev()}
+            className="w-8 h-8 rounded-full bg-white/20 text-white border border-white/30 flex items-center justify-center hover:bg-white/30 transition-all duration-300"
+          >
+            <span className="text-lg font-bold">&lt;</span>
+          </button>
+          
+          {/* Slide indicators */}
+          <div className="flex space-x-1">
+            {Array.from({ length: count }, (_, index) => (
+              <button
+                key={index}
+                className={`w-2 h-2 rounded-full transition-all duration-300 ${
+                  index + 1 === current ? 'bg-primary' : 'bg-white/50'
+                }`}
+                onClick={() => api?.scrollTo(index)}
+              />
+            ))}
+          </div>
+          
+          {/* Next button */}
+          <button
+            onClick={() => api?.scrollNext()}
+            className="w-8 h-8 rounded-full bg-white/20 text-white border border-white/30 flex items-center justify-center hover:bg-white/30 transition-all duration-300"
+          >
+            <span className="text-lg font-bold">&gt;</span>
+          </button>
         </div>
       </Carousel>
     </section>

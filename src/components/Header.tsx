@@ -15,11 +15,11 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
   const navigationItems = [
     { id: "home", label: "AGTV" },
     { id: "programs", label: "Programs" },
-    { id: "sermons", label: "Sermons" },
+    { id: "live", label: "Watch Live" },
+    { id: "schedule", label: "Schedule" },
     { id: "events", label: "Events" },
     { id: "news", label: "News" },
     { id: "about", label: "About" },
-    { id: "live", label: "Watch Live" },
   ];
 
   const handleNavClick = (pageId: string) => {
