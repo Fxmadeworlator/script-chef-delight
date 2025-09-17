@@ -3,11 +3,11 @@ import { Header } from "@/components/Header";
 import { Footer } from "@/components/Footer";
 import { HomePage } from "@/pages/HomePage";
 import { ProgramsPage } from "@/pages/ProgramsPage";
-import { SermonsPage } from "@/pages/SermonsPage";
+import { SchedulePage } from "@/pages/SchedulePage";
 import { EventsPage } from "@/pages/EventsPage";
 import { NewsPage } from "@/pages/NewsPage";
 import { AboutPage } from "@/pages/AboutPage";
-import { ContactPage } from "@/pages/ContactPage";
+import { LivePage } from "@/pages/LivePage";
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState("home");
@@ -18,16 +18,16 @@ const Index = () => {
         return <HomePage />;
       case "programs":
         return <ProgramsPage />;
-      case "sermons":
-        return <SermonsPage />;
+      case "live":
+        return <LivePage />;
+      case "schedule":
+        return <SchedulePage />;
       case "events":
         return <EventsPage />;
       case "news":
         return <NewsPage />;
       case "about":
         return <AboutPage />;
-      case "contact":
-        return <ContactPage />;
       default:
         return <HomePage />;
     }

@@ -12,52 +12,68 @@ interface Event {
 
 const events: Event[] = [
   {
-    id: "revival-conference",
-    title: "African Revival Conference 2024",
-    description: "A powerful gathering of believers from across Africa for worship, teaching, and spiritual renewal.",
-    location: "Accra International Conference Centre",
-    date: { day: "15", month: "DEC" },
-    emoji: "🔥"
+    id: "feeding-homeless",
+    title: "Feed the Homeless Outreach",
+    description: "Join us in serving hot meals and sharing God's love with the homeless community in Accra.",
+    location: "Accra Central Market Area",
+    date: { day: "18", month: "NOV" },
+    emoji: "🍽️"
   },
   {
-    id: "youth-summit",
-    title: "Youth Leadership Summit",
-    description: "Empowering the next generation of Christian leaders with vision, purpose, and practical skills.",
-    location: "University of Ghana, Legon",
-    date: { day: "22", month: "NOV" },
-    emoji: "👥"
+    id: "school-visit",
+    title: "School Evangelism Program",
+    description: "Visiting local schools to share the gospel and provide educational support to students.",
+    location: "Kaneshie Methodist School",
+    date: { day: "25", month: "NOV" },
+    emoji: "🏫"
   },
   {
-    id: "family-festival",
-    title: "Family Festival & Fun Day",
-    description: "A celebration of Christian families with activities, games, and inspiring messages for all ages.",
-    location: "Independence Square, Accra",
-    date: { day: "30", month: "NOV" },
-    emoji: "🎪"
+    id: "roadside-preaching",
+    title: "Roadside Preaching & Testimony",
+    description: "Taking the gospel to the streets with powerful testimonies and open-air preaching.",
+    location: "Circle Intersection, Accra",
+    date: { day: "02", month: "DEC" },
+    emoji: "📢"
   },
   {
-    id: "prayer-marathon",
-    title: "24-Hour Prayer Marathon",
-    description: "Join us for continuous prayer and worship as we seek God's face for breakthrough and blessing.",
-    location: "AGTV Studios & Online",
-    date: { day: "08", month: "DEC" },
-    emoji: "🕊️"
+    id: "hospital-visit",
+    title: "Hospital Ministry Visit",
+    description: "Ministering to patients and families, bringing comfort and prayer to those in need.",
+    location: "Korle-Bu Teaching Hospital",
+    date: { day: "09", month: "DEC" },
+    emoji: "🏥"
   },
   {
-    id: "business-conference",
-    title: "Kingdom Business Conference",
-    description: "Integrating faith and business for Christian entrepreneurs and marketplace ministers.",
-    location: "Kempinski Hotel, Accra",
-    date: { day: "12", month: "JAN" },
-    emoji: "💼"
+    id: "prison-outreach",
+    title: "Prison Ministry Outreach",
+    description: "Sharing hope and redemption with inmates through worship, testimony, and counseling.",
+    location: "Nsawam Medium Security Prison",
+    date: { day: "16", month: "DEC" },
+    emoji: "🔓"
   },
   {
-    id: "worship-concert",
-    title: "Worship Under the Stars",
-    description: "An evening of praise and worship featuring top gospel artists from across Africa.",
-    location: "National Theatre, Accra",
-    date: { day: "25", month: "DEC" },
-    emoji: "🌟"
+    id: "community-cleanup",
+    title: "Community Clean-Up Day",
+    description: "Serving our neighborhood by cleaning public spaces and showing Christ's love through action.",
+    location: "Dansoman Community",
+    date: { day: "23", month: "DEC" },
+    emoji: "🧹"
+  },
+  {
+    id: "christmas-gift",
+    title: "Christmas Gift Distribution",
+    description: "Distributing gifts and food packages to underprivileged families during the Christmas season.",
+    location: "Various Communities in Accra",
+    date: { day: "24", month: "DEC" },
+    emoji: "🎁"
+  },
+  {
+    id: "new-year-prayer",
+    title: "New Year Prayer Walk",
+    description: "Walking through our community, praying for God's blessing and breakthrough in the new year.",
+    location: "Starting from AGTV Studios",
+    date: { day: "01", month: "JAN" },
+    emoji: "🚶‍♂️"
   }
 ];
 
@@ -67,10 +83,10 @@ export const EventsPage = () => {
       <div className="container mx-auto px-4">
         <div className="text-center mb-16">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-foreground font-display">
-            Upcoming Events
+            Community Outreach Events
           </h1>
           <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Join us for life-changing events that strengthen community and deepen faith
+            Join us in serving our community and sharing God's love through action
           </p>
         </div>
         

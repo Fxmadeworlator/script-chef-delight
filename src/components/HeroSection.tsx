@@ -86,12 +86,12 @@ export const HeroSection = () => {
                    <p className="text-xs md:text-sm mb-3 opacity-90 leading-relaxed">
                      {slide.description}
                    </p>
-                   <div className="flex justify-start">
-                     <Button className="btn-live">
-                       <slide.primaryButton.icon className="mr-2 h-4 w-4" />
-                       {slide.primaryButton.text}
-                     </Button>
-                   </div>
+                    <div className="flex justify-start">
+                      <Button className="btn-live">
+                        <slide.primaryButton.icon className="mr-2 h-4 w-4" />
+                        {slide.primaryButton.text}
+                      </Button>
+                    </div>
                  </div>
               </div>
             </CarouselItem>

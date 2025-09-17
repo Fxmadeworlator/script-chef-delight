@@ -13,7 +13,6 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigationItems = [
-    { id: "home", label: "AGTV" },
     { id: "programs", label: "Programs" },
     { id: "live", label: "Watch Live" },
     { id: "schedule", label: "Schedule" },
