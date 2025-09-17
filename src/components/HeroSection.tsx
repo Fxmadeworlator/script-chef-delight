@@ -14,25 +14,29 @@ const slides = [
     title: "Watch AGTV Live",
     subtitle: "Faith That Transforms Lives",
     description: "Experience the power of God's word through inspiring programs, uplifting worship, and life-changing messages that bring hope to every home across Africa.",
-    primaryButton: { text: "Watch Live Now", icon: PlayCircle }
+    primaryButton: { text: "Watch Live Now", icon: PlayCircle, link: "live" }
   },
   {
     image: heroNews,
     title: "Latest News & Updates",
     subtitle: "Stay Connected",
     description: "Get the latest updates from AGTV, upcoming events, testimonies, and inspiring stories from our community of believers across Africa.",
-    primaryButton: { text: "Read Latest News", icon: BookOpen }
+    primaryButton: { text: "Read Latest News", icon: BookOpen, link: "news" }
   },
   {
     image: heroJoin,
     title: "Give Your Life to Christ",
     subtitle: "Join Our Church Family",
     description: "Take the most important step of your life. Experience God's love, find your purpose, and become part of a community that will support your spiritual journey.",
-    primaryButton: { text: "Join Us Today", icon: Heart }
+    primaryButton: { text: "Join Us Today", icon: Heart, link: "about" }
   }
 ];
 
-export const HeroSection = () => {
+interface HeroSectionProps {
+  onPageChange: (page: string) => void;
+}
+
+export const HeroSection = ({ onPageChange }: HeroSectionProps) => {
   const [api, setApi] = useState<CarouselApi>();
   const [current, setCurrent] = useState(0);
   const [count, setCount] = useState(0);
@@ -86,12 +90,15 @@ export const HeroSection = () => {
                    <p className="text-xs md:text-sm mb-3 opacity-90 leading-relaxed">
                      {slide.description}
                    </p>
-                    <div className="flex justify-start">
-                      <Button className="btn-live">
-                        <slide.primaryButton.icon className="mr-2 h-4 w-4" />
-                        {slide.primaryButton.text}
-                      </Button>
-                    </div>
+                     <div className="flex justify-start">
+                       <Button 
+                         className={index === 0 ? "btn-live-glow" : "btn-live-yellow"}
+                         onClick={() => onPageChange(slide.primaryButton.link)}
+                       >
+                         <slide.primaryButton.icon className="mr-2 h-4 w-4" />
+                         {slide.primaryButton.text}
+                       </Button>
+                     </div>
                  </div>
               </div>
             </CarouselItem>
@@ -103,7 +110,7 @@ export const HeroSection = () => {
           {/* Previous button */}
           <button
             onClick={() => api?.scrollPrev()}
-            className="w-8 h-8 rounded-full bg-white/20 text-white border border-white/30 flex items-center justify-center hover:bg-white/30 transition-all duration-300"
+            className="w-8 h-8 bg-white/20 text-white border border-white/30 flex items-center justify-center hover:bg-white/30 transition-all duration-300"
           >
             <span className="text-lg font-bold">&lt;</span>
           </button>
@@ -124,7 +131,7 @@ export const HeroSection = () => {
           {/* Next button */}
           <button
             onClick={() => api?.scrollNext()}
-            className="w-8 h-8 rounded-full bg-white/20 text-white border border-white/30 flex items-center justify-center hover:bg-white/30 transition-all duration-300"
+            className="w-8 h-8 bg-white/20 text-white border border-white/30 flex items-center justify-center hover:bg-white/30 transition-all duration-300"
           >
             <span className="text-lg font-bold">&gt;</span>
           </button>

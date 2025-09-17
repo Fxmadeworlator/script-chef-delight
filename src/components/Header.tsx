@@ -13,8 +13,8 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
 
   const navigationItems = [
-    { id: "programs", label: "Programs" },
     { id: "live", label: "Watch Live" },
+    { id: "programs", label: "Programs" },
     { id: "schedule", label: "Schedule" },
     { id: "events", label: "Events" },
     { id: "news", label: "News" },

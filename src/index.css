@@ -182,6 +182,15 @@ All colors MUST be HSL. Typography: Montserrat (body) + Playfair Display (headin
     @apply hover:shadow-red-500/50 hover:border-red-300;
     box-shadow: 0 0 20px rgba(239, 68, 68, 0.6), 0 4px 10px rgba(220,38,38,0.4);
   }
+
+  .btn-live-glow {
+    @apply bg-red-700 text-white px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-red-800;
+    box-shadow: 0 0 25px rgba(220,38,38,0.7), 0 4px 10px rgba(220,38,38,0.4);
+  }
+
+  .btn-live-yellow {
+    @apply bg-primary text-primary-foreground px-6 py-3 rounded-lg font-semibold transition-all duration-300 hover:bg-primary/90;
+  }
   
   .card-program {
     @apply bg-card rounded-xl overflow-hidden transition-all duration-300;

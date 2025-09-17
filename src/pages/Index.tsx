@@ -15,7 +15,7 @@ const Index = () => {
   const renderPage = () => {
     switch (currentPage) {
       case "home":
-        return <HomePage />;
+        return <HomePage onPageChange={setCurrentPage} />;
       case "programs":
         return <ProgramsPage />;
       case "live":
@@ -29,7 +29,7 @@ const Index = () => {
       case "about":
         return <AboutPage />;
       default:
-        return <HomePage />;
+        return <HomePage onPageChange={setCurrentPage} />;
     }
   };
 
