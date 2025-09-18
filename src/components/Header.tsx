@@ -14,7 +14,7 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
 
   const navigationItems = [
     { id: "live", label: "Watch Live" },
-    { id: "programs", label: "Programs" },
+    { id: "programs", label: "Club 1000+" },
     { id: "schedule", label: "Schedule" },
     { id: "events", label: "Events" },
     { id: "news", label: "News" },
