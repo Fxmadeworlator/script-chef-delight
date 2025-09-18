@@ -12,24 +12,24 @@ export const NewsClubSection = ({ onPageChange }: NewsClubSectionProps) => {
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {/* News Section */}
           <div 
-            className="relative h-80 rounded-lg overflow-hidden"
+            className="relative h-96 rounded-2xl overflow-hidden shadow-2xl"
             style={{
-              backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url(${"/assets/hero-news.jpg"})`,
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url("https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
           >
-            <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
-              <div className="flex items-center mb-4">
-                <Newspaper className="h-8 w-8 mr-3" />
-                <h2 className="text-3xl font-bold">Latest News</h2>
+            <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8 text-white">
+              <div className="flex items-center mb-6">
+                <Newspaper className="h-12 w-12 mr-4 text-primary drop-shadow-lg" />
+                <h2 className="text-4xl md:text-5xl font-bold font-display drop-shadow-lg">Latest News</h2>
               </div>
-              <p className="text-white/90 mb-6 leading-relaxed text-lg">
+              <p className="text-white/95 mb-8 leading-relaxed text-xl max-w-md drop-shadow-md">
                 Stay updated with the latest happenings at AGTV. From ministry updates to community outreach programs, get all the news that matters to our faith community.
               </p>
               <Button 
                 onClick={() => onPageChange('news')}
-                className="bg-white text-blue-600 hover:bg-blue-50 font-semibold w-fit"
+                className="bg-white text-blue-600 hover:bg-blue-50 font-semibold px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 Read Latest News
               </Button>
@@ -38,24 +38,24 @@ export const NewsClubSection = ({ onPageChange }: NewsClubSectionProps) => {
 
           {/* Club 1000+ Section */}
           <div 
-            className="relative h-80 rounded-lg overflow-hidden"
+            className="relative h-96 rounded-2xl overflow-hidden shadow-2xl"
             style={{
-              backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url(${"/assets/hero-join.jpg"})`,
+              backgroundImage: `linear-gradient(rgba(0,0,0,0.5), rgba(0,0,0,0.7)), url("https://images.pexels.com/photos/1595385/pexels-photo-1595385.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")`,
               backgroundSize: 'cover',
               backgroundPosition: 'center',
             }}
           >
-            <div className="absolute inset-0 flex flex-col justify-end p-8 text-white">
-              <div className="flex items-center mb-4">
-                <Users className="h-8 w-8 mr-3" />
-                <h2 className="text-3xl font-bold">Join AGTV Club 1000+</h2>
+            <div className="absolute inset-0 flex flex-col justify-center items-center text-center p-8 text-white">
+              <div className="flex items-center mb-6">
+                <Users className="h-12 w-12 mr-4 text-primary drop-shadow-lg" />
+                <h2 className="text-4xl md:text-5xl font-bold font-display drop-shadow-lg">Join AGTV Club 1000+</h2>
               </div>
-              <p className="text-white/90 mb-6 leading-relaxed text-lg">
+              <p className="text-white/95 mb-8 leading-relaxed text-xl max-w-md drop-shadow-md">
                 Become a sustaining partner and help spread the Gospel across Africa. Your monthly support keeps AGTV on air and reaching millions with life-changing content.
               </p>
               <Button 
                 onClick={() => onPageChange('programs')}
-                className="bg-white text-orange-600 hover:bg-orange-50 font-semibold w-fit"
+                className="bg-primary text-primary-foreground hover:bg-primary/90 font-semibold px-8 py-4 text-lg rounded-full shadow-lg hover:shadow-xl transition-all duration-300 hover:scale-105"
               >
                 Join Club 1000+
               </Button>
