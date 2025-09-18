@@ -110,7 +110,7 @@ export const HeroSection = ({ onPageChange }: HeroSectionProps) => {
           {/* Previous button */}
           <button
             onClick={() => api?.scrollPrev()}
-            className="w-8 h-8 bg-white/20 text-white border border-white/30 flex items-center justify-center hover:bg-white/30 transition-all duration-300"
+            className="w-8 h-8 bg-transparent text-white flex items-center justify-center hover:bg-white/20 transition-all duration-300"
           >
             <span className="text-lg font-bold">&lt;</span>
           </button>
@@ -131,7 +131,7 @@ export const HeroSection = ({ onPageChange }: HeroSectionProps) => {
           {/* Next button */}
           <button
             onClick={() => api?.scrollNext()}
-            className="w-8 h-8 bg-white/20 text-white border border-white/30 flex items-center justify-center hover:bg-white/30 transition-all duration-300"
+            className="w-8 h-8 bg-transparent text-white flex items-center justify-center hover:bg-white/20 transition-all duration-300"
           >
             <span className="text-lg font-bold">&gt;</span>
           </button>

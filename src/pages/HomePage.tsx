@@ -1,5 +1,5 @@
 import { HeroSection } from "@/components/HeroSection";
-import { ClubSection } from "@/components/ClubSection";
+import { NewsClubSection } from "@/components/NewsClubSection";
 import { ProgramsGrid } from "@/components/ProgramsGrid";
 import { LiveSection } from "@/components/LiveSection";
 
@@ -11,7 +11,7 @@ export const HomePage = ({ onPageChange }: HomePageProps) => {
   return (
     <div>
       <HeroSection onPageChange={onPageChange} />
-      <ClubSection />
+      <NewsClubSection onPageChange={onPageChange} />
       <ProgramsGrid featured limit={6} />
       <LiveSection />
     </div>

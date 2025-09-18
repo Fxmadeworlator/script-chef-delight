@@ -49,21 +49,28 @@ export const LivePage = () => {
           {/* Video Player - Left Side */}
           <div className="lg:col-span-2">
             <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
-              {/* Video Player Placeholder */}
-              <div className="aspect-video bg-gradient-to-br from-gray-900 to-black flex items-center justify-center">
-                <div className="text-center text-white">
-                  <div className="inline-flex items-center bg-red-500 text-white px-4 py-2 rounded-full mb-4 font-bold text-sm">
+              {/* Mock Video Player */}
+              <div className="aspect-video bg-black relative overflow-hidden">
+                <video
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                >
+                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+                
+                {/* Video Overlay Content - Bottom Left */}
+                <div className="absolute bottom-4 left-4 text-white">
+                  <div className="inline-flex items-center bg-red-600 text-white px-3 py-1 mb-3 font-bold text-sm">
                     <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
-                    LATEST MESSAGE
+                    LIVE NOW
                   </div>
                   
-                  <h2 className="text-2xl font-bold mb-2">Deciding To Engage</h2>
-                  <p className="text-white/80 mb-6">Pastor Emmanuel Asante | Sep 14, 2025</p>
-                  
-                  <Button className="bg-blue-500 hover:bg-blue-600 text-white">
-                    <PlayCircle className="mr-2 h-5 w-5" />
-                    Watch Now
-                  </Button>
+                  <h2 className="text-xl font-bold mb-1">Faith That Transforms</h2>
+                  <p className="text-white/90 text-sm">Pastor Emmanuel Asante | Sunday Service</p>
                 </div>
               </div>
               
