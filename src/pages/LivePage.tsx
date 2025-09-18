@@ -38,11 +38,6 @@ export const LivePage = () => {
   return (
     <div className="min-h-screen py-8">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-foreground font-display">
-            WATCH
-          </h1>
-        </div>
         
         {/* Main Content Layout */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
@@ -63,14 +58,12 @@ export const LivePage = () => {
                 </video>
                 
                 {/* Video Overlay Content - Bottom Left */}
-                <div className="absolute bottom-4 left-4 text-white">
-                  <div className="inline-flex items-center bg-red-600 text-white px-3 py-1 mb-3 font-bold text-sm">
-                    <span className="w-2 h-2 bg-white rounded-full mr-2 animate-pulse"></span>
-                    LIVE NOW
-                  </div>
-                  
-                  <h2 className="text-xl font-bold mb-1">Faith That Transforms</h2>
-                  <p className="text-white/90 text-sm">Pastor Emmanuel Asante | Sunday Service</p>
+                <div className="absolute bottom-6 left-6 text-white">
+                  <h2 className="text-2xl font-bold mb-2">Faith That Transforms</h2>
+                  <p className="text-white/90 text-lg mb-4">Pastor Emmanuel Asante | Sunday Service</p>
+                  <Button className="bg-primary hover:bg-primary/80 text-black font-semibold">
+                    Watch Now
+                  </Button>
                 </div>
               </div>
               
@@ -87,10 +80,6 @@ export const LivePage = () => {
                   </div>
                   
                   <div className="flex items-center space-x-4">
-                    <div className="flex items-center text-sm">
-                      <Users className="h-4 w-4 mr-1" />
-                      2,847 watching
-                    </div>
                     <Button variant="ghost" size="sm" className="text-white hover:text-primary">
                       <Maximize className="h-5 w-5" />
                     </Button>

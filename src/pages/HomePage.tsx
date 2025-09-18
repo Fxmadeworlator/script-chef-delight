@@ -1,6 +1,6 @@
 import { HeroSection } from "@/components/HeroSection";
 import { NewsClubSection } from "@/components/NewsClubSection";
-import { ProgramsGrid } from "@/components/ProgramsGrid";
+import { StayConnectedSection } from "@/components/StayConnectedSection";
 import { LiveSection } from "@/components/LiveSection";
 
 interface HomePageProps {
@@ -12,7 +12,7 @@ export const HomePage = ({ onPageChange }: HomePageProps) => {
     <div>
       <HeroSection onPageChange={onPageChange} />
       <NewsClubSection onPageChange={onPageChange} />
-      <ProgramsGrid featured limit={6} />
+      <StayConnectedSection />
       <LiveSection />
     </div>
   );
