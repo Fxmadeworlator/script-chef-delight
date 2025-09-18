@@ -40,9 +40,9 @@ export const LivePage = () => {
       <div className="container mx-auto px-4">
         
         {/* Main Content Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
           {/* Video Player - Left Side */}
-          <div className="lg:col-span-2">
+          <div>
             <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
               {/* Mock Video Player */}
               <div className="aspect-video bg-black relative overflow-hidden">
