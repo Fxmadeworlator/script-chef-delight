@@ -50,7 +50,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
   };
 
   return (
-    <div className="min-h-screen pt-32">
+    <div className="min-h-screen pt-20">
       <div className="container mx-auto px-4">
         
         {/* Main Content Layout */}
@@ -88,9 +88,9 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
           
           {/* Today's Programs - Right Side (1/3 width) */}
           <div>
-            <div className="bg-card rounded-2xl p-6 shadow-lg border h-full">
+            <div className="bg-card rounded-2xl p-6 shadow-lg border aspect-video">
               <h3 className="text-2xl font-bold mb-6 text-foreground">Today's Programs</h3>
-              <div className="space-y-4">
+              <div className="space-y-4 overflow-y-auto h-[calc(100%-4rem)]">
                 {todaysPrograms.map((program, index) => (
                   <div 
                     key={index}

@@ -140,7 +140,7 @@ All colors MUST be HSL. Typography: Montserrat (body) + Playfair Display (headin
     font-family: var(--font-body);
     line-height: 1.6;
     overflow-x: hidden;
-    background-image: url('./assets/global-bg.jpg');
+    background-image: url('./assets/vecteezy_abstract-black-fluid-wave-background_.jpg');
     background-size: cover;
     background-position: center;
     background-attachment: fixed;

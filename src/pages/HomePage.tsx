@@ -8,7 +8,7 @@ interface HomePageProps {
 
 export const HomePage = ({ onPageChange }: HomePageProps) => {
   return (
-    <div className="pt-32">
+    <div className="pt-20">
       <HeroSection onPageChange={onPageChange} />
       <NewsClubSection onPageChange={onPageChange} />
       <StayConnectedSection />
