@@ -19,6 +19,7 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
     { id: "events", label: "Events" },
     { id: "news", label: "News" },
     { id: "about", label: "About" },
+    { id: "contact", label: "Contact Us" },
   ];
 
   const handleNavClick = (pageId: string) => {

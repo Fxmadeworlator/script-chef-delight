@@ -1,7 +1,13 @@
-import { PlayCircle, Users, Volume2, Maximize } from "lucide-react";
+import { PlayCircle, Users, Volume2, Maximize, ArrowRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
+import { useState } from "react";
 
-export const LivePage = () => {
+interface LivePageProps {
+  onPageChange?: (page: string) => void;
+}
+
+export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
+  const [isFullscreen, setIsFullscreen] = useState(false);
   const todaysPrograms = [
     {
       title: "Morning Devotion",
@@ -35,14 +41,22 @@ export const LivePage = () => {
     }
   ];
 
+  const handleWatchNow = () => {
+    setIsFullscreen(true);
+  };
+
+  const handleCloseFullscreen = () => {
+    setIsFullscreen(false);
+  };
+
   return (
     <div className="min-h-screen py-8">
       <div className="container mx-auto px-4">
         
         {/* Main Content Layout */}
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-8 max-w-7xl mx-auto">
-          {/* Video Player - Left Side */}
-          <div>
+        <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
+          {/* Video Player - Left Side (2/3 width) */}
+          <div className="lg:col-span-2">
             <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
               {/* Mock Video Player */}
               <div className="aspect-video bg-black relative overflow-hidden">
@@ -58,54 +72,39 @@ export const LivePage = () => {
                 </video>
                 
                 {/* Video Overlay Content - Bottom Left */}
-                <div className="absolute bottom-6 left-6 text-white">
-                  <h2 className="text-2xl font-bold mb-2">Faith That Transforms</h2>
-                  <p className="text-white/90 text-lg mb-4">Pastor Emmanuel Asante | Sunday Service</p>
-                  <Button className="bg-primary hover:bg-primary/80 text-black font-semibold">
+                <div className="absolute bottom-8 left-8 text-white max-w-md">
+                  <h2 className="text-3xl font-bold mb-3 drop-shadow-lg">Faith That Transforms</h2>
+                  <p className="text-white/90 text-xl mb-6 drop-shadow-md">Pastor Emmanuel Asante | Sunday Service</p>
+                  <Button 
+                    onClick={handleWatchNow}
+                    className="bg-primary hover:bg-primary/80 text-black font-semibold px-8 py-3 text-lg"
+                  >
                     Watch Now
                   </Button>
-                </div>
-              </div>
-              
-              {/* Video Controls */}
-              <div className="absolute bottom-0 left-0 right-0 bg-gradient-to-t from-black/80 to-transparent p-4">
-                <div className="flex items-center justify-between text-white">
-                  <div className="flex items-center space-x-4">
-                    <Button variant="ghost" size="sm" className="text-white hover:text-primary">
-                      <PlayCircle className="h-5 w-5" />
-                    </Button>
-                    <Button variant="ghost" size="sm" className="text-white hover:text-primary">
-                      <Volume2 className="h-5 w-5" />
-                    </Button>
-                  </div>
-                  
-                  <div className="flex items-center space-x-4">
-                    <Button variant="ghost" size="sm" className="text-white hover:text-primary">
-                      <Maximize className="h-5 w-5" />
-                    </Button>
-                  </div>
                 </div>
               </div>
             </div>
           </div>
           
-          {/* Today's Programs - Right Side */}
+          {/* Today's Programs - Right Side (1/3 width) */}
           <div>
-            <div className="bg-card rounded-lg p-6 shadow-lg">
-              <h3 className="text-xl font-bold mb-6 text-foreground">Today's Programs</h3>
-              <div className="space-y-3">
+            <div className="bg-card rounded-lg shadow-lg overflow-hidden">
+              <div className="p-6 border-b border-border">
+                <h3 className="text-xl font-bold text-foreground">Today's Programs</h3>
+              </div>
+              <div className="divide-y divide-border">
                 {todaysPrograms.map((program, index) => (
                   <div 
                     key={index}
-                    className={`p-4 rounded-lg border transition-colors cursor-pointer hover:bg-muted/50 ${
+                    className={`p-4 transition-colors cursor-pointer hover:bg-muted/50 ${
                       program.status === 'live' 
-                        ? 'bg-red-50 border-red-200 dark:bg-red-950/20 dark:border-red-800' 
-                        : 'bg-card border-border'
+                        ? 'bg-red-50 dark:bg-red-950/20' 
+                        : 'bg-card'
                     }`}
                   >
                     <div className="flex items-start justify-between mb-2">
-                      <h4 className="font-semibold text-sm">{program.title}</h4>
-                      <div className={`text-xs px-2 py-1 rounded flex items-center ${
+                      <h4 className="font-semibold text-base text-foreground">{program.title}</h4>
+                      <div className={`text-xs px-2 py-1 rounded-full flex items-center font-medium ${
                         program.status === 'live' 
                           ? 'bg-red-500 text-white' 
                           : program.status === 'completed'
@@ -119,15 +118,49 @@ export const LivePage = () => {
                          program.status === 'completed' ? 'COMPLETED' : 'UPCOMING'}
                       </div>
                     </div>
-                    <p className="text-xs text-muted-foreground mb-1">{program.time}</p>
-                    <p className="text-xs text-muted-foreground">{program.pastor}</p>
+                    <p className="text-sm text-muted-foreground mb-1 font-medium">{program.time}</p>
+                    <p className="text-sm text-muted-foreground">{program.pastor}</p>
                   </div>
                 ))}
+                {/* See More Button */}
+                <button 
+                  onClick={() => onPageChange?.('schedule')}
+                  className="w-full p-4 text-left hover:bg-muted/50 transition-colors group"
+                >
+                  <div className="flex items-center justify-between">
+                    <span className="font-semibold text-base text-primary">See More</span>
+                    <ArrowRight className="h-4 w-4 text-primary group-hover:translate-x-1 transition-transform" />
+                  </div>
+                </button>
               </div>
             </div>
           </div>
         </div>
       </div>
+
+      {/* Fullscreen Video Modal */}
+      {isFullscreen && (
+        <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
+          <button
+            onClick={handleCloseFullscreen}
+            className="absolute top-4 right-4 text-white hover:text-primary z-10 p-2"
+          >
+            <X className="h-8 w-8" />
+          </button>
+          
+          <div className="relative w-full h-full">
+            <video
+              className="w-full h-full object-contain"
+              autoPlay
+              controls
+              playsInline
+            >
+              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+              Your browser does not support the video tag.
+            </video>
+          </div>
+        </div>
+      )}
     </div>
   );
 };

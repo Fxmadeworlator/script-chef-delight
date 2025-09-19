@@ -8,6 +8,7 @@ import { EventsPage } from "@/pages/EventsPage";
 import { NewsPage } from "@/pages/NewsPage";
 import { AboutPage } from "@/pages/AboutPage";
 import { LivePage } from "@/pages/LivePage";
+import { ContactPage } from "@/pages/ContactPage";
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState("home");
@@ -19,7 +20,7 @@ const Index = () => {
       case "programs":
         return <ProgramsPage />;
       case "live":
-        return <LivePage />;
+        return <LivePage onPageChange={setCurrentPage} />;
       case "schedule":
         return <SchedulePage />;
       case "events":
@@ -28,6 +29,8 @@ const Index = () => {
         return <NewsPage />;
       case "about":
         return <AboutPage />;
+      case "contact":
+        return <ContactPage />;
       default:
         return <HomePage onPageChange={setCurrentPage} />;
     }
