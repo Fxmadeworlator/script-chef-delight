@@ -50,7 +50,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
   };
 
   return (
-    <div className="min-h-screen py-8">
+    <div className="min-h-screen pt-32">
       <div className="container mx-auto px-4">
         
         {/* Main Content Layout */}
@@ -88,15 +88,13 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
           
           {/* Today's Programs - Right Side (1/3 width) */}
           <div>
-            <div className="bg-card rounded-lg shadow-lg overflow-hidden">
-              <div className="p-6 border-b border-border">
-                <h3 className="text-xl font-bold text-foreground">Today's Programs</h3>
-              </div>
-              <div className="divide-y divide-border">
+            <div className="bg-card rounded-2xl p-6 shadow-lg border">
+              <h3 className="text-2xl font-bold mb-6 text-foreground">Today's Programs</h3>
+              <div className="space-y-4">
                 {todaysPrograms.map((program, index) => (
                   <div 
                     key={index}
-                    className={`p-4 transition-colors cursor-pointer hover:bg-muted/50 ${
+                    className={`p-4 rounded-xl border border-border hover:bg-muted/50 transition-colors cursor-pointer ${
                       program.status === 'live' 
                         ? 'bg-red-50 dark:bg-red-950/20' 
                         : 'bg-card'
@@ -125,7 +123,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                 {/* See More Button */}
                 <button 
                   onClick={() => onPageChange?.('schedule')}
-                  className="w-full p-4 text-left hover:bg-muted/50 transition-colors group"
+                  className="w-full p-4 rounded-xl border border-border hover:bg-muted/50 transition-colors group"
                 >
                   <div className="flex items-center justify-between">
                     <span className="font-semibold text-base text-primary">See More</span>

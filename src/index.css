@@ -140,6 +140,11 @@ All colors MUST be HSL. Typography: Montserrat (body) + Playfair Display (headin
     font-family: var(--font-body);
     line-height: 1.6;
     overflow-x: hidden;
+    background-image: url('./assets/global-bg.jpg');
+    background-size: cover;
+    background-position: center;
+    background-attachment: fixed;
+    background-repeat: no-repeat;
   }
 
   h1, h2, h3, h4, h5, h6 {

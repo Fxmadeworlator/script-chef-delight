@@ -1,5 +1,4 @@
 import { Button } from "@/components/ui/button";
-import { Newspaper, Users } from "lucide-react";
 
 interface NewsClubSectionProps {
   onPageChange: (page: string) => void;
@@ -20,9 +19,6 @@ export const NewsClubSection = ({ onPageChange }: NewsClubSectionProps) => {
             }}
           >
             <div className="absolute bottom-8 left-8 text-white max-w-md">
-              <div className="flex items-center mb-4">
-                <Newspaper className="h-10 w-10 mr-3 text-primary drop-shadow-lg" />
-              </div>
               <p className="text-white/95 mb-6 leading-relaxed text-lg drop-shadow-md">
                 Stay updated with the latest happenings at AGTV. From ministry updates to community outreach programs, get all the news that matters to our faith community.
               </p>
@@ -45,9 +41,6 @@ export const NewsClubSection = ({ onPageChange }: NewsClubSectionProps) => {
             }}
           >
             <div className="absolute bottom-8 left-8 text-white max-w-md">
-              <div className="flex items-center mb-4">
-                <Users className="h-10 w-10 mr-3 text-primary drop-shadow-lg" />
-              </div>
               <p className="text-white/95 mb-6 leading-relaxed text-lg drop-shadow-md">
                 Become a sustaining partner and help spread the Gospel across Africa. Your monthly support keeps AGTV on air and reaching millions with life-changing content.
               </p>
