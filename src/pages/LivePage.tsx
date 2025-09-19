@@ -26,18 +26,6 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
       time: "3:00 PM",
       pastor: "Minister Grace Owusu",
       status: "upcoming"
-    },
-    {
-      title: "Evening Prayer",
-      time: "6:00 PM",
-      pastor: "Pastor Samuel Adjei",
-      status: "upcoming"
-    },
-    {
-      title: "Youth Service",
-      time: "7:30 PM",
-      pastor: "Pastor David Mensah",
-      status: "upcoming"
     }
   ];
 
