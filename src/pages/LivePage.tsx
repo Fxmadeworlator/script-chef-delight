@@ -76,9 +76,9 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
           
           {/* Today's Programs - Right Side (1/3 width) */}
           <div>
-            <div className="bg-card rounded-2xl p-6 shadow-lg border aspect-video">
-              <h3 className="text-2xl font-bold mb-6 text-foreground">Today's Programs</h3>
-              <div className="space-y-4 overflow-y-auto h-[calc(100%-4rem)]">
+            <div className="bg-card rounded-2xl p-6 shadow-lg border h-full flex flex-col">
+  <h3 className="text-2xl font-bold mb-6 text-foreground shrink-0">Today's Programs</h3>
+  <div className="space-y-4 overflow-hidden grow">
                 {todaysPrograms.map((program, index) => (
                   <div 
                     key={index}
