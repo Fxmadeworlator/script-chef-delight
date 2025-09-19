@@ -228,11 +228,3 @@ All colors MUST be HSL. Typography: Montserrat (body) + Playfair Display (headin
     background: linear-gradient(rgba(0,0,0,0.7), rgba(0,0,0,0.8));
   }
 }
- /* unbeatable watermark background */
-html {
-  background: #0a0a0a url('/src/assets/vecteezy_abstract-black-fluid-wave-background_.jpg') center/cover fixed no-repeat !important;
-}
-
-body {
-  background: transparent !important; /* strip any body colour */
-}
