@@ -80,34 +80,34 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
   <h3 className="text-2xl font-bold mb-6 text-foreground shrink-0">Today's Programs</h3>
   <div className="space-y-4 overflow-hidden grow">
                 {todaysPrograms.map((program, index) => (
-                  <div 
-                    key={index}
-                    className={`p-4 rounded-xl border border-border hover:bg-muted/50 transition-colors cursor-pointer ${
-                      program.status === 'live' 
-                        ? 'bg-red-50 dark:bg-red-950/20' 
-                        : 'bg-card'
-                    }`}
-                  >
-                    <div className="flex items-start justify-between mb-2">
-                      <h4 className="font-semibold text-base text-foreground">{program.title}</h4>
-                      <div className={`text-xs px-2 py-1 rounded-full flex items-center font-medium ${
-                        program.status === 'live' 
-                          ? 'bg-red-500 text-white' 
-                          : program.status === 'completed'
-                          ? 'bg-green-500 text-white'
-                          : 'bg-blue-500 text-white'
-                      }`}>
-                        {program.status === 'live' && (
-                          <span className="w-2 h-2 bg-white rounded-full mr-1 animate-pulse"></span>
-                        )}
-                        {program.status === 'live' ? 'LIVE' : 
-                         program.status === 'completed' ? 'COMPLETED' : 'UPCOMING'}
-                      </div>
-                    </div>
-                    <p className="text-sm text-muted-foreground mb-1 font-medium">{program.time}</p>
-                    <p className="text-sm text-muted-foreground">{program.pastor}</p>
-                  </div>
-                ))}
+  <div
+    key={index}
+    className={`p-2 rounded-lg border border-border hover:bg-muted/50 transition-colors cursor-pointer ${
+      program.status === 'live'
+        ? 'bg-red-50 dark:bg-red-950/20'
+        : 'bg-card'
+    }`}
+  >
+    <div className="flex items-start justify-between mb-1">
+      <h4 className="font-semibold text-sm text-foreground">{program.title}</h4>
+      <div className={`text-xs px-2 py-1 rounded-full flex items-center font-medium ${
+        program.status === 'live'
+          ? 'bg-red-500 text-white'
+          : program.status === 'completed'
+          ? 'bg-green-500 text-white'
+          : 'bg-blue-500 text-white'
+      }`}>
+        {program.status === 'live' && (
+          <span className="w-2 h-2 bg-white rounded-full mr-1 animate-pulse"></span>
+        )}
+        {program.status === 'live' ? 'LIVE' :
+         program.status === 'completed' ? 'COMPLETED' : 'UPCOMING'}
+      </div>
+    </div>
+    <p className="text-xs text-muted-foreground mb-0.5 font-medium">{program.time}</p>
+    <p className="text-xs text-muted-foreground">{program.pastor}</p>
+  </div>
+))}
                 {/* See More Button */}
                 <button 
                   onClick={() => onPageChange?.('schedule')}
