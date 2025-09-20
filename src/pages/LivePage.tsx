@@ -92,10 +92,10 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
         </div>
       )}
 
-      {/*  PREVIOUS LIVE SESSIONS  –  BIGGER FONT  */}
+      {/*  PREVIOUS LIVE SESSIONS  –  slightly smaller & black  */}
       <section className="py-16 container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold text-left text-blue-400">
+          <h2 className="text-3xl font-bold text-left text-black">
             Previous Live Sessions
           </h2>
 
