@@ -95,10 +95,10 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
         </div>
       )}
 
-      {/*  PREVIOUS LIVE SESSIONS  –  minimal, bigger thumbs, no captions, plain black heading  */}
+      {/*  PREVIOUS LIVE SESSIONS  –  minimal, bigger thumbs, no captions, pale blue heading  */}
       <section className="py-16 container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-left text-black">
+          <h2 className="text-base md:text-lg font-bold text-left text-blue-400">
             Previous Live Sessions
           </h2>
 
