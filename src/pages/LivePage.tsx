@@ -22,13 +22,13 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
   const previousSessions = [
     { id: "7dv-ssU6Xzk" },
     { id: "vSctvLbETNg" },
-    { id: "TqoG6PdFunc" }   // ← new third thumbnail
+    { id: "TqoG6PdFunc" }
   ];
 
   return (
     <div className="min-h-screen pt-20">
       <div className="container mx-auto px-4">
-        {/*  LIVE PLAYER + TODAY'S PROGRAMS  */}
+        {/*  LIVE PLAYER + TODAY'S PROGRAMS  –  plain black status text  */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           <div className="lg:col-span-2">
             <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
@@ -55,19 +55,14 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                 {todaysPrograms.map((program, index) => (
                   <div
                     key={index}
-                    className={`p-2 rounded-lg border border-border hover:bg-muted/50 transition-colors cursor-pointer ${
-                      program.status === 'live' ? 'bg-red-50 dark:bg-red-950/20' : 'bg-card'
-                    }`}
+                    className="p-2 rounded-lg border border-border hover:bg-muted/50 transition-colors cursor-pointer"
                   >
                     <div className="flex items-start justify-between mb-2">
                       <h4 className="font-semibold text-base text-foreground">{program.title}</h4>
-                      <div className={`text-xs px-2 py-1 rounded-full flex items-center font-medium ${
-                        program.status === 'live' ? 'bg-red-500 text-white' :
-                        program.status === 'completed' ? 'bg-green-500 text-white' : 'bg-blue-500 text-white'
-                      }`}>
-                        {program.status === 'live' && <span className="w-2 h-2 bg-white rounded-full mr-1 animate-pulse"></span>}
+                      {/*  plain black text – no badge, no animation, no rounded pill  */}
+                      <span className="text-sm text-black font-medium">
                         {program.status === 'live' ? 'LIVE' : program.status === 'completed' ? 'COMPLETED' : 'UPCOMING'}
-                      </div>
+                      </span>
                     </div>
                     <p className="text-xs text-muted-foreground mb-1 font-medium">{program.time}</p>
                     <p className="text-xs text-muted-foreground">{program.pastor}</p>
