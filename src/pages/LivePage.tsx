@@ -137,4 +137,4 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
       </section>
     </div>
   );
-);
+};
