@@ -1,10 +1,10 @@
-// ProgramsGrid.tsx
+// ProgramsGrid.tsx  (Club 1000+ page – Ghana edition)
 import { useState } from "react";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-/* ----------  DATA  ---------- */
+/*  SUBSCRIPTION TIERS  –  Ghana benefits  */
 interface Tier {
   id: string;
   name: string;
@@ -22,7 +22,7 @@ const tiers: Tier[] = [
     description: "Perfect for those starting their faith journey",
     features: [
       "Early access to episodes",
-      "Monthly newsletter",
+      "Monthly newsletter (Twi + English)",
       "Community forum access",
       "Basic prayer support"
     ]
@@ -34,8 +34,8 @@ const tiers: Tier[] = [
     description: "Enhanced experience for growing believers",
     features: [
       "All Bronze benefits",
+      "HD video downloads (Twi subtitles)",
       "Exclusive live Q&A sessions",
-      "HD video downloads",
       "Priority prayer support",
       "Monthly devotionals"
     ],
@@ -48,16 +48,15 @@ const tiers: Tier[] = [
     description: "Premium support for dedicated partners",
     features: [
       "All Silver benefits",
-      "Direct pastor access",
+      "Direct pastor access (Accra studio)",
       "Priority prayer chain",
-      "Exclusive events",
-      "Quarterly retreats",
-      "Personal mentorship"
+      "Exclusive village crusade invites",
+      "Quarterly retreats in Ghana",
+      "Personal mentorship (Twi/English)"
     ]
   }
 ];
 
-/* ----------  COMPONENT  ---------- */
 export const ProgramsGrid = () => {
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
 
@@ -68,25 +67,37 @@ export const ProgramsGrid = () => {
 
   return (
     <>
-      {/* Heading with easy-swap background picture */}
+      {/*  GHANA-SPECIFIC HEADING + BIGGER PICTURE  */}
       <section className="relative py-20 px-4 text-white text-center overflow-hidden">
+        {/*  background picture – swap file name only  */}
         <img
           src="/src/assets/support-bg.jpg"
           alt=""
-          className="absolute inset-0 w-full h-full object-cover object-center"
+          className="absolute inset-0 w-full h-96 object-cover object-center"
         />
-        <div className="absolute inset-0 bg-black/50" />
+        <div className="absolute inset-0 bg-black/55" />
 
-        <div className="relative z-10 max-w-4xl mx-auto">
-          <h2 className="text-4xl md:text-5xl font-bold mb-4 font-display">Support AGTV</h2>
-          <p className="text-lg md:text-xl opacity-90">
-            Join our community of partners and help spread the Gospel across Africa.
-            Your monthly support keeps AGTV on air and reaching millions.
+        <div className="relative z-10 max-w-4xl mx-auto text-left">
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 font-display">Support AGTV</h2>
+
+          <p className="text-lg md:text-xl opacity-90 leading-relaxed">
+            AGTV is Ghana’s 24-hour Christian television network, broadcasting from Accra to every region, village and hospital.
+            Every cedi you give keeps the signal on air, produces fresh Twi/English Gospel content, and reaches millions who have never heard the name of Jesus.
+          </p>
+
+          <p className="text-lg md:text-xl opacity-90 leading-relaxed mt-4">
+            When you subscribe you don’t just watch — you <strong>partner</strong>.
+            You fund village crusades in the Northern Region, youth outreaches in Kumasi, emergency relief in Takoradi, and the daily costs of our Accra studio uplink.
+            In return you get early access, HD downloads with Twi subtitles, direct pastor chat, and the joy of knowing you are literally sending the Gospel into homes, hospitals, prisons and remote villages across Ghana.
+          </p>
+
+          <p className="text-lg md:text-xl opacity-90 leading-relaxed mt-4">
+            Join the family today. Cancel anytime. 100 % of every cedi goes to ministry operations — no admin fees, no middle-men, just Jesus on air, 24/7.
           </p>
         </div>
       </section>
 
-      {/* Subscription Tiers */}
+      {/*  SUBSCRIPTION TIERS  –  bigger, minimal, no captions  */}
       <section className="py-16 container mx-auto px-4">
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
           {tiers.map((tier) => (
@@ -145,15 +156,14 @@ export const ProgramsGrid = () => {
         <div className="text-center mt-12">
           <p className="text-sm text-muted-foreground">
             All subscriptions auto-renew monthly. Cancel anytime.
-            100% of proceeds go directly to ministry operations.
+            100 % of proceeds go directly to ministry operations.
           </p>
         </div>
       </section>
 
-      {/* Video Player - UNDER the tiers */}
+      {/*  VIDEO PLAYER  –  under the tiers, bigger, no caption  */}
       <section className="py-16 container mx-auto px-4">
-        <div className="max-w-4xl mx-auto text-center">
-          <h2 className="text-3xl font-bold mb-6">Experience AGTV Live</h2>
+        <div className="max-w-4xl mx-auto">
           <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl aspect-video">
             <iframe
               className="w-full h-full"
@@ -164,9 +174,6 @@ export const ProgramsGrid = () => {
               allowFullScreen
             />
           </div>
-          <p className="text-muted-foreground mt-4">
-            Join thousands watching live. Your support keeps us on air.
-          </p>
         </div>
       </section>
     </>
