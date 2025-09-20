@@ -31,6 +31,7 @@ export const VideoPlaybackSection = () => {
             
             {/* Video Overlay Content */}
             <div className="absolute bottom-8 left-8">
+              <p className="text-white text-sm mb-2 font-medium">Why We Give</p>
               <Button 
                 onClick={handleWatchNow}
                 className="bg-primary hover:bg-primary/80 text-black font-semibold px-6 py-2"

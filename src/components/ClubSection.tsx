@@ -7,6 +7,11 @@ const subscriptionOptions = [
     id: "basic",
     icon: Sprout,
     amount: "₵200",
+    subTiers: [
+      { name: "Monthly", price: "₵200" },
+      { name: "Quarterly", price: "₵540", savings: "Save ₵60" },
+      { name: "Yearly", price: "₵2,000", savings: "Save ₵400" }
+    ],
     frequency: "Monthly",
     title: "Basic Club Member",
     features: [
@@ -21,6 +26,11 @@ const subscriptionOptions = [
     id: "premium",
     icon: Heart,
     amount: "₵500",
+    subTiers: [
+      { name: "Monthly", price: "₵500" },
+      { name: "Quarterly", price: "₵1,350", savings: "Save ₵150" },
+      { name: "Yearly", price: "₵5,000", savings: "Save ₵1,000" }
+    ],
     frequency: "Monthly",
     title: "Premium Club Member",
     featured: true,
@@ -36,7 +46,12 @@ const subscriptionOptions = [
   {
     id: "platinum",
     icon: Crown,
-    amount: "₵1000",
+    amount: "₵1,000",
+    subTiers: [
+      { name: "Monthly", price: "₵1,000" },
+      { name: "Quarterly", price: "₵2,700", savings: "Save ₵300" },
+      { name: "Yearly", price: "₵10,000", savings: "Save ₵2,000" }
+    ],
     frequency: "Monthly",
     title: "Platinum Club Member",
     features: [
@@ -81,16 +96,38 @@ export const ClubSection = () => {
           <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed">
             Join our exclusive Club 1000+ community and become a vital partner in keeping AGTV on air! Your monthly subscription ensures we continue reaching millions across Africa with transformative Gospel content, quality programming, and life-changing messages.
           </p>
+          
+          {/* Membership Explanation */}
+          <div className="bg-card rounded-xl p-8 mb-12 max-w-4xl mx-auto shadow-lg border">
+            <h3 className="text-2xl font-bold mb-4 text-foreground font-display">Choose Your Membership Level</h3>
+            <p className="text-muted-foreground leading-relaxed mb-4">
+              Our Club 1000+ membership program offers three distinct levels of partnership, each designed to fit different commitment levels while maximizing your impact on Gospel broadcasting across Africa.
+            </p>
+            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
+              <div className="text-center">
+                <div className="text-primary font-bold mb-1">Basic Membership</div>
+                <div className="text-muted-foreground">Perfect for individuals starting their partnership journey</div>
+              </div>
+              <div className="text-center">
+                <div className="text-primary font-bold mb-1">Premium Membership</div>
+                <div className="text-muted-foreground">Ideal for committed supporters seeking deeper engagement</div>
+              </div>
+              <div className="text-center">
+                <div className="text-primary font-bold mb-1">Platinum Membership</div>
+                <div className="text-muted-foreground">For dedicated partners wanting maximum ministry impact</div>
+              </div>
+            </div>
+          </div>
 
           {/* Subscription Options */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 items-stretch">
             {subscriptionOptions.map((option) => {
               const IconComponent = option.icon;
               return (
                 <div
                   key={option.id}
                   className={cn(
-                    "card-donation min-h-[480px] flex flex-col justify-between",
+                    "card-donation min-h-[600px] flex flex-col justify-between",
                     option.featured && "featured relative"
                   )}
                 >
@@ -114,6 +151,21 @@ export const ClubSection = () => {
                     {option.frequency}
                   </div>
                   
+                  {/* Sub-tiers */}
+                  <div className="mb-6 space-y-2">
+                    {option.subTiers.map((tier, index) => (
+                      <div key={index} className="flex justify-between items-center text-sm">
+                        <span className="text-muted-foreground">{tier.name}</span>
+                        <div className="text-right">
+                          <span className="font-semibold text-foreground">{tier.price}</span>
+                          {tier.savings && (
+                            <div className="text-xs text-primary">{tier.savings}</div>
+                          )}
+                        </div>
+                      </div>
+                    ))}
+                  </div>
+                  
                   <ul className="text-left space-y-3 mb-8">
                     {option.features.map((feature, index) => (
                       <li key={index} className="flex items-center text-muted-foreground">
@@ -131,13 +183,13 @@ export const ClubSection = () => {
                   
                   <Button 
                     className={cn(
-                      "w-full",
+                      "w-full font-bold",
                       option.featured 
                         ? "bg-foreground text-primary hover:bg-foreground/90" 
                         : "btn-primary"
                     )}
                   >
-                    {option.title}
+                    Join Now
                   </Button>
                 </div>
               );
