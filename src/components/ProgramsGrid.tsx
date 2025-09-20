@@ -28,13 +28,6 @@ const programs: Program[] = [
     time: "Thursdays 8:00 PM - 9:00 PM",
     emoji: "💼"
   },
-  {
-    id: "little-lights",
-    title: "Little Lights",
-    description: "Fun, educational, and faith-filled content designed to nurture young hearts and minds in Christian values.",
-    time: "Saturdays 10:00 AM - 11:00 AM",
-    emoji: "👶"
-  }
 ];
 
 interface ProgramsGridProps {
@@ -83,13 +76,14 @@ export const ProgramsGrid = ({ featured = false, limit }: ProgramsGridProps) => 
         )}
         
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {displayPrograms.map((program) => (
+          {displayPrograms.map((program, index) => (
             <div key={program.id} className="card-program group cursor-pointer">
-              <div className="relative h-48 bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-6xl text-primary-foreground overflow-hidden">
-                {program.emoji}
-                <div className="absolute inset-0 flex items-center justify-center opacity-0 group-hover:opacity-100 transition-opacity duration-300">
-                  <span className="text-5xl">▶</span>
-                </div>
+              <div className="relative h-48 bg-gradient-to-br from-primary to-primary-dark overflow-hidden">
+                <img 
+                  src={`https://picsum.photos/400/300?random=${index + 10}`}
+                  alt={program.title}
+                  className="w-full h-full object-cover"
+                />
               </div>
               
               <div className="p-6">
@@ -106,6 +100,26 @@ export const ProgramsGrid = ({ featured = false, limit }: ProgramsGridProps) => 
             </div>
           ))}
         </div>
+        
+        {/* Video Section for Programs Page */}
+        {!featured && !limit && (
+          <div className="mt-16">
+            <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl max-w-4xl mx-auto">
+              <div className="aspect-video bg-black relative overflow-hidden">
+                <video
+                  className="w-full h-full object-cover"
+                  autoPlay
+                  muted
+                  loop
+                  playsInline
+                >
+                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+                  Your browser does not support the video tag.
+                </video>
+              </div>
+            </div>
+          </div>
+        )}
       </div>
     </section>
   );

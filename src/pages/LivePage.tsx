@@ -126,7 +126,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
 
         {/* Past Live Videos Section */}
         <div className="mt-16 max-w-7xl mx-auto">
-          <h3 className="text-3xl font-bold mb-8 text-foreground text-center">Watch Previous Live Sessions</h3>
+          <h3 className="text-3xl font-bold mb-8 text-foreground text-left">Previous Live Sessions</h3>
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
             {[1, 2, 3].map((videoNum) => (
               <div key={videoNum} className="bg-card rounded-2xl overflow-hidden shadow-lg border">
