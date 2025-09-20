@@ -18,7 +18,6 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
   const handleWatchNow = () => setIsFullscreen(true);
   const handleCloseFullscreen = () => setIsFullscreen(false);
 
-  /*  PAST SESSIONS  –  paste ONLY the YouTube ID  */
   const previousSessions = [
     { id: "7dv-ssU6Xzk" },
     { id: "vSctvLbETNg" },
@@ -28,7 +27,6 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
   return (
     <div className="min-h-screen pt-20">
       <div className="container mx-auto px-4">
-        {/*  LIVE PLAYER + TODAY'S PROGRAMS  –  same font as pastor name + pale blue  */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           <div className="lg:col-span-2">
             <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
@@ -59,9 +57,8 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                   >
                     <div className="flex items-start justify-between mb-2">
                       <h4 className="font-semibold text-base text-foreground">{program.title}</h4>
-                      {/*  same font-size as pastor name + pale blue  */}
-                      <span className="text-xs text-blue-400 font-medium">
-                        {program.status === 'live' ? 'LIVE' : program.status === 'completed' ? 'COMPLETED' : 'UPCOMING'}
+                      <span className={`text-xs font-medium ${program.status === 'live' ? 'text-red-500' : 'text-blue-400'}`}>
+                        {program.status === 'live' ? 'Now' : program.status === 'completed' ? 'COMPLETED' : 'UPCOMING'}
                       </span>
                     </div>
                     <p className="text-xs text-muted-foreground mb-1 font-medium">{program.time}</p>
@@ -70,7 +67,6 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                 ))}
                 <button onClick={() => onPageChange?.('schedule')} className="w-full p-4 rounded-xl border border-border hover:bg-muted/50 transition-colors group">
                   <div className="flex items-center justify-between">
-                    {/*  same pale blue as heading  */}
                     <span className="text-base text-blue-400 font-medium">See More</span>
                     <ArrowRight className="h-4 w-4 text-blue-400 group-hover:translate-x-1 transition-transform" />
                   </div>
@@ -96,10 +92,10 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
         </div>
       )}
 
-      {/*  PREVIOUS LIVE SESSIONS  –  same font as heading, pale blue, bigger thumbs, no captions  */}
+      {/*  PREVIOUS LIVE SESSIONS  –  BIGGER FONT  */}
       <section className="py-16 container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-lg font-bold text-left text-blue-400">
+          <h2 className="text-4xl md:text-5xl font-bold text-left text-blue-400">
             Previous Live Sessions
           </h2>
 
@@ -112,7 +108,6 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                 rel="noopener noreferrer"
                 className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
               >
-                {/*  bigger thumbnail (no play button)  */}
                 <div className="aspect-video bg-black relative">
                   <img
                     src={`https://img.youtube.com/vi/${s.id}/maxresdefault.jpg`}
