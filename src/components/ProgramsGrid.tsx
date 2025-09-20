@@ -147,7 +147,7 @@ export const ProgramsGrid = () => {
           <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl aspect-video">
             <iframe
               className="w-full h-full"
-              src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+              src="https://www.youtube.com/embed/Qx1HFNm94TE"
               title="AGTV Live Stream"
               frameBorder="0"
               allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
