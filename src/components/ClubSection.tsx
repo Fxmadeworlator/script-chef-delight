@@ -144,6 +144,10 @@ export const ClubSection = () => {
                     <IconComponent size={40} className="mx-auto" />
                   </div>
                   
+                  <h3 className="text-xl font-bold mb-4 text-foreground font-display">
+                    {option.title}
+                  </h3>
+                  
                   <div className="text-3xl font-bold mb-2 text-foreground">
                     {option.amount}
                   </div>
