@@ -139,11 +139,6 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                   >
                     <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
                   </video>
-                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center opacity-0 hover:opacity-100 transition-opacity">
-                    <div className="bg-white/20 rounded-full p-4">
-                      <span className="text-white font-semibold">Click to Play</span>
-                    </div>
-                  </div>
                 </div>
                 <div className="p-6">
                   <h4 className="text-xl font-bold mb-2 text-foreground">Live Session {videoNum}</h4>

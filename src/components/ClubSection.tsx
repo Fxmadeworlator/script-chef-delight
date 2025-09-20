@@ -2,47 +2,50 @@ import { Crown, Sprout, Heart, HandHeart, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
 
-const donationOptions = [
+const subscriptionOptions = [
   {
-    id: "partner",
+    id: "basic",
     icon: Sprout,
-    amount: "₵150",
+    amount: "₵200",
     frequency: "Monthly",
-    title: "Partner Subscription",
+    title: "Basic Club Member",
     features: [
-      "Monthly prayer updates",
-      "Digital devotionals", 
-      "AGTV partner badge",
-      "Weekly devotional emails"
+      "Access to live streams",
+      "Monthly devotionals", 
+      "AGTV club member badge",
+      "Weekly inspirational emails",
+      "Prayer request submissions"
     ]
   },
   {
-    id: "champion",
+    id: "premium",
     icon: Heart,
-    amount: "₵300",
-    frequency: "Monthly",
-    title: "Champion Subscription",
-    featured: true,
-    features: [
-      "All partner benefits",
-      "Exclusive premium content",
-      "Quarterly ministry reports",
-      "Special prayer requests",
-      "Monthly pastor Q&A sessions"
-    ]
-  },
-  {
-    id: "leader",
-    icon: HandHeart,
     amount: "₵500",
     frequency: "Monthly",
-    title: "Leader Subscription",
+    title: "Premium Club Member",
+    featured: true,
     features: [
-      "All champion benefits",
-      "Personal thank you call",
-      "Annual impact report",
-      "Leadership training videos",
-      "Direct ministry support line"
+      "All basic benefits",
+      "Exclusive premium content library",
+      "Monthly pastor Q&A sessions",
+      "Early access to new programs",
+      "Quarterly ministry impact reports",
+      "Priority prayer line access"
+    ]
+  },
+  {
+    id: "platinum",
+    icon: Crown,
+    amount: "₵1000",
+    frequency: "Monthly",
+    title: "Platinum Club Member",
+    features: [
+      "All premium benefits",
+      "Personal ministry consultation calls",
+      "Annual exclusive retreat invitations",
+      "Behind-the-scenes content access",
+      "Direct pastor communication line",
+      "Custom prayer and blessing videos"
     ]
   }
 ];
@@ -79,9 +82,9 @@ export const ClubSection = () => {
             Join our exclusive Club 1000+ community and become a vital partner in keeping AGTV on air! Your monthly subscription ensures we continue reaching millions across Africa with transformative Gospel content, quality programming, and life-changing messages.
           </p>
 
-          {/* Donation Options */}
+          {/* Subscription Options */}
           <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12">
-            {donationOptions.map((option) => {
+            {subscriptionOptions.map((option) => {
               const IconComponent = option.icon;
               return (
                 <div
