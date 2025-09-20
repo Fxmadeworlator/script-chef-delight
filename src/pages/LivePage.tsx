@@ -28,7 +28,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
   return (
     <div className="min-h-screen pt-20">
       <div className="container mx-auto px-4">
-        {/*  LIVE PLAYER + TODAY'S PROGRAMS  –  pale blue status, same font as pastor name  */}
+        {/*  LIVE PLAYER + TODAY'S PROGRAMS  –  same font as pastor name + pale blue  */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           <div className="lg:col-span-2">
             <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
@@ -70,8 +70,9 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                 ))}
                 <button onClick={() => onPageChange?.('schedule')} className="w-full p-4 rounded-xl border border-border hover:bg-muted/50 transition-colors group">
                   <div className="flex items-center justify-between">
-                    <span className="font-semibold text-base text-primary">See More</span>
-                    <ArrowRight className="h-4 w-4 text-primary group-hover:translate-x-1 transition-transform" />
+                    {/*  same pale blue as heading  */}
+                    <span className="text-base text-blue-400 font-medium">See More</span>
+                    <ArrowRight className="h-4 w-4 text-blue-400 group-hover:translate-x-1 transition-transform" />
                   </div>
                 </button>
               </div>
@@ -95,10 +96,10 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
         </div>
       )}
 
-      {/*  PREVIOUS LIVE SESSIONS  –  minimal, bigger thumbs, no captions, pale blue heading  */}
+      {/*  PREVIOUS LIVE SESSIONS  –  same font as heading, pale blue, bigger thumbs, no captions  */}
       <section className="py-16 container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-base md:text-lg font-bold text-left text-blue-400">
+          <h2 className="text-3xl md:text-lg font-bold text-left text-blue-400">
             Previous Live Sessions
           </h2>
 
