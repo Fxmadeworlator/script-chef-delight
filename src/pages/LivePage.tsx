@@ -100,14 +100,14 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
         </div>
       )}
 
-      {/*  PREVIOUS LIVE SESSIONS  –  blue→black gradient, left-aligned, bigger thumbs, no captions  */}
-      <section className="py-16 container mx-auto px-4 bg-gradient-to-br from-blue-900 via-blue-800 to-black text-white">
+      {/*  PREVIOUS LIVE SESSIONS  –  minimal, bigger thumbs, no captions, blue-black text only  */}
+      <section className="py-16 container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-left mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-left bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent">
             Previous Live Sessions
           </h2>
 
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
             {previousSessions.map((s) => (
               <a
                 key={s.id}
