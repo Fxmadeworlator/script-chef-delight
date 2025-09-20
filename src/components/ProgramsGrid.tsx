@@ -137,4 +137,23 @@ export const ProgramsGrid = () => {
       </div>
     </section>
   );
+  {/* Video playback section - now UNDER the tiers */}
+<section className="py-16 container mx-auto px-4">
+  <div className="max-w-4xl mx-auto text-center">
+    <h2 className="text-3xl font-bold mb-6">Experience AGTV Live</h2>
+    <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl aspect-video">
+      <iframe
+        className="w-full h-full"
+        src="https://www.youtube.com/embed/dQw4w9WgXcQ"
+        title="AGTV Live Stream"
+        frameBorder="0"
+        allow="accelerometer; autoplay; clipboard-write; encrypted-media; gyroscope; picture-in-picture"
+        allowFullScreen
+      />
+    </div>
+    <p className="text-muted-foreground mt-4">
+      Join thousands watching live. Your support keeps us on air.
+    </p>
+  </div>
+</section>
 };
