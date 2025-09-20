@@ -1,7 +1,7 @@
 // LivePage.tsx
 import { ArrowRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState, useEffect } from "react";
+import { useState } from "react";
 
 interface LivePageProps {
   onPageChange?: (page: string) => void;
@@ -18,27 +18,18 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
   const handleWatchNow = () => setIsFullscreen(true);
   const handleCloseFullscreen = () => setIsFullscreen(false);
 
-  /*  PREVIOUS SESSIONS  –  paste ONLY the YouTube ID  */
+  /*  PAST SESSIONS  –  paste ONLY the YouTube ID  */
   const previousSessions = [
-    { id: "7dv-ssU6Xzk" },   // https://www.youtube.com/live/7dv-ssU6Xzk?si=GnZbQRIVdhB31Eus
-    { id: "vSctvLbETNg" },   // https://www.youtube.com/live/vSctvLbETNg?si=VvZHHnxv-ICrTKv7
-    { id: "LaZjaDwL574" },   // https://www.youtube.com/live/LaZjaDwL574?si=fCf88-Mb6gAq4aXK
+    { id: "7dv-ssU6Xzk" },
+    { id: "vSctvLbETNg" },
+    { id: "LaZjaDwL574" }
   ];
-
-  /*  auto-generated caption from YouTube API (fallback to "Live Stream")  */
-  const generateCaption = (id: string) => {
-    /*  YouTube API call would go here  */
-    /*  for now we simply return a placeholder  */
-    /*  once you wire the API, replace this with the real upload date  */
-    return "Live Stream";   // fallback text
-  };
 
   return (
     <div className="min-h-screen pt-20">
       <div className="container mx-auto px-4">
         {/*  LIVE PLAYER + TODAY'S PROGRAMS  */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {/*  Video Player  */}
           <div className="lg:col-span-2">
             <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
               <div className="aspect-video bg-black relative overflow-hidden">
@@ -46,7 +37,6 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                   <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
-
                 <div className="absolute bottom-8 left-8 text-white max-w-md">
                   <h2 className="text-3xl font-bold mb-3 drop-shadow-lg">Faith That Transforms</h2>
                   <p className="text-white/90 text-xl mb-6 drop-shadow-md">Pastor Emmanuel Asante | Sunday Service</p>
@@ -58,7 +48,6 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
             </div>
           </div>
 
-          {/*  Today's Programs  */}
           <div>
             <div className="bg-card rounded-2xl p-4 shadow-lg border h-full flex flex-col">
               <h3 className="text-2xl font-bold mb-6 text-foreground shrink-0">Today's Programs</h3>
@@ -111,14 +100,10 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
         </div>
       )}
 
-      {/*  PREVIOUS LIVE SESSIONS  –  left-aligned with first card, bigger thumbs, no play button  */}
+      {/*  PREVIOUS LIVE SESSIONS  –  minimal, bigger thumbs, no captions  */}
       <section className="py-16 container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground font-display text-left">
-            Previous Live Sessions
-          </h2>
-
-          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
             {previousSessions.map((s) => (
               <a
                 key={s.id}
@@ -131,17 +116,10 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                 <div className="aspect-video bg-black relative">
                   <img
                     src={`https://img.youtube.com/vi/${s.id}/maxresdefault.jpg`}
-                    alt={s.title}
+                    alt=""
                     className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                   />
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors" />
-                </div>
-
-                {/*  auto-generated caption  */}
-                <div className="p-5 bg-card">
-                  <h3 className="font-semibold text-lg text-foreground line-clamp-2">
-                    {s.title || generateCaption(s.id)}
-                  </h3>
                 </div>
               </a>
             ))}
