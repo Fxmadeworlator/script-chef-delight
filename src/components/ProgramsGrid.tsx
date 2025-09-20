@@ -68,13 +68,15 @@ export const ProgramsGrid = () => {
 
   return (
     <>
-      {/* Heading with background image + overlay */}
+      {/* Heading with easy-swap background picture */}
       <section className="relative py-20 px-4 text-white text-center overflow-hidden">
-        <div
-          className="absolute inset-0 bg-cover bg-center bg-no-repeat bg-fixed"
-          style={{ backgroundImage: "url('/src/assets/vecteezy_abstract-black-fluid-wave-background_.jpg')" }}
+        <img
+          src="/src/assets/support-bg.jpg"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover object-center"
         />
-        <div className="absolute inset-0 bg-black/60" />
+        <div className="absolute inset-0 bg-black/50" />
+
         <div className="relative z-10 max-w-4xl mx-auto">
           <h2 className="text-4xl md:text-5xl font-bold mb-4 font-display">Support AGTV</h2>
           <p className="text-lg md:text-xl opacity-90">
