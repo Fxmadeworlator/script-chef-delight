@@ -1,3 +1,4 @@
+// ProgramsGrid.tsx
 import { useState } from "react";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
@@ -63,8 +64,9 @@ export const ProgramsGrid = () => {
     alert(`You selected the ${tierId} tier! Payment integration coming soon.`);
   };
 
-    return (
+  return (
     <>
+      {/* Subscription Tiers */}
       <section className="py-16 container mx-auto px-4">
         <div className="text-center mb-16">
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground font-display">
@@ -138,6 +140,7 @@ export const ProgramsGrid = () => {
         </div>
       </section>
 
+      {/* Video Player - UNDER the tiers */}
       <section className="py-16 container mx-auto px-4">
         <div className="max-w-4xl mx-auto text-center">
           <h2 className="text-3xl font-bold mb-6">Experience AGTV Live</h2>
@@ -158,3 +161,4 @@ export const ProgramsGrid = () => {
       </section>
     </>
   );
+};
