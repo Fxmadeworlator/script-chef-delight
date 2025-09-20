@@ -39,7 +39,6 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                   Your browser does not support the video tag.
                 </video>
 
-                {/*  Overlay Text  */}
                 <div className="absolute bottom-8 left-8 text-white max-w-md">
                   <h2 className="text-3xl font-bold mb-3 drop-shadow-lg">Faith That Transforms</h2>
                   <p className="text-white/90 text-xl mb-6 drop-shadow-md">Pastor Emmanuel Asante | Sunday Service</p>
@@ -89,7 +88,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
         </div>
       </div>
 
-      {/*  FULLSCREEN MODAL  */}
+      {/*  Fullscreen Modal  */}
       {isFullscreen && (
         <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
           <button onClick={handleCloseFullscreen} className="absolute top-4 right-4 text-white hover:text-primary z-10 p-2">
@@ -98,45 +97,45 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
           <div className="relative w-full h-full">
             <video className="w-full h-full object-contain" autoPlay controls playsInline>
               <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
-              Your browser does not support the video tag.
+                  Your browser does not support the video tag.
             </video>
           </div>
         </div>
       )}
 
-      {/*  PREVIOUS LIVE SESSIONS  –  heading & first card share the same line  */}
+      {/* Previous Live Sessions - left-aligned with first card, bigger thumbs, no play button */}
       <section className="py-16 container mx-auto px-4">
-        <div className="flex items-baseline justify-between mb-8">
-          <h2 className="text-3xl md:text-4xl font-bold text-foreground font-display">
+        <div className="max-w-7xl mx-auto">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground font-display text-left">
             Previous Live Sessions
           </h2>
-        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
-          {previousSessions.map((s) => (
-            <a
-              key={s.id}
-              href={`https://www.youtube.com/watch?v=${s.id}`}
-              target="_blank"
-              rel="noopener noreferrer"
-              className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
-            >
-              {/*  Thumbnail (no play button)  */}
-              <div className="aspect-video bg-black relative">
-                <img
-                  src={`https://img.youtube.com/vi/${s.id}/maxresdefault.jpg`}
-                  alt={s.title}
-                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
-                />
-                <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors" />
-              </div>
+          <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 mt-6">
+            {previousSessions.map((s) => (
+              <a
+                key={s.id}
+                href={`https://www.youtube.com/watch?v=${s.id}`}
+                target="_blank"
+                rel="noopener noreferrer"
+                className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
+              >
+                {/*  bigger thumbnail (no play button)  */}
+                <div className="aspect-video bg-black relative">
+                  <img
+                    src={`https://img.youtube.com/vi/${s.id}/maxresdefault.jpg`}
+                    alt={s.title}
+                    className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                  />
+                  <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors" />
+                </div>
 
-              {/*  Title  */}
-              <div className="p-4 bg-card">
-                <h3 className="font-semibold text-sm text-foreground line-clamp-2">{s.title}</h3>
-              </div>
-            </a>
-          ))}
+                {/*  bigger title  */}
+                <div className="p-5 bg-card">
+                  <h3 className="font-semibold text-lg text-foreground line-clamp-2">{s.title}</h3>
+                </div>
+              </a>
+            ))}
+          </div>
         </div>
       </section>
     </div>
