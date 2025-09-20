@@ -8,20 +8,6 @@ interface Program {
 
 const programs: Program[] = [
   {
-    id: "morning-glory",
-    title: "Morning Glory",
-    description: "Start your day with powerful prayers, worship, and inspiring messages that set the tone for victory and breakthrough.",
-    time: "Weekdays 6:00 AM - 7:00 AM",
-    emoji: "🙏"
-  },
-  {
-    id: "word-of-life",
-    title: "Word of Life",
-    description: "Deep biblical teachings that illuminate God's truth and provide practical wisdom for Christian living.",
-    time: "Sundays 9:00 AM - 10:30 AM",
-    emoji: "✝️"
-  },
-  {
     id: "family-foundations",
     title: "Family Foundations",
     description: "Building stronger Christian families through biblical principles, practical advice, and real-life testimonies.",
@@ -70,6 +56,29 @@ export const ProgramsGrid = ({ featured = false, limit }: ProgramsGridProps) => 
             <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
               Discover our most inspiring shows that strengthen faith and transform communities
             </p>
+          </div>
+        )}
+        
+        {/* Hero Image for Programs Page */}
+        {!featured && !limit && (
+          <div className="mb-16">
+            <div className="relative h-96 rounded-2xl overflow-hidden bg-gradient-to-br from-primary to-primary-dark">
+              <img 
+                src="/src/assets/hero-bg.jpg" 
+                alt="AGTV Programs" 
+                className="w-full h-full object-cover"
+              />
+              <div className="absolute inset-0 bg-black/40 flex items-center justify-center">
+                <div className="text-center text-white">
+                  <h2 className="text-4xl md:text-5xl font-bold mb-4 font-display">
+                    Join Club 1000+
+                  </h2>
+                  <p className="text-xl md:text-2xl">
+                    Exclusive access to premium faith content
+                  </p>
+                </div>
+              </div>
+            </div>
           </div>
         )}
         

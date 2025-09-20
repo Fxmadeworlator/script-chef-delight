@@ -1,4 +1,4 @@
-import { PlayCircle, Users, Volume2, Maximize, ArrowRight, X } from "lucide-react";
+import { PlayCircle, Users, Volume2, Maximize, ArrowRight, X, Play } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { useState } from "react";
 
@@ -67,6 +67,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                     onClick={handleWatchNow}
                     className="bg-primary hover:bg-primary/80 text-black font-semibold px-8 py-3 text-lg"
                   >
+                    <Play className="w-5 h-5 mr-2" />
                     Watch Now
                   </Button>
                 </div>
@@ -120,6 +121,44 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                 </button>
               </div>
             </div>
+          </div>
+        </div>
+
+        {/* Past Live Videos Section */}
+        <div className="mt-16 max-w-7xl mx-auto">
+          <h3 className="text-3xl font-bold mb-8 text-foreground text-center">Watch Previous Live Sessions</h3>
+          <div className="grid grid-cols-1 md:grid-cols-3 gap-8">
+            {[1, 2, 3].map((videoNum) => (
+              <div key={videoNum} className="bg-card rounded-2xl overflow-hidden shadow-lg border">
+                <div className="relative aspect-video bg-black">
+                  <video
+                    className="w-full h-full object-cover"
+                    muted
+                    playsInline
+                    poster={`https://picsum.photos/400/225?random=${videoNum}`}
+                  >
+                    <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+                  </video>
+                  <div className="absolute inset-0 bg-black/20 flex items-center justify-center">
+                    <div className="bg-white/20 rounded-full p-4">
+                      <Play className="w-8 h-8 text-white" />
+                    </div>
+                  </div>
+                </div>
+                <div className="p-6">
+                  <h4 className="text-xl font-bold mb-2 text-foreground">Live Session {videoNum}</h4>
+                  <p className="text-muted-foreground mb-4">
+                    {videoNum === 1 ? "Faith That Overcomes - Pastor Emmanuel Asante" :
+                     videoNum === 2 ? "Kingdom Principles - Minister Grace Owusu" :
+                     "Prophetic Declarations - Pastor David Mensah"}
+                  </p>
+                  <Button className="w-full bg-primary hover:bg-primary/80 text-primary-foreground">
+                    <Play className="w-4 h-4 mr-2" />
+                    Watch the Replay
+                  </Button>
+                </div>
+              </div>
+            ))}
           </div>
         </div>
       </div>
