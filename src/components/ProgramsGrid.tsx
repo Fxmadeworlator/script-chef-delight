@@ -156,5 +156,5 @@ export const ProgramsGrid = () => {
         </p>
       </div>
     </section>
-  );
-};
+  </>
+);
