@@ -1,7 +1,7 @@
 // LivePage.tsx
 import { ArrowRight, X } from "lucide-react";
 import { Button } from "@/components/ui/button";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 
 interface LivePageProps {
   onPageChange?: (page: string) => void;
@@ -18,12 +18,20 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
   const handleWatchNow = () => setIsFullscreen(true);
   const handleCloseFullscreen = () => setIsFullscreen(false);
 
-  /*  PREVIOUS SESSIONS  –  edit here only  */
+  /*  PREVIOUS SESSIONS  –  paste ONLY the YouTube ID  */
   const previousSessions = [
-    { id: "Qx1HFNm94TE", title: "Sunday Revival 2024-06-09" },
-    { id: "jfKfPfyJRdk", title: "Mid-Week Prayer 2024-06-05" },
-    { id: "dQw4w9WgXcQ", title: "Youth Praise Night 2024-05-26" }
+    { id: "7dv-ssU6Xzk" },   // https://www.youtube.com/live/7dv-ssU6Xzk?si=GnZbQRIVdhB31Eus
+    { id: "vSctvLbETNg" },   // https://www.youtube.com/live/vSctvLbETNg?si=VvZHHnxv-ICrTKv7
+    { id: "LaZjaDwL574" },   // https://www.youtube.com/live/LaZjaDwL574?si=fCf88-Mb6gAq4aXK
   ];
+
+  /*  auto-generated caption from YouTube API (fallback to "Live Stream")  */
+  const generateCaption = (id: string) => {
+    /*  YouTube API call would go here  */
+    /*  for now we simply return a placeholder  */
+    /*  once you wire the API, replace this with the real upload date  */
+    return "Live Stream";   // fallback text
+  };
 
   return (
     <div className="min-h-screen pt-20">
@@ -103,7 +111,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
         </div>
       )}
 
-      {/* Previous Live Sessions - left-aligned with first card, bigger thumbs, no play button */}
+      {/*  PREVIOUS LIVE SESSIONS  –  left-aligned with first card, bigger thumbs, no play button  */}
       <section className="py-16 container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
           <h2 className="text-3xl md:text-4xl font-bold text-foreground font-display text-left">
@@ -129,9 +137,11 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                   <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors" />
                 </div>
 
-                {/*  bigger title  */}
+                {/*  auto-generated caption  */}
                 <div className="p-5 bg-card">
-                  <h3 className="font-semibold text-lg text-foreground line-clamp-2">{s.title}</h3>
+                  <h3 className="font-semibold text-lg text-foreground line-clamp-2">
+                    {s.title || generateCaption(s.id)}
+                  </h3>
                 </div>
               </a>
             ))}
