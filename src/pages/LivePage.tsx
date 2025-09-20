@@ -11,19 +11,26 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
   const [isFullscreen, setIsFullscreen] = useState(false);
   const todaysPrograms = [
     { title: "Morning Devotion", time: "6:00 AM", pastor: "Pastor Emmanuel Asante", status: "completed" },
-    { title: "Sunday Service", time: "9:00 AM", pastor: "Pastor Emmanuel Asante", status: "live" },
+    { title: "Sunday Service",  time: "9:00 AM", pastor: "Pastor Emmanuel Asante", status: "live" },
     { title: "Gospel Music Hour", time: "3:00 PM", pastor: "Minister Grace Owusu", status: "upcoming" }
   ];
 
   const handleWatchNow = () => setIsFullscreen(true);
   const handleCloseFullscreen = () => setIsFullscreen(false);
 
+  /*  PREVIOUS SESSIONS  –  edit here only  */
+  const previousSessions = [
+    { id: "Qx1HFNm94TE", title: "Sunday Revival 2024-06-09" },
+    { id: "jfKfPfyJRdk", title: "Mid-Week Prayer 2024-06-05" },
+    { id: "dQw4w9WgXcQ", title: "Youth Praise Night 2024-05-26" }
+  ];
+
   return (
     <div className="min-h-screen pt-20">
       <div className="container mx-auto px-4">
-        {/* Main Content Layout */}
+        {/*  LIVE PLAYER + TODAY'S PROGRAMS  */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
-          {/* Video Player - Left Side (2/3 width) */}
+          {/*  Video Player  */}
           <div className="lg:col-span-2">
             <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
               <div className="aspect-video bg-black relative overflow-hidden">
@@ -32,7 +39,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                   Your browser does not support the video tag.
                 </video>
 
-                {/* Video Overlay Content - Bottom Left */}
+                {/*  Overlay Text  */}
                 <div className="absolute bottom-8 left-8 text-white max-w-md">
                   <h2 className="text-3xl font-bold mb-3 drop-shadow-lg">Faith That Transforms</h2>
                   <p className="text-white/90 text-xl mb-6 drop-shadow-md">Pastor Emmanuel Asante | Sunday Service</p>
@@ -44,7 +51,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
             </div>
           </div>
 
-          {/* Today's Programs - Right Side (1/3 width) */}
+          {/*  Today's Programs  */}
           <div>
             <div className="bg-card rounded-2xl p-4 shadow-lg border h-full flex flex-col">
               <h3 className="text-2xl font-bold mb-6 text-foreground shrink-0">Today's Programs</h3>
@@ -82,7 +89,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
         </div>
       </div>
 
-      {/* Fullscreen Video Modal */}
+      {/*  FULLSCREEN MODAL  */}
       {isFullscreen && (
         <div className="fixed inset-0 bg-black z-50 flex items-center justify-center">
           <button onClick={handleCloseFullscreen} className="absolute top-4 right-4 text-white hover:text-primary z-10 p-2">
@@ -97,19 +104,16 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
         </div>
       )}
 
-      {/* Previous Live Sessions - YouTube grid (left-aligned, no play button) */}
+      {/*  PREVIOUS LIVE SESSIONS  –  heading & first card share the same line  */}
       <section className="py-16 container mx-auto px-4">
-        <h2 className="text-3xl md:text-4xl font-bold text-foreground font-display text-left">
-          Previous Live Sessions
-        </h2>
+        <div className="flex items-baseline justify-between mb-8">
+          <h2 className="text-3xl md:text-4xl font-bold text-foreground font-display">
+            Previous Live Sessions
+          </h2>
+        </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto mt-8">
-          {/* Paste MORE { id, title } objects here whenever you add a past stream */}
-          {[
-            { id: "Qx1HFNm94TE", title: "Sunday Revival 2024-06-09" },
-            { id: "jfKfPfyJRdk", title: "Mid-Week Prayer 2024-06-05" },
-            { id: "dQw4w9WgXcQ", title: "Youth Praise Night 2024-05-26" }
-          ].map((s) => (
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 max-w-6xl mx-auto">
+          {previousSessions.map((s) => (
             <a
               key={s.id}
               href={`https://www.youtube.com/watch?v=${s.id}`}
@@ -117,7 +121,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
               rel="noopener noreferrer"
               className="group relative rounded-xl overflow-hidden shadow-lg hover:shadow-2xl transition-all duration-300"
             >
-              {/* Thumbnail (no play button overlay) */}
+              {/*  Thumbnail (no play button)  */}
               <div className="aspect-video bg-black relative">
                 <img
                   src={`https://img.youtube.com/vi/${s.id}/maxresdefault.jpg`}
@@ -127,7 +131,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                 <div className="absolute inset-0 bg-black/40 group-hover:bg-black/60 transition-colors" />
               </div>
 
-              {/* Title */}
+              {/*  Title  */}
               <div className="p-4 bg-card">
                 <h3 className="font-semibold text-sm text-foreground line-clamp-2">{s.title}</h3>
               </div>
