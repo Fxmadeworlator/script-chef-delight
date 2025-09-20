@@ -6,40 +6,43 @@ const donationOptions = [
   {
     id: "partner",
     icon: Sprout,
-    amount: "$25",
+    amount: "₵150",
     frequency: "Monthly",
-    title: "Become a Partner",
+    title: "Partner Subscription",
     features: [
       "Monthly prayer updates",
-      "Digital devotionals",
-      "AGTV partner badge"
+      "Digital devotionals", 
+      "AGTV partner badge",
+      "Weekly devotional emails"
     ]
   },
   {
     id: "champion",
     icon: Heart,
-    amount: "$50",
+    amount: "₵300",
     frequency: "Monthly",
-    title: "Become a Champion",
+    title: "Champion Subscription",
     featured: true,
     features: [
-      "All previous benefits",
-      "Exclusive web content",
+      "All partner benefits",
+      "Exclusive premium content",
       "Quarterly ministry reports",
-      "Special prayer requests"
+      "Special prayer requests",
+      "Monthly pastor Q&A sessions"
     ]
   },
   {
     id: "leader",
     icon: HandHeart,
-    amount: "$100",
+    amount: "₵500",
     frequency: "Monthly",
-    title: "Become a Leader",
+    title: "Leader Subscription",
     features: [
-      "All previous benefits",
+      "All champion benefits",
       "Personal thank you call",
       "Annual impact report",
-      "Leadership updates"
+      "Leadership training videos",
+      "Direct ministry support line"
     ]
   }
 ];
@@ -73,7 +76,7 @@ export const ClubSection = () => {
             Join AGTV Club 1000+
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed">
-            Become a sustaining partner and help spread the Gospel across Africa. Your monthly support keeps AGTV on air and reaching millions with life-changing content.
+            Join our exclusive Club 1000+ community and become a vital partner in keeping AGTV on air! Your monthly subscription ensures we continue reaching millions across Africa with transformative Gospel content, quality programming, and life-changing messages.
           </p>
 
           {/* Donation Options */}
@@ -84,7 +87,7 @@ export const ClubSection = () => {
                 <div
                   key={option.id}
                   className={cn(
-                    "card-donation",
+                    "card-donation min-h-[480px] flex flex-col justify-between",
                     option.featured && "featured relative"
                   )}
                 >

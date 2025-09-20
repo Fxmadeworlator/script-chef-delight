@@ -1,3 +1,5 @@
+import { VideoPlaybackSection } from "./VideoPlaybackSection";
+
 interface Program {
   id: string;
   title: string;
@@ -66,8 +68,11 @@ export const ProgramsGrid = ({ featured = false, limit }: ProgramsGridProps) => 
                   <h2 className="text-4xl md:text-5xl font-bold mb-4 font-display">
                     Join Club 1000+
                   </h2>
-                  <p className="text-xl md:text-2xl">
+                  <p className="text-xl md:text-2xl mb-4">
                     Exclusive access to premium faith content
+                  </p>
+                  <p className="text-lg text-white/90 max-w-2xl mx-auto">
+                    Be part of the movement that keeps AGTV broadcasting across Africa. Your subscription supports quality Christian programming, reaches millions with the Gospel, and builds stronger faith communities continent-wide.
                   </p>
                 </div>
               </div>
@@ -103,22 +108,7 @@ export const ProgramsGrid = ({ featured = false, limit }: ProgramsGridProps) => 
         
         {/* Video Section for Programs Page */}
         {!featured && !limit && (
-          <div className="mt-16">
-            <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl max-w-4xl mx-auto">
-              <div className="aspect-video bg-black relative overflow-hidden">
-                <video
-                  className="w-full h-full object-cover"
-                  autoPlay
-                  muted
-                  loop
-                  playsInline
-                >
-                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
-                  Your browser does not support the video tag.
-                </video>
-              </div>
-            </div>
-          </div>
+          <VideoPlaybackSection />
         )}
       </div>
     </section>
