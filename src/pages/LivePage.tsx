@@ -22,7 +22,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
   const previousSessions = [
     { id: "7dv-ssU6Xzk" },
     { id: "vSctvLbETNg" },
-    { id: "LaZjaDwL574" }
+    { id: "TqoG6PdFunc" }   // ← new third thumbnail
   ];
 
   return (
@@ -100,10 +100,10 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
         </div>
       )}
 
-      {/*  PREVIOUS LIVE SESSIONS  –  minimal, bigger thumbs, no captions, blue-black text only  */}
+      {/*  PREVIOUS LIVE SESSIONS  –  minimal, bigger thumbs, no captions, plain black heading  */}
       <section className="py-16 container mx-auto px-4">
         <div className="max-w-7xl mx-auto">
-          <h2 className="text-3xl md:text-4xl font-bold text-left bg-gradient-to-r from-blue-600 to-black bg-clip-text text-transparent">
+          <h2 className="text-3xl md:text-4xl font-bold text-left text-black">
             Previous Live Sessions
           </h2>
 
