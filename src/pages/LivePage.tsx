@@ -28,7 +28,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
   return (
     <div className="min-h-screen pt-20">
       <div className="container mx-auto px-4">
-        {/*  LIVE PLAYER + TODAY'S PROGRAMS  –  plain black status text  */}
+        {/*  LIVE PLAYER + TODAY'S PROGRAMS  –  pale blue status, same font as pastor name  */}
         <div className="grid grid-cols-1 lg:grid-cols-3 gap-8 max-w-7xl mx-auto">
           <div className="lg:col-span-2">
             <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
@@ -59,8 +59,8 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                   >
                     <div className="flex items-start justify-between mb-2">
                       <h4 className="font-semibold text-base text-foreground">{program.title}</h4>
-                      {/*  plain black text – no badge, no animation, no rounded pill  */}
-                      <span className="text-sm text-black font-medium">
+                      {/*  same font-size as pastor name + pale blue  */}
+                      <span className="text-base text-blue-400 font-medium">
                         {program.status === 'live' ? 'LIVE' : program.status === 'completed' ? 'COMPLETED' : 'UPCOMING'}
                       </span>
                     </div>
