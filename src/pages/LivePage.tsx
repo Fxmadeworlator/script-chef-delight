@@ -34,7 +34,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
             <div className="relative bg-black rounded-lg overflow-hidden shadow-2xl">
               <div className="aspect-video bg-black relative overflow-hidden">
                 <video className="w-full h-full object-cover" autoPlay muted loop playsInline>
-                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+                  <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4 " type="video/mp4" />
                   Your browser does not support the video tag.
                 </video>
                 <div className="absolute bottom-8 left-8 text-white max-w-md">
@@ -60,7 +60,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
                     <div className="flex items-start justify-between mb-2">
                       <h4 className="font-semibold text-base text-foreground">{program.title}</h4>
                       {/*  same font-size as pastor name + pale blue  */}
-                      <span className="text-base text-blue-400 font-medium">
+                      <span className="text-xs text-blue-400 font-medium">
                         {program.status === 'live' ? 'LIVE' : program.status === 'completed' ? 'COMPLETED' : 'UPCOMING'}
                       </span>
                     </div>
@@ -89,7 +89,7 @@ export const LivePage = ({ onPageChange }: LivePageProps = {}) => {
           </button>
           <div className="relative w-full h-full">
             <video className="w-full h-full object-contain" autoPlay controls playsInline>
-              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" type="video/mp4" />
+              <source src="https://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4 " type="video/mp4" />
                   Your browser does not support the video tag.
             </video>
           </div>
