@@ -1,4 +1,4 @@
-// src/pages/SchedulePage.tsx
+// src/pages/SchedulePage.tsx  (single-channel, pop-out scroll)
 import { useState } from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
@@ -156,7 +156,7 @@ export const SchedulePage = () => {
           </ScrollArea>
         </div>
 
-        {/* Grid */}
+        {/* Schedule Grid – SINGLE CHANNEL */}
         <div className="border rounded-lg bg-white shadow-lg overflow-hidden">
           {/* Time header */}
           <div className="bg-[#E4E8EC] border-b">
@@ -174,81 +174,74 @@ export const SchedulePage = () => {
                   </div>
                 ))}
               </div>
-              <ScrollBar orientation="horizontal" />
+              {/* POP-OUT SCROLLBAR */}
+              <ScrollBar
+                orientation="horizontal"
+                className="h-3 bg-transparent"
+              />
+              <style jsx global>{`
+                .scroll-area-scrollbar[data-orientation="horizontal"] {
+                  background: transparent;
+                  height: 10px;
+                }
+                .scroll-area-scrollbar .scroll-area-thumb {
+                  background: #622347;
+                  border-radius: 4px;
+                }
+                .scroll-area-scrollbar .scroll-area-thumb:hover {
+                  background: #122E34;
+                }
+                /* Firefox */
+                .scroll-area-scrollbar {
+                  scrollbar-width: thin;
+                  scrollbar-color: #622347 transparent;
+                }
+              `}</style>
             </ScrollArea>
           </div>
 
-          {/* Program rows */}
+          {/* AGTV row */}
           <div className="relative">
-            <ScrollArea className="w-full h-[600px]">
-              <div className="flex flex-col">
-                {/* AGTV row */}
-                <div className="flex border-b">
-                  <div className="min-w-[80px] h-20 flex items-center justify-center border-r bg-[#F5F7FA]">
-                    <div className="text-center">
-                      <div className="text-xs font-semibold text-[#122E34]">AGTV</div>
-                      <div className="text-xs text-[#677E8A]">151</div>
-                    </div>
-                  </div>
-                  <div className="relative flex-1 h-20">
-                    {timeSlots.map((t) => (
-                      <div
-                        key={t}
-                        className="absolute border-r h-full"
-                        style={{ left: `${(t / 1440) * 100}%`, width: `${(30 / 1440) * 100}%` }}
-                      />
-                    ))}
-
-                    {schedulePrograms
-                      .filter((p) => p.day === selectedDate % 7)
-                      .map((p) => (
-                        <div
-                          key={p.id}
-                          className={`absolute h-16 mt-2 rounded px-2 py-1 text-xs overflow-hidden ${categoryStyles[p.category]}`}
-                          style={{
-                            left: `${(p.startTime / 1440) * 100}%`,
-                            width: `${(p.duration / 1440) * 100}%`,
-                          }}
-                        >
-                          <div className="font-semibold truncate">{p.title}</div>
-                          <div className="opacity-90 truncate">{p.category}</div>
-                          <div className="opacity-80 text-xs">
-                            {formatTime(p.startTime)} – {formatTime(p.startTime + p.duration)}
-                          </div>
-                        </div>
-                      ))}
+            <ScrollArea className="w-full h-[300px]">
+              <div className="flex border-b">
+                <div className="min-w-[80px] h-20 flex items-center justify-center border-r bg-[#F5F7FA]">
+                  <div className="text-center">
+                    <div className="text-xs font-semibold text-[#122E34]">AGTV</div>
+                    <div className="text-xs text-[#677E8A]">151</div>
                   </div>
                 </div>
+                <div className="relative flex-1 h-20">
+                  {/* vertical grid lines */}
+                  {timeSlots.map((t) => (
+                    <div
+                      key={t}
+                      className="absolute border-r h-full"
+                      style={{ left: `${(t / 1440) * 100}%`, width: `${(30 / 1440) * 100}%` }}
+                    />
+                  ))}
 
-                {/* Dummy extra channels */}
-                {[2, 3, 4, 5].map((ch) => (
-                  <div key={ch} className="flex border-b">
-                    <div className="min-w-[80px] h-20 flex items-center justify-center border-r bg-[#F5F7FA]">
-                      <div className="text-center">
-                        <div className="text-xs font-semibold text-[#122E34]">AGTV {ch}</div>
-                        <div className="text-xs text-[#677E8A]">{150 + ch}</div>
-                      </div>
-                    </div>
-                    <div className="relative flex-1 h-20">
-                      {timeSlots.map((t) => (
-                        <div
-                          key={t}
-                          className="absolute border-r h-full"
-                          style={{ left: `${(t / 1440) * 100}%`, width: `${(30 / 1440) * 100}%` }}
-                        />
-                      ))}
+                  {/* programmes for selected day */}
+                  {schedulePrograms
+                    .filter((p) => p.day === selectedDate % 7)
+                    .map((p) => (
                       <div
-                        className="absolute h-16 mt-2 rounded px-2 py-1 bg-[#ABAFB5] text-black text-xs"
-                        style={{ left: "20%", width: "15%" }}
+                        key={p.id}
+                        className={`absolute h-16 mt-2 rounded px-2 py-1 text-xs overflow-hidden ${categoryStyles[p.category]}`}
+                        style={{
+                          left: `${(p.startTime / 1440) * 100}%`,
+                          width: `${(p.duration / 1440) * 100}%`,
+                        }}
                       >
-                        <div className="font-semibold">Repeat Programs</div>
-                        <div className="opacity-80">Various</div>
+                        <div className="font-semibold truncate">{p.title}</div>
+                        <div className="opacity-90 truncate">{p.category}</div>
+                        <div className="opacity-80 text-xs">
+                          {formatTime(p.startTime)} – {formatTime(p.startTime + p.duration)}
+                        </div>
                       </div>
-                    </div>
-                  </div>
-                ))}
+                    ))}
+                </div>
               </div>
-              <ScrollBar orientation="horizontal" />
+              <ScrollBar orientation="horizontal" className="h-3 bg-transparent" />
             </ScrollArea>
           </div>
         </div>
