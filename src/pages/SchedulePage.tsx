@@ -1,4 +1,4 @@
-// src/pages/SchedulePage.tsx  (ONE shared scroll for dates + times + programmes)
+// src/pages/SchedulePage.tsx  (shared scroll + longer shows + grab cursor everywhere)
 import { useState } from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
@@ -12,34 +12,27 @@ interface ScheduleProgram {
   color: string;
 }
 
-/* ---------- MOCK PROGRAMMES – 30-MIN GRID, FULL DAY ---------- */
-const schedulePrograms: ScheduleProgram[] = Array.from({ length: 48 }, (_, i) => {
-  const start = i * 30;
-  const titles = [
-    "Night Prayers","Quiet Time","Reflections","Dawn Worship","Early Word","Morning Glory",
-    "Sun-rise Music","Devotion Plus","Faith Boost","Bible Insight","Worship Hour","Mid-Day Encouragement",
-    "Youth Fire","Teaching Time","Family Talk","Healing Service","Gospel Music","Evening Word",
-    "Late Sermon","Midnight Praise"
-  ];
-  return {
-    id: `slot-${i}`,
-    title: titles[i % titles.length],
-    startTime: start,
-    duration: 30,
-    day: 0,
-    color: [
-      "bg-fuchsia-500","bg-indigo-500","bg-sky-500","bg-amber-500","bg-emerald-500","bg-teal-500",
-      "bg-rose-500","bg-orange-500","bg-yellow-400","bg-red-500","bg-pink-500","bg-lime-500",
-      "bg-cyan-500","bg-violet-500","bg-purple-500","bg-blue-500","bg-green-500","bg-amber-600"
-    ][i % 18],
-  };
-});
+/* ---------- LONGER MOCK PROGRAMMES – 60 min default ---------- */
+const schedulePrograms: ScheduleProgram[] = [
+  { id: "00:00", title: "Night Prayers", startTime: 0, duration: 60, day: 0, color: "bg-fuchsia-500" },
+  { id: "01:00", title: "Quiet Time", startTime: 60, duration: 60, day: 0, color: "bg-indigo-500" },
+  { id: "02:00", title: "Reflections", startTime: 120, duration: 60, day: 0, color: "bg-sky-500" },
+  { id: "06:00", title: "Morning Glory", startTime: 360, duration: 120, day: 0, color: "bg-amber-500" },
+  { id: "08:00", title: "Sun-rise Music", startTime: 480, duration: 60, day: 0, color: "bg-emerald-500" },
+  { id: "09:00", title: "Sunday Service Live", startTime: 540, duration: 120, day: 0, color: "bg-rose-500" },
+  { id: "12:00", title: "Mid-Day Encouragement", startTime: 720, duration: 60, day: 0, color: "bg-teal-500" },
+  { id: "14:00", title: "Teaching Time", startTime: 840, duration: 60, day: 0, color: "bg-orange-500" },
+  { id: "15:00", title: "Healing & Miracle", startTime: 900, duration: 120, day: 0, color: "bg-red-500" },
+  { id: "18:00", title: "Evening Word", startTime: 1080, duration: 60, day: 0, color: "bg-yellow-400" },
+  { id: "19:00", title: "Youth Fire", startTime: 1140, duration: 90, day: 0, color: "bg-pink-500" },
+  { id: "21:00", title: "Gospel Music Hour", startTime: 1260, duration: 60, day: 0, color: "bg-cyan-500" },
+  { id: "22:00", title: "Late-Night Sermon", startTime: 1320, duration: 90, day: 0, color: "bg-purple-500" },
+];
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
-/* ---------- CORRECT 14-DAY CALENDAR ---------- */
 const calendar = Array.from({ length: 14 }, (_, i) => {
-  const base = new Date(2025, 8, 21 + i); // 21 Sep 2025
+  const base = new Date(2025, 8, 21 + i);
   return {
     label: days[base.getDay()],
     date: base.getDate(),
@@ -68,7 +61,7 @@ export const SchedulePage = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-[#122E34] font-display">TV Guide</h1>
         </div>
 
-        {/* SINGLE SHARED HORIZONTAL SCROLL WRAPPER */}
+        {/* SINGLE SHARED HORIZONTAL SCROLL – grab cursor on everything */}
         <ScrollArea className="w-full whitespace-nowrap cursor-grab active:cursor-grabbing">
           {/* DATE STRIP */}
           <div className="flex space-x-2 pb-4">
@@ -101,8 +94,8 @@ export const SchedulePage = () => {
             ))}
           </div>
 
-          {/* PROGRAMME GRID – SAME SCROLL CONTAINER */}
-          <div className="relative h-20 py-2">
+          {/* PROGRAMME GRID – taller cards */}
+          <div className="relative h-24 py-2">
             {/* vertical grid lines */}
             {timeSlots.map((t) => (
               <div
@@ -112,7 +105,7 @@ export const SchedulePage = () => {
               />
             ))}
 
-            {/* tall programme cards – times match ruler exactly */}
+            {/* longer shows */}
             {programmesToday.map((p) => (
               <div
                 key={p.id}
@@ -130,7 +123,7 @@ export const SchedulePage = () => {
             ))}
           </div>
 
-          {/* DARK SCROLL-BAR (always visible) */}
+          {/* DARK SCROLL-BAR */}
           <ScrollBar
             orientation="horizontal"
             className="h-3 bg-transparent"
