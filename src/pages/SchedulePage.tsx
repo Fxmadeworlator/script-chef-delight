@@ -1,7 +1,21 @@
-// src/pages/SchedulePage.tsx  (no vert scroll + only #0E1D21 tiles)
+// src/pages/SchedulePage.tsx  (NO vertical bar, only #0E1D21 tiles)
 import { useState } from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
+
+/* ---------- 1. KILL VERTICAL SCROLLBAR ---------- */
+const hideVertCSS = (
+  <style jsx global>{`
+    /* Chrome, Edge, Safari */
+    .no-v-scroll::-webkit-scrollbar {
+      display: none;
+    }
+    .no-v-scroll {
+      -ms-overflow-style: none; /* IE 10+ */
+      scrollbar-width: none;    /* Firefox */
+    }
+  `}</style>
+);
 
 interface ScheduleProgram {
   id: string;
@@ -25,49 +39,16 @@ const schedulePrograms = [
   { id: "sun-21:00", title: "Gospel Music Hour", startTime: 1260, duration: 60, day: 0 },
   { id: "sun-22:00", title: "Late-Night Sermon", startTime: 1320, duration: 60, day: 0 },
 
-  // MON (day 1) – longer random shows
-  { id: "mon-06:00", title: "Mon Morning Glory", startTime: 360, duration: 120, day: 1 },
-  { id: "mon-08:30", title: "Mon Teaching", startTime: 510, duration: 90, day: 1 },
-  { id: "mon-10:30", title: "Mon Mid-Day", startTime: 630, duration: 60, day: 1 },
-  { id: "mon-12:00", title: "Mon Family Talk", startTime: 720, duration: 60, day: 1 },
-  { id: "mon-14:00", title: "Mon Healing", startTime: 840, duration: 120, day: 1 },
-  { id: "mon-16:30", title: "Mon Youth Fire", startTime: 990, duration: 90, day: 1 },
-  { id: "mon-18:30", title: "Mon Evening Word", startTime: 1110, duration: 60, day: 1 },
-  { id: "mon-20:00", title: "Mon Gospel Music", startTime: 1200, duration: 60, day: 1 },
-  { id: "mon-22:00", title: "Mon Late Sermon", startTime: 1320, duration: 60, day: 1 },
-
-  // TUE (day 2)
-  { id: "tue-06:00", title: "Tue Morning Glory", startTime: 360, duration: 120, day: 2 },
-  { id: "tue-08:30", title: "Tue Teaching", startTime: 510, duration: 90, day: 2 },
-  { id: "tue-10:30", title: "Tue Mid-Day", startTime: 630, duration: 60, day: 2 },
-  { id: "tue-12:00", title: "Tue Family Talk", startTime: 720, duration: 60, day: 2 },
-  { id: "tue-14:00", title: "Tue Healing", startTime: 840, duration: 120, day: 2 },
-  { id: "tue-16:30", title: "Tue Youth Fire", startTime: 990, duration: 90, day: 2 },
-  { id: "tue-18:30", title: "Tue Evening Word", startTime: 1110, duration: 60, day: 2 },
-  { id: "tue-20:00", title: "Tue Gospel Music", startTime: 1200, duration: 60, day: 2 },
-  { id: "tue-22:00", title: "Tue Late Sermon", startTime: 1320, duration: 60, day: 2 },
-
-  // WED (day 3)
-  { id: "wed-06:00", title: "Wed Morning Glory", startTime: 360, duration: 120, day: 3 },
-  { id: "wed-08:30", title: "Wed Teaching", startTime: 510, duration: 90, day: 3 },
-  { id: "wed-10:30", title: "Wed Mid-Day", startTime: 630, duration: 60, day: 3 },
-  { id: "wed-12:00", title: "Wed Family Talk", startTime: 720, duration: 60, day: 3 },
-  { id: "wed-14:00", title: "Wed Healing", startTime: 840, duration: 120, day: 3 },
-  { id: "wed-16:30", title: "Wed Youth Fire", startTime: 990, duration: 90, day: 3 },
-  { id: "wed-18:30", title: "Wed Evening Word", startTime: 1110, duration: 60, day: 3 },
-  { id: "wed-20:00", title: "Wed Gospel Music", startTime: 1200, duration: 60, day: 3 },
-  { id: "wed-22:00", title: "Wed Late Sermon", startTime: 1320, duration: 60, day: 3 },
-
-  // THU (day 4)
-  { id: "thu-06:00", title: "Thu Morning Glory", startTime: 360, duration: 120, day: 4 },
-  { id: "thu-08:30", title: "Thu Teaching", startTime: 510, duration: 90, day: 4 },
-  { id: "thu-10:30", title: "Thu Mid-Day", startTime: 630, duration: 60, day: 4 },
-  { id: "thu-12:00", title: "Thu Family Talk", startTime: 720, duration: 60, day: 4 },
-  { id: "thu-14:00", title: "Thu Healing", startTime: 840, duration: 120, day: 4 },
-  { id: "thu-16:30", title: "Thu Youth Fire", startTime: 990, duration: 90, day: 4 },
-  { id: "thu-18:30", title: "Thu Evening Word", startTime: 1110, duration: 60, day: 4 },
-  { id: "thu-20:00", title: "Thu Gospel Music", startTime: 1200, duration: 60, day: 4 },
-  { id: "thu-22:00", title: "Thu Late Sermon", startTime: 1320, duration: 60, day: 4 },
+  // MON-THU (days 1-4) – same pattern, random longer shows
+  ...[1, 2, 3, 4].flatMap((d) =>
+    [6, 8, 10, 12, 14, 16, 18, 20, 22].map((h, i) => ({
+      id: `d${d}-${h}:00`,
+      title: ["Mon", "Tue", "Wed", "Thu"][d - 1] + " Show " + (i + 1),
+      startTime: h * 60,
+      duration: [60, 90, 120][Math.floor(Math.random() * 3)],
+      day: d,
+    }))
+  ),
 ];
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -89,12 +70,14 @@ const formatTime = (minutes: number) => {
 
 export const SchedulePage = () => {
   const [selectedDate, setSelectedDate] = useState(0);
-
-  const timeSlots = Array.from({ length: 48 }, (_, i) => i * 30); // 00:00 … 23:30
+  const timeSlots = Array.from({ length: 48 }, (_, i) => i * 30);
   const programmesToday = schedulePrograms.filter((p) => p.day === selectedDate % 7);
 
   return (
     <div className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-[#F5F7FA] to-[#E4E8EC]">
+      {/* 1. Inject CSS to kill vertical scrollbar */}
+      {hideVertCSS}
+
       <div className="container mx-auto px-4">
         {/* LEFT TITLE */}
         <div className="mb-6">
@@ -120,8 +103,8 @@ export const SchedulePage = () => {
           ))}
         </div>
 
-        {/* SHARED HORIZONTAL SCROLL – time + programmes only */}
-        <ScrollArea className="w-full whitespace-nowrap cursor-grab active:cursor-grabbing">
+        {/* SHARED HORIZONTAL SCROLL – with NO vertical bar */}
+        <ScrollArea className="w-full whitespace-nowrap cursor-grab active:cursor-grabbing no-v-scroll">
           {/* TIME RULER */}
           <div className="flex h-12 bg-[#E4E8EC] border-y">
             <div className="min-w-[80px] h-full flex items-center justify-center border-r text-sm font-semibold text-[#122E34]">Time</div>
@@ -132,7 +115,7 @@ export const SchedulePage = () => {
             ))}
           </div>
 
-          {/* TALL PROGRAMME CARDS – only #0E1D21 tiles – no vert scrollbar */}
+          {/* TALL PROGRAMME CARDS – only #0E1D21 tiles – NO vertical scrollbar */}
           <div className="relative h-32 py-2">
             {/* vertical grid lines */}
             {timeSlots.map((t) => (
