@@ -1,4 +1,4 @@
-// src/pages/SchedulePage.tsx  (longer shows + blank hours + no vert scrollbar + horiz scroll only)
+// src/pages/SchedulePage.tsx  (no vert scroll + only #0E1D21 tiles)
 import { useState } from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
@@ -9,66 +9,65 @@ interface ScheduleProgram {
   startTime: number;
   duration: number;
   day: number;
-  color: string;
 }
 
 /* ---------- LONGER SHOWS – 60-120 min + BLANK HOURS ---------- */
-const schedulePrograms: ScheduleProgram[] = [
+const schedulePrograms = [
   // SUN (day 0)
-  { id: "sun-06:00", title: "Morning Glory", startTime: 360, duration: 120, day: 0, color: "bg-amber-500" },
-  { id: "sun-08:00", title: "Sun-rise Music", startTime: 480, duration: 60, day: 0, color: "bg-emerald-500" },
-  { id: "sun-09:00", title: "Sunday Service Live", startTime: 540, duration: 120, day: 0, color: "bg-rose-500" },
-  { id: "sun-12:00", title: "Mid-Day Encouragement", startTime: 720, duration: 60, day: 0, color: "bg-teal-500" },
-  { id: "sun-14:00", title: "Teaching Time", startTime: 840, duration: 60, day: 0, color: "bg-orange-500" },
-  { id: "sun-15:00", title: "Healing & Miracle", startTime: 900, duration: 120, day: 0, color: "bg-red-500" },
-  { id: "sun-18:00", title: "Evening Word", startTime: 1080, duration: 60, day: 0, color: "bg-yellow-400" },
-  { id: "sun-19:00", title: "Youth Fire", startTime: 1140, duration: 90, day: 0, color: "bg-pink-500" },
-  { id: "sun-21:00", title: "Gospel Music Hour", startTime: 1260, duration: 60, day: 0, color: "bg-cyan-500" },
-  { id: "sun-22:00", title: "Late-Night Sermon", startTime: 1320, duration: 60, day: 0, color: "bg-purple-500" },
+  { id: "sun-06:00", title: "Morning Glory", startTime: 360, duration: 120, day: 0 },
+  { id: "sun-08:00", title: "Sun-rise Music", startTime: 480, duration: 60, day: 0 },
+  { id: "sun-09:00", title: "Sunday Service Live", startTime: 540, duration: 120, day: 0 },
+  { id: "sun-12:00", title: "Mid-Day Encouragement", startTime: 720, duration: 60, day: 0 },
+  { id: "sun-14:00", title: "Teaching Time", startTime: 840, duration: 60, day: 0 },
+  { id: "sun-15:00", title: "Healing & Miracle", startTime: 900, duration: 120, day: 0 },
+  { id: "sun-18:00", title: "Evening Word", startTime: 1080, duration: 60, day: 0 },
+  { id: "sun-19:00", title: "Youth Fire", startTime: 1140, duration: 90, day: 0 },
+  { id: "sun-21:00", title: "Gospel Music Hour", startTime: 1260, duration: 60, day: 0 },
+  { id: "sun-22:00", title: "Late-Night Sermon", startTime: 1320, duration: 60, day: 0 },
 
   // MON (day 1) – longer random shows
-  { id: "mon-06:00", title: "Mon Morning Glory", startTime: 360, duration: 120, day: 1, color: "bg-indigo-500" },
-  { id: "mon-08:30", title: "Mon Teaching", startTime: 510, duration: 90, day: 1, color: "bg-sky-500" },
-  { id: "mon-10:30", title: "Mon Mid-Day", startTime: 630, duration: 60, day: 1, color: "bg-emerald-500" },
-  { id: "mon-12:00", title: "Mon Family Talk", startTime: 720, duration: 60, day: 1, color: "bg-amber-500" },
-  { id: "mon-14:00", title: "Mon Healing", startTime: 840, duration: 120, day: 1, color: "bg-rose-500" },
-  { id: "mon-16:30", title: "Mon Youth Fire", startTime: 990, duration: 90, day: 1, color: "bg-pink-500" },
-  { id: "mon-18:30", title: "Mon Evening Word", startTime: 1110, duration: 60, day: 1, color: "bg-yellow-400" },
-  { id: "mon-20:00", title: "Mon Gospel Music", startTime: 1200, duration: 60, day: 1, color: "bg-cyan-500" },
-  { id: "mon-22:00", title: "Mon Late Sermon", startTime: 1320, duration: 60, day: 1, color: "bg-purple-500" },
+  { id: "mon-06:00", title: "Mon Morning Glory", startTime: 360, duration: 120, day: 1 },
+  { id: "mon-08:30", title: "Mon Teaching", startTime: 510, duration: 90, day: 1 },
+  { id: "mon-10:30", title: "Mon Mid-Day", startTime: 630, duration: 60, day: 1 },
+  { id: "mon-12:00", title: "Mon Family Talk", startTime: 720, duration: 60, day: 1 },
+  { id: "mon-14:00", title: "Mon Healing", startTime: 840, duration: 120, day: 1 },
+  { id: "mon-16:30", title: "Mon Youth Fire", startTime: 990, duration: 90, day: 1 },
+  { id: "mon-18:30", title: "Mon Evening Word", startTime: 1110, duration: 60, day: 1 },
+  { id: "mon-20:00", title: "Mon Gospel Music", startTime: 1200, duration: 60, day: 1 },
+  { id: "mon-22:00", title: "Mon Late Sermon", startTime: 1320, duration: 60, day: 1 },
 
   // TUE (day 2)
-  { id: "tue-06:00", title: "Tue Morning Glory", startTime: 360, duration: 120, day: 2, color: "bg-teal-500" },
-  { id: "tue-08:30", title: "Tue Teaching", startTime: 510, duration: 90, day: 2, color: "bg-orange-500" },
-  { id: "tue-10:30", title: "Tue Mid-Day", startTime: 630, duration: 60, day: 2, color: "bg-green-500" },
-  { id: "tue-12:00", title: "Tue Family Talk", startTime: 720, duration: 60, day: 2, color: "bg-amber-600" },
-  { id: "tue-14:00", title: "Tue Healing", startTime: 840, duration: 120, day: 2, color: "bg-rose-600" },
-  { id: "tue-16:30", title: "Tue Youth Fire", startTime: 990, duration: 90, day: 2, color: "bg-pink-600" },
-  { id: "tue-18:30", title: "Tue Evening Word", startTime: 1110, duration: 60, day: 2, color: "bg-yellow-500" },
-  { id: "tue-20:00", title: "Tue Gospel Music", startTime: 1200, duration: 60, day: 2, color: "bg-cyan-600" },
-  { id: "tue-22:00", title: "Tue Late Sermon", startTime: 1320, duration: 60, day: 2, color: "bg-purple-600" },
+  { id: "tue-06:00", title: "Tue Morning Glory", startTime: 360, duration: 120, day: 2 },
+  { id: "tue-08:30", title: "Tue Teaching", startTime: 510, duration: 90, day: 2 },
+  { id: "tue-10:30", title: "Tue Mid-Day", startTime: 630, duration: 60, day: 2 },
+  { id: "tue-12:00", title: "Tue Family Talk", startTime: 720, duration: 60, day: 2 },
+  { id: "tue-14:00", title: "Tue Healing", startTime: 840, duration: 120, day: 2 },
+  { id: "tue-16:30", title: "Tue Youth Fire", startTime: 990, duration: 90, day: 2 },
+  { id: "tue-18:30", title: "Tue Evening Word", startTime: 1110, duration: 60, day: 2 },
+  { id: "tue-20:00", title: "Tue Gospel Music", startTime: 1200, duration: 60, day: 2 },
+  { id: "tue-22:00", title: "Tue Late Sermon", startTime: 1320, duration: 60, day: 2 },
 
   // WED (day 3)
-  { id: "wed-06:00", title: "Wed Morning Glory", startTime: 360, duration: 120, day: 3, color: "bg-indigo-600" },
-  { id: "wed-08:30", title: "Wed Teaching", startTime: 510, duration: 90, day: 3, color: "bg-sky-600" },
-  { id: "wed-10:30", title: "Wed Mid-Day", startTime: 630, duration: 60, day: 3, color: "bg-emerald-600" },
-  { id: "wed-12:00", title: "Wed Family Talk", startTime: 720, duration: 60, day: 3, color: "bg-amber-700" },
-  { id: "wed-14:00", title: "Wed Healing", startTime: 840, duration: 120, day: 3, color: "bg-rose-700" },
-  { id: "wed-16:30", title: "Wed Youth Fire", startTime: 990, duration: 90, day: 3, color: "bg-pink-700" },
-  { id: "wed-18:30", title: "Wed Evening Word", startTime: 1110, duration: 60, day: 3, color: "bg-yellow-600" },
-  { id: "wed-20:00", title: "Wed Gospel Music", startTime: 1200, duration: 60, day: 3, color: "bg-cyan-700" },
-  { id: "wed-22:00", title: "Wed Late Sermon", startTime: 1320, duration: 60, day: 3, color: "bg-purple-700" },
+  { id: "wed-06:00", title: "Wed Morning Glory", startTime: 360, duration: 120, day: 3 },
+  { id: "wed-08:30", title: "Wed Teaching", startTime: 510, duration: 90, day: 3 },
+  { id: "wed-10:30", title: "Wed Mid-Day", startTime: 630, duration: 60, day: 3 },
+  { id: "wed-12:00", title: "Wed Family Talk", startTime: 720, duration: 60, day: 3 },
+  { id: "wed-14:00", title: "Wed Healing", startTime: 840, duration: 120, day: 3 },
+  { id: "wed-16:30", title: "Wed Youth Fire", startTime: 990, duration: 90, day: 3 },
+  { id: "wed-18:30", title: "Wed Evening Word", startTime: 1110, duration: 60, day: 3 },
+  { id: "wed-20:00", title: "Wed Gospel Music", startTime: 1200, duration: 60, day: 3 },
+  { id: "wed-22:00", title: "Wed Late Sermon", startTime: 1320, duration: 60, day: 3 },
 
   // THU (day 4)
-  { id: "thu-06:00", title: "Thu Morning Glory", startTime: 360, duration: 120, day: 4, color: "bg-teal-700" },
-  { id: "thu-08:30", title: "Thu Teaching", startTime: 510, duration: 90, day: 4, color: "bg-orange-700" },
-  { id: "thu-10:30", title: "Thu Mid-Day", startTime: 630, duration: 60, day: 4, color: "bg-green-700" },
-  { id: "thu-12:00", title: "Thu Family Talk", startTime: 720, duration: 60, day: 4, color: "bg-lime-700" },
-  { id: "thu-14:00", title: "Thu Healing", startTime: 840, duration: 120, day: 4, color: "bg-rose-800" },
-  { id: "thu-16:30", title: "Thu Youth Fire", startTime: 990, duration: 90, day: 4, color: "bg-pink-800" },
-  { id: "thu-18:30", title: "Thu Evening Word", startTime: 1110, duration: 60, day: 4, color: "bg-yellow-700" },
-  { id: "thu-20:00", title: "Thu Gospel Music", startTime: 1200, duration: 60, day: 4, color: "bg-cyan-800" },
-  { id: "thu-22:00", title: "Thu Late Sermon", startTime: 1320, duration: 60, day: 4, color: "bg-purple-800" },
+  { id: "thu-06:00", title: "Thu Morning Glory", startTime: 360, duration: 120, day: 4 },
+  { id: "thu-08:30", title: "Thu Teaching", startTime: 510, duration: 90, day: 4 },
+  { id: "thu-10:30", title: "Thu Mid-Day", startTime: 630, duration: 60, day: 4 },
+  { id: "thu-12:00", title: "Thu Family Talk", startTime: 720, duration: 60, day: 4 },
+  { id: "thu-14:00", title: "Thu Healing", startTime: 840, duration: 120, day: 4 },
+  { id: "thu-16:30", title: "Thu Youth Fire", startTime: 990, duration: 90, day: 4 },
+  { id: "thu-18:30", title: "Thu Evening Word", startTime: 1110, duration: 60, day: 4 },
+  { id: "thu-20:00", title: "Thu Gospel Music", startTime: 1200, duration: 60, day: 4 },
+  { id: "thu-22:00", title: "Thu Late Sermon", startTime: 1320, duration: 60, day: 4 },
 ];
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
@@ -133,7 +132,7 @@ export const SchedulePage = () => {
             ))}
           </div>
 
-          {/* TALL PROGRAMME CARDS – 32 px high (h-32) – blanks appear automatically where no card is placed */}
+          {/* TALL PROGRAMME CARDS – only #0E1D21 tiles – no vert scrollbar */}
           <div className="relative h-32 py-2">
             {/* vertical grid lines */}
             {timeSlots.map((t) => (
@@ -147,7 +146,7 @@ export const SchedulePage = () => {
             {programmesToday.map((p) => (
               <div
                 key={p.id}
-                className={`absolute h-32 rounded px-3 py-2 text-sm text-white overflow-hidden ${p.color}`}
+                className="absolute h-32 rounded px-3 py-2 text-sm text-white overflow-hidden bg-[#0E1D21]"
                 style={{
                   left: `${(p.startTime / 1440) * 100}%`,
                   width: `${(p.duration / 1440) * 100}%`,
@@ -161,7 +160,7 @@ export const SchedulePage = () => {
             ))}
           </div>
 
-          {/* HORIZONTAL SCROLLBAR ONLY – no vertical scrollbar */}
+          {/* HORIZONTAL SCROLLBAR ONLY – no vertical scrollbar rendered */}
           <ScrollBar
             orientation="horizontal"
             className="h-3 bg-transparent"
