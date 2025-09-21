@@ -1,4 +1,4 @@
-// src/pages/SchedulePage.tsx  (NO vertical bar, only #0E1D21 tiles)
+// src/pages/SchedulePage.tsx  (no vertical bar + only #677E8A tiles)
 import { useState } from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
@@ -39,7 +39,7 @@ const schedulePrograms = [
   { id: "sun-21:00", title: "Gospel Music Hour", startTime: 1260, duration: 60, day: 0 },
   { id: "sun-22:00", title: "Late-Night Sermon", startTime: 1320, duration: 60, day: 0 },
 
-  // MON-THU (days 1-4) – same pattern, random longer shows
+  // MON-THU (days 1-4) – same pattern, longer shows
   ...[1, 2, 3, 4].flatMap((d) =>
     [6, 8, 10, 12, 14, 16, 18, 20, 22].map((h, i) => ({
       id: `d${d}-${h}:00`,
@@ -75,7 +75,6 @@ export const SchedulePage = () => {
 
   return (
     <div className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-[#F5F7FA] to-[#E4E8EC]">
-      {/* 1. Inject CSS to kill vertical scrollbar */}
       {hideVertCSS}
 
       <div className="container mx-auto px-4">
@@ -115,7 +114,7 @@ export const SchedulePage = () => {
             ))}
           </div>
 
-          {/* TALL PROGRAMME CARDS – only #0E1D21 tiles – NO vertical scrollbar */}
+          {/* TALL PROGRAMME CARDS – only #677E8A tiles – NO vertical scrollbar */}
           <div className="relative h-32 py-2">
             {/* vertical grid lines */}
             {timeSlots.map((t) => (
@@ -129,7 +128,7 @@ export const SchedulePage = () => {
             {programmesToday.map((p) => (
               <div
                 key={p.id}
-                className="absolute h-32 rounded px-3 py-2 text-sm text-white overflow-hidden bg-[#0E1D21]"
+                className="absolute h-32 rounded px-3 py-2 text-sm text-white overflow-hidden bg-[#677E8A]"
                 style={{
                   left: `${(p.startTime / 1440) * 100}%`,
                   width: `${(p.duration / 1440) * 100}%`,
