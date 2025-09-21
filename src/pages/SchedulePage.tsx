@@ -1,4 +1,4 @@
-// src/pages/SchedulePage.tsx  (pinned dates + smaller dates + taller programmes)
+// src/pages/SchedulePage.tsx  (taller cards + random programmes for first 5 days)
 import { useState } from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
@@ -12,22 +12,33 @@ interface ScheduleProgram {
   color: string;
 }
 
-/* ---------- LONGER MOCK PROGRAMMES ---------- */
-const schedulePrograms: ScheduleProgram[] = [
-  { id: "00:00", title: "Night Prayers", startTime: 0, duration: 60, day: 0, color: "bg-fuchsia-500" },
-  { id: "01:00", title: "Quiet Time", startTime: 60, duration: 60, day: 0, color: "bg-indigo-500" },
-  { id: "02:00", title: "Reflections", startTime: 120, duration: 60, day: 0, color: "bg-sky-500" },
-  { id: "06:00", title: "Morning Glory", startTime: 360, duration: 120, day: 0, color: "bg-amber-500" },
-  { id: "08:00", title: "Sun-rise Music", startTime: 480, duration: 60, day: 0, color: "bg-emerald-500" },
-  { id: "09:00", title: "Sunday Service Live", startTime: 540, duration: 120, day: 0, color: "bg-rose-500" },
-  { id: "12:00", title: "Mid-Day Encouragement", startTime: 720, duration: 60, day: 0, color: "bg-teal-500" },
-  { id: "14:00", title: "Teaching Time", startTime: 840, duration: 60, day: 0, color: "bg-orange-500" },
-  { id: "15:00", title: "Healing & Miracle", startTime: 900, duration: 120, day: 0, color: "bg-red-500" },
-  { id: "18:00", title: "Evening Word", startTime: 1080, duration: 60, day: 0, color: "bg-yellow-400" },
-  { id: "19:00", title: "Youth Fire", startTime: 1140, duration: 90, day: 0, color: "bg-pink-500" },
-  { id: "21:00", title: "Gospel Music Hour", startTime: 1260, duration: 60, day: 0, color: "bg-cyan-500" },
-  { id: "22:00", title: "Late-Night Sermon", startTime: 1320, duration: 90, day: 0, color: "bg-purple-500" },
+/* ---------- RANDOM PROGRAMMES – FIRST 5 DAYS (00:00-23:30) ---------- */
+const programmeTitles = [
+  "Night Prayers","Quiet Time","Reflections","Dawn Worship","Early Word","Morning Glory",
+  "Sun-rise Music","Devotion Plus","Faith Boost","Bible Insight","Worship Hour","Mid-Day Encouragement",
+  "Youth Fire","Teaching Time","Family Talk","Healing Service","Gospel Music","Evening Word",
+  "Late Sermon","Midnight Praise","Prayer Line","Song of Hope","Revival Hour","Q&A with Pastors"
 ];
+
+const brightPalette = [
+  "bg-fuchsia-500","bg-indigo-500","bg-sky-500","bg-amber-500","bg-emerald-500","bg-teal-500",
+  "bg-rose-500","bg-orange-500","bg-yellow-400","bg-red-500","bg-pink-500","bg-lime-500",
+  "bg-cyan-500","bg-violet-500","bg-purple-500","bg-blue-500","bg-green-500","bg-amber-600"
+];
+
+const schedulePrograms: ScheduleProgram[] = Array.from({ length: 5 * 48 }, (_, i) => {
+  const day = Math.floor(i / 48);
+  const slot = i % 48;
+  const start = slot * 30;
+  return {
+    id: `d${day}-s${slot}`,
+    title: programmeTitles[Math.floor(Math.random() * programmeTitles.length)],
+    startTime: start,
+    duration: 30,
+    day: day, // 0-4 (Sun-Thu)
+    color: brightPalette[Math.floor(Math.random() * brightPalette.length)],
+  };
+});
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -51,7 +62,7 @@ export const SchedulePage = () => {
   const [selectedDate, setSelectedDate] = useState(0);
 
   const timeSlots = Array.from({ length: 48 }, (_, i) => i * 30); // 00:00 … 23:30
-  const programmesToday = schedulePrograms.map((p) => ({ ...p, day: selectedDate % 7 }));
+  const programmesToday = schedulePrograms.filter((p) => p.day === selectedDate % 7);
 
   /* dark scrollbar thumb */
   const darkScrollBar = (
@@ -70,7 +81,7 @@ export const SchedulePage = () => {
           <h1 className="text-4xl md:text-5xl font-bold text-[#122E34] font-display">TV Guide</h1>
         </div>
 
-        {/* PINNED – SMALLER DATE STRIP (no scroll) */}
+        {/* PINNED – SMALLER DATE STRIP */}
         <div className="flex space-x-2 mb-4 overflow-x-auto">
           {calendar.map((d) => (
             <Button
@@ -103,8 +114,8 @@ export const SchedulePage = () => {
             ))}
           </div>
 
-          {/* TALL PROGRAMME CARDS – 96 px high */}
-          <div className="relative h-24 py-2">
+          {/* TALL PROGRAMME CARDS – 32 px high (h-32) */}
+          <div className="relative h-32 py-2">
             {/* vertical grid lines */}
             {timeSlots.map((t) => (
               <div
@@ -117,7 +128,7 @@ export const SchedulePage = () => {
             {programmesToday.map((p) => (
               <div
                 key={p.id}
-                className={`absolute h-24 rounded px-3 py-2 text-sm text-white overflow-hidden ${p.color}`}
+                className={`absolute h-32 rounded px-3 py-2 text-sm text-white overflow-hidden ${p.color}`}
                 style={{
                   left: `${(p.startTime / 1440) * 100}%`,
                   width: `${(p.duration / 1440) * 100}%`,
