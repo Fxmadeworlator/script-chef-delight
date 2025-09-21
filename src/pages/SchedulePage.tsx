@@ -8,23 +8,32 @@ interface ScheduleProgram {
   title: string;
   startTime: number; // minutes from 00:00
   duration: number; // minutes
-  day: number; // 0-6 (Sun-Sat)
+  day: number;
   color: string;
 }
 
-/* ---------- 30-MIN MOCK PROGRAMMES – GRID-ALIGNED ---------- */
-const schedulePrograms: ScheduleProgram[] = [
-  { id: "00:00", title: "Night Prayers", startTime: 0, duration: 30, day: 0, color: "bg-fuchsia-500" },
-  { id: "00:30", title: "Quiet Time", startTime: 30, duration: 30, day: 0, color: "bg-indigo-500" },
-  { id: "01:00", title: "Reflections", startTime: 60, duration: 30, day: 0, color: "bg-sky-500" },
-  { id: "06:00", title: "Morning Glory", startTime: 360, duration: 60, day: 0, color: "bg-amber-500" },
-  { id: "09:00", title: "Sunday Service Live", startTime: 540, duration: 120, day: 0, color: "bg-emerald-500" },
-  { id: "12:00", title: "Mid-Day Encouragement", startTime: 720, duration: 30, day: 0, color: "bg-teal-500" },
-  { id: "15:00", title: "Healing & Miracle", startTime: 900, duration: 120, day: 0, color: "bg-rose-500" },
-  { id: "18:30", title: "Evening Word", startTime: 1110, duration: 60, day: 0, color: "bg-orange-500" },
-  { id: "20:00", title: "Gospel Music Hour", startTime: 1200, duration: 60, day: 0, color: "bg-yellow-400" },
-  { id: "22:00", title: "Late-Night Sermon", startTime: 1320, duration: 60, day: 0, color: "bg-red-500" },
-];
+/* ---------- MOCK PROGRAMMES – 30-MIN GRID, FULL DAY ---------- */
+const schedulePrograms: ScheduleProgram[] = Array.from({ length: 48 }, (_, i) => {
+  const start = i * 30;
+  const titles = [
+    "Night Prayers","Quiet Time","Reflections","Dawn Worship","Early Word","Morning Glory",
+    "Sun-rise Music","Devotion Plus","Faith Boost","Bible Insight","Worship Hour","Mid-Day Encouragement",
+    "Youth Fire","Teaching Time","Family Talk","Healing Service","Gospel Music","Evening Word",
+    "Late Sermon","Midnight Praise"
+  ];
+  return {
+    id: `slot-${i}`,
+    title: titles[i % titles.length],
+    startTime: start,
+    duration: 30,
+    day: 0, // will be overridden per selected date
+    color: [
+      "bg-fuchsia-500","bg-indigo-500","bg-sky-500","bg-amber-500","bg-emerald-500","bg-teal-500",
+      "bg-rose-500","bg-orange-500","bg-yellow-400","bg-red-500","bg-pink-500","bg-lime-500",
+      "bg-cyan-500","bg-violet-500","bg-purple-500","bg-blue-500","bg-green-500","bg-amber-600"
+    ][i % 18],
+  };
+});
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 
@@ -34,7 +43,7 @@ const calendar = Array.from({ length: 14 }, (_, i) => {
   return {
     label: days[base.getDay()],
     date: base.getDate(),
-    month: base.getMonth() === 8 ? "Sep" : "Oct", // roll into Oct
+    month: base.getMonth() === 8 ? "Sep" : "Oct",
     index: i,
   };
 });
@@ -47,19 +56,16 @@ const formatTime = (minutes: number) => {
 
 export const SchedulePage = () => {
   const [selectedDate, setSelectedDate] = useState(0);
-  const [scrollTime, setScrollTime] = useState(0); // keeps scroll position if needed
 
-  const timeSlots = Array.from({ length: 48 }, (_, i) => i * 30); // 00:00 – 23:30
-
+  const timeSlots = Array.from({ length: 48 }, (_, i) => i * 30); // 00:00 … 23:30
   const programmesToday = schedulePrograms.map((p) => ({ ...p, day: selectedDate % 7 }));
 
-  /* reusable dark scrollbar */
+  /* dark scrollbar thumb */
   const darkScrollBar = (
     <ScrollBar
       orientation="horizontal"
       className="h-3 bg-transparent"
       style={{
-        // web-kit
         "--scroll-thumb": "#622347",
         "--scroll-track": "transparent",
       } as React.CSSProperties}
@@ -100,9 +106,9 @@ export const SchedulePage = () => {
           </ScrollArea>
         </div>
 
-        {/* TIME RULER SCROLL */}
+        {/* TIME RULER – pinned */}
         <div className="mb-2">
-          <ScrollArea className="w-full whitespace-nowrap" onScrollCapture={(e) => setScrollTime(e.currentTarget.scrollLeft)}>
+          <ScrollArea className="w-full whitespace-nowrap">
             <div className="flex h-12 bg-[#E4E8EC] border-y">
               <div className="min-w-[80px] h-full flex items-center justify-center border-r text-sm font-semibold text-[#122E34]">Time</div>
               {timeSlots.map((t) => (
@@ -115,10 +121,10 @@ export const SchedulePage = () => {
           </ScrollArea>
         </div>
 
-        {/* PROGRAMME GRID – SINGLE CHANNEL */}
+        {/* PROGRAMMES – independent horizontal scroll + tall cards + grab cursor */}
         <div className="border rounded-lg bg-white shadow-lg overflow-hidden">
-          <ScrollArea className="w-full h-[320px]">
-            <div className="relative h-20">
+          <ScrollArea className="w-full h-[380px] cursor-grab active:cursor-grabbing">
+            <div className="relative h-20 py-2">
               {/* vertical grid lines */}
               {timeSlots.map((t) => (
                 <div
@@ -128,11 +134,11 @@ export const SchedulePage = () => {
                 />
               ))}
 
-              {/* programmes – times match ruler exactly */}
+              {/* tall programme cards */}
               {programmesToday.map((p) => (
                 <div
                   key={p.id}
-                  className={`absolute h-16 mt-2 rounded px-2 py-1 text-xs text-white overflow-hidden ${p.color}`}
+                  className={`absolute h-20 rounded px-3 py-2 text-sm text-white overflow-hidden ${p.color}`}
                   style={{
                     left: `${(p.startTime / 1440) * 100}%`,
                     width: `${(p.duration / 1440) * 100}%`,
