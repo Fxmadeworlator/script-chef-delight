@@ -1,18 +1,17 @@
-// src/pages/SchedulePage.tsx  (no vertical bar + only #677E8A tiles)
-import { useState } from "react";
+// src/pages/SchedulePage.tsx  (AGTV Guide + auto-scroll to 19:00)
+import { useState, useEffect, useRef } from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
 
-/* ---------- 1. KILL VERTICAL SCROLLBAR ---------- */
+/* 1. KILL VERTICAL SCROLLBAR */
 const hideVertCSS = (
   <style jsx global>{`
-    /* Chrome, Edge, Safari */
     .no-v-scroll::-webkit-scrollbar {
       display: none;
     }
     .no-v-scroll {
-      -ms-overflow-style: none; /* IE 10+ */
-      scrollbar-width: none;    /* Firefox */
+      -ms-overflow-style: none;
+      scrollbar-width: none;
     }
   `}</style>
 );
@@ -39,7 +38,7 @@ const schedulePrograms = [
   { id: "sun-21:00", title: "Gospel Music Hour", startTime: 1260, duration: 60, day: 0 },
   { id: "sun-22:00", title: "Late-Night Sermon", startTime: 1320, duration: 60, day: 0 },
 
-  // MON-THU (days 1-4) – same pattern, longer shows
+  // MON-THU (days 1-4) – longer random shows
   ...[1, 2, 3, 4].flatMap((d) =>
     [6, 8, 10, 12, 14, 16, 18, 20, 22].map((h, i) => ({
       id: `d${d}-${h}:00`,
@@ -65,7 +64,7 @@ const calendar = Array.from({ length: 14 }, (_, i) => {
 const formatTime = (minutes: number) => {
   const h = Math.floor(minutes / 60);
   const m = minutes % 60;
-  return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}`;
+  return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}`
 };
 
 export const SchedulePage = () => {
@@ -73,14 +72,23 @@ export const SchedulePage = () => {
   const timeSlots = Array.from({ length: 48 }, (_, i) => i * 30);
   const programmesToday = schedulePrograms.filter((p) => p.day === selectedDate % 7);
 
+  /* 2. AUTO-SCROLL TO 19:00 (7 pm) on mount */
+  const scrollRef = useRef<HTMLDivElement>(null);
+  useEffect(() => {
+    if (!scrollRef.current) return;
+    // 19:00 = 1140 min → left edge
+    const leftPx = (1140 / 1440) * (timeSlots.length * 100); // rough pixel count
+    scrollRef.current.scrollLeft = leftPx;
+  }, []);
+
   return (
     <div className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-[#F5F7FA] to-[#E4E8EC]">
       {hideVertCSS}
 
       <div className="container mx-auto px-4">
-        {/* LEFT TITLE */}
+        {/* 3. TEXT CHANGED → “AGTV Guide” */}
         <div className="mb-6">
-          <h1 className="text-4xl md:text-5xl font-bold text-[#122E34] font-display">TV Guide</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-[#122E34] font-display">AGTV Guide</h1>
         </div>
 
         {/* PINNED – SMALL DATE STRIP */}
@@ -102,8 +110,11 @@ export const SchedulePage = () => {
           ))}
         </div>
 
-        {/* SHARED HORIZONTAL SCROLL – with NO vertical bar */}
-        <ScrollArea className="w-full whitespace-nowrap cursor-grab active:cursor-grabbing no-v-scroll">
+        {/* 4. SHARED HORIZONTAL SCROLL – auto-scrolled to 19:00 */}
+        <ScrollArea
+          ref={scrollRef}
+          className="w-full whitespace-nowrap cursor-grab active:cursor-grabbing no-v-scroll"
+        >
           {/* TIME RULER */}
           <div className="flex h-12 bg-[#E4E8EC] border-y">
             <div className="min-w-[80px] h-full flex items-center justify-center border-r text-sm font-semibold text-[#122E34]">Time</div>
