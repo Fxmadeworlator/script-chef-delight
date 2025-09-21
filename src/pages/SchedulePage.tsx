@@ -1,3 +1,4 @@
+// src/pages/SchedulePage.tsx
 import { useState } from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
@@ -6,8 +7,8 @@ interface ScheduleProgram {
   id: string;
   title: string;
   startTime: number; // minutes from 00:00
-  duration: number; // duration in minutes
-  day: number; // 0-6 (Sunday-Saturday)
+  duration: number; // minutes
+  day: number; // 0-6 (Sun-Sat)
   category: string;
   host: string;
 }
@@ -16,145 +17,138 @@ const schedulePrograms: ScheduleProgram[] = [
   {
     id: "morning-devotion",
     title: "Morning Devotion",
-    startTime: 360, // 6:00 AM
+    startTime: 360, // 06:00
     duration: 60,
-    day: 1, // Monday
+    day: 1,
     category: "Devotional",
-    host: "Pastor Samuel Mensah"
+    host: "Pastor Samuel Mensah",
   },
   {
     id: "sunday-service",
     title: "Sunday Service Live",
-    startTime: 540, // 9:00 AM
+    startTime: 540, // 09:00
     duration: 150,
-    day: 0, // Sunday
+    day: 0,
     category: "Worship",
-    host: "Pastor Emmanuel Asante"
+    host: "Pastor Emmanuel Asante",
   },
   {
     id: "youth-fire",
     title: "Youth Fire",
-    startTime: 1140, // 7:00 PM
+    startTime: 1140, // 19:00
     duration: 90,
-    day: 3, // Wednesday
+    day: 3,
     category: "Youth",
-    host: "Pastor Grace Owusu"
+    host: "Pastor Grace Owusu",
   },
   {
     id: "bible-study",
     title: "Midweek Bible Study",
-    startTime: 1110, // 6:30 PM
+    startTime: 1110, // 18:30
     duration: 90,
-    day: 3, // Wednesday
+    day: 3,
     category: "Teaching",
-    host: "Dr. Isaac Adjei"
+    host: "Dr. Isaac Adjei",
   },
   {
     id: "women-fellowship",
     title: "Women of Faith",
-    startTime: 600, // 10:00 AM
+    startTime: 600, // 10:00
     duration: 90,
-    day: 6, // Saturday
+    day: 6,
     category: "Fellowship",
-    host: "Pastor Mary Asante"
+    host: "Pastor Mary Asante",
   },
   {
     id: "healing-prayer",
     title: "Healing & Miracle Service",
-    startTime: 900, // 3:00 PM
+    startTime: 900, // 15:00
     duration: 120,
-    day: 5, // Friday
+    day: 5,
     category: "Prayer",
-    host: "Prophet Daniel Mensah"
+    host: "Prophet Daniel Mensah",
   },
   {
     id: "gospel-music-tue",
     title: "Gospel Music Hour",
-    startTime: 1200, // 8:00 PM
+    startTime: 1200, // 20:00
     duration: 60,
-    day: 2, // Tuesday
+    day: 2,
     category: "Music",
-    host: "Minister John Osei"
+    host: "Minister John Osei",
   },
   {
     id: "gospel-music-thu",
     title: "Gospel Music Hour",
-    startTime: 1200, // 8:00 PM
+    startTime: 1200, // 20:00
     duration: 60,
-    day: 4, // Thursday
+    day: 4,
     category: "Music",
-    host: "Minister John Osei"
+    host: "Minister John Osei",
   },
   {
     id: "family-time",
     title: "Family Foundations",
-    startTime: 960, // 4:00 PM
+    startTime: 960, // 16:00
     duration: 60,
-    day: 6, // Saturday
+    day: 6,
     category: "Family",
-    host: "Pastor & Mrs. Kwame Asiedu"
-  }
+    host: "Pastor & Mrs. Kwame Asiedu",
+  },
 ];
 
-const days = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
-const dates = [21, 22, 23, 24, 25, 26, 27, 28, 29, 30, 1, 2, 3, 4]; // Sample dates
+const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
+const dates = Array.from({ length: 14 }, (_, i) => 21 + i); // 21 Sep – 4 Oct
 
 const formatTime = (minutes: number) => {
-  const hours = Math.floor(minutes / 60);
-  const mins = minutes % 60;
-  return `${hours.toString().padStart(2, '0')}:${mins.toString().padStart(2, '0')}`;
+  const h = Math.floor(minutes / 60);
+  const m = minutes % 60;
+  return `${h.toString().padStart(2, "0")}:${m.toString().padStart(2, "0")}`;
 };
 
-const getCategoryColor = (category: string) => {
-  const colors = {
-    'Devotional': 'bg-blue-500',
-    'Worship': 'bg-purple-500',
-    'Youth': 'bg-green-500',
-    'Teaching': 'bg-orange-500',
-    'Fellowship': 'bg-pink-500',
-    'Prayer': 'bg-red-500',
-    'Music': 'bg-yellow-500',
-    'Family': 'bg-indigo-500'
-  };
-  return colors[category as keyof typeof colors] || 'bg-gray-500';
+/* ---------- COLOURS FROM IMAGE ---------- */
+const categoryStyles: Record<string, string> = {
+  Devotional: "bg-[#EOB4B2] text-white",
+  Worship: "bg-[#622347] text-white",
+  Youth: "bg-[#ABAFB5] text-black",
+  Teaching: "bg-[#677E8A] text-white",
+  Fellowship: "bg-[#122E34] text-white",
+  Prayer: "bg-[#0E1D21] text-white",
+  Music: "bg-[#EOB4B2] text-white",
+  Family: "bg-[#ABAFB5] text-black",
 };
 
 export const SchedulePage = () => {
   const [selectedDate, setSelectedDate] = useState(0);
 
-  // Generate time slots from 00:00 to 23:30 (30-minute intervals)
-  const timeSlots = [];
-  for (let i = 0; i < 1440; i += 30) {
-    timeSlots.push(i);
-  }
+  const timeSlots = Array.from({ length: 48 }, (_, i) => i * 30); // 00:00 – 23:30
 
   return (
-    <div className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-primary/10 to-secondary/10">
+    <div className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-[#F5F7FA] to-[#E4E8EC]">
       <div className="container mx-auto px-4">
+        {/* Header */}
         <div className="text-center mb-8">
-          <h1 className="text-4xl md:text-5xl font-bold mb-4 text-foreground font-display">
-            TV Guide
-          </h1>
-          <p className="text-lg text-muted-foreground">
-            Your complete AGTV programming schedule
-          </p>
+          <h1 className="text-4xl md:text-5xl font-bold text-[#122E34] font-display">TV Guide</h1>
+          <p className="text-lg text-[#677E8A] mt-2">Your complete AGTV programming schedule</p>
         </div>
 
-        {/* Date Navigation */}
+        {/* Date strip */}
         <div className="mb-6">
           <ScrollArea className="w-full whitespace-nowrap">
             <div className="flex space-x-2 pb-4">
-              {dates.map((date, index) => (
+              {dates.map((d, idx) => (
                 <Button
-                  key={index}
-                  variant={selectedDate === index ? "default" : "outline"}
+                  key={idx}
+                  variant={selectedDate === idx ? "default" : "outline"}
+                  onClick={() => setSelectedDate(idx)}
                   className={`min-w-[120px] h-16 flex flex-col items-center justify-center ${
-                    selectedDate === index ? 'bg-primary text-primary-foreground' : 'bg-card'
+                    selectedDate === idx
+                      ? "bg-[#622347] text-white"
+                      : "bg-white text-[#122E34] border border-[#ABAFB5]"
                   }`}
-                  onClick={() => setSelectedDate(index)}
                 >
-                  <div className="text-sm font-medium">{days[index % 7]}</div>
-                  <div className="text-lg font-bold">{date} Sep</div>
+                  <div className="text-sm font-medium">{days[idx % 7]}</div>
+                  <div className="text-lg font-bold">{d} Sep</div>
                 </Button>
               ))}
             </div>
@@ -162,21 +156,21 @@ export const SchedulePage = () => {
           </ScrollArea>
         </div>
 
-        {/* Schedule Grid */}
-        <div className="border rounded-lg bg-card shadow-lg overflow-hidden">
-          {/* Time Header */}
-          <div className="bg-muted/50 border-b">
+        {/* Grid */}
+        <div className="border rounded-lg bg-white shadow-lg overflow-hidden">
+          {/* Time header */}
+          <div className="bg-[#E4E8EC] border-b">
             <ScrollArea className="w-full">
               <div className="flex">
-                <div className="min-w-[80px] h-12 flex items-center justify-center border-r bg-muted text-sm font-semibold">
+                <div className="min-w-[80px] h-12 flex items-center justify-center border-r text-sm font-semibold text-[#122E34]">
                   Channel
                 </div>
-                {timeSlots.map((time) => (
+                {timeSlots.map((t) => (
                   <div
-                    key={time}
-                    className="min-w-[100px] h-12 flex items-center justify-center border-r text-xs font-medium"
+                    key={t}
+                    className="min-w-[100px] h-12 flex items-center justify-center border-r text-xs font-medium text-[#677E8A]"
                   >
-                    {formatTime(time)}
+                    {formatTime(t)}
                   </div>
                 ))}
               </div>
@@ -184,77 +178,71 @@ export const SchedulePage = () => {
             </ScrollArea>
           </div>
 
-          {/* Program Grid */}
+          {/* Program rows */}
           <div className="relative">
             <ScrollArea className="w-full h-[600px]">
               <div className="flex flex-col">
-                {/* AGTV Channel Row */}
+                {/* AGTV row */}
                 <div className="flex border-b">
-                  <div className="min-w-[80px] h-20 flex items-center justify-center border-r bg-muted">
+                  <div className="min-w-[80px] h-20 flex items-center justify-center border-r bg-[#F5F7FA]">
                     <div className="text-center">
-                      <div className="text-xs font-semibold">AGTV</div>
-                      <div className="text-xs text-muted-foreground">151</div>
+                      <div className="text-xs font-semibold text-[#122E34]">AGTV</div>
+                      <div className="text-xs text-[#677E8A]">151</div>
                     </div>
                   </div>
-                  
-                  {/* Time slots with programs */}
                   <div className="relative flex-1 h-20">
-                    {timeSlots.map((time) => (
+                    {timeSlots.map((t) => (
                       <div
-                        key={time}
+                        key={t}
                         className="absolute border-r h-full"
-                        style={{ left: `${(time / 1440) * 100}%`, width: `${(30 / 1440) * 100}%` }}
+                        style={{ left: `${(t / 1440) * 100}%`, width: `${(30 / 1440) * 100}%` }}
                       />
                     ))}
-                    
-                    {/* Programs for selected day */}
+
                     {schedulePrograms
-                      .filter(program => program.day === selectedDate % 7)
-                      .map((program) => (
+                      .filter((p) => p.day === selectedDate % 7)
+                      .map((p) => (
                         <div
-                          key={program.id}
-                          className={`absolute h-16 mt-2 rounded px-2 py-1 text-white text-xs overflow-hidden ${getCategoryColor(program.category)}`}
+                          key={p.id}
+                          className={`absolute h-16 mt-2 rounded px-2 py-1 text-xs overflow-hidden ${categoryStyles[p.category]}`}
                           style={{
-                            left: `${(program.startTime / 1440) * 100}%`,
-                            width: `${(program.duration / 1440) * 100}%`
+                            left: `${(p.startTime / 1440) * 100}%`,
+                            width: `${(p.duration / 1440) * 100}%`,
                           }}
                         >
-                          <div className="font-semibold truncate">{program.title}</div>
-                          <div className="text-white/80 truncate">{program.category}</div>
-                          <div className="text-white/70 text-xs">
-                            {formatTime(program.startTime)} - {formatTime(program.startTime + program.duration)}
+                          <div className="font-semibold truncate">{p.title}</div>
+                          <div className="opacity-90 truncate">{p.category}</div>
+                          <div className="opacity-80 text-xs">
+                            {formatTime(p.startTime)} – {formatTime(p.startTime + p.duration)}
                           </div>
                         </div>
                       ))}
                   </div>
                 </div>
 
-                {/* Additional channel rows for variety */}
-                {[2, 3, 4, 5].map((channelNum) => (
-                  <div key={channelNum} className="flex border-b">
-                    <div className="min-w-[80px] h-20 flex items-center justify-center border-r bg-muted">
+                {/* Dummy extra channels */}
+                {[2, 3, 4, 5].map((ch) => (
+                  <div key={ch} className="flex border-b">
+                    <div className="min-w-[80px] h-20 flex items-center justify-center border-r bg-[#F5F7FA]">
                       <div className="text-center">
-                        <div className="text-xs font-semibold">AGTV {channelNum}</div>
-                        <div className="text-xs text-muted-foreground">{150 + channelNum}</div>
+                        <div className="text-xs font-semibold text-[#122E34]">AGTV {ch}</div>
+                        <div className="text-xs text-[#677E8A]">{150 + ch}</div>
                       </div>
                     </div>
-                    
                     <div className="relative flex-1 h-20">
-                      {timeSlots.map((time) => (
+                      {timeSlots.map((t) => (
                         <div
-                          key={time}
+                          key={t}
                           className="absolute border-r h-full"
-                          style={{ left: `${(time / 1440) * 100}%`, width: `${(30 / 1440) * 100}%` }}
+                          style={{ left: `${(t / 1440) * 100}%`, width: `${(30 / 1440) * 100}%` }}
                         />
                       ))}
-                      
-                      {/* Sample programs for other channels */}
                       <div
-                        className="absolute h-16 mt-2 rounded px-2 py-1 bg-gray-500 text-white text-xs"
-                        style={{ left: '20%', width: '15%' }}
+                        className="absolute h-16 mt-2 rounded px-2 py-1 bg-[#ABAFB5] text-black text-xs"
+                        style={{ left: "20%", width: "15%" }}
                       >
                         <div className="font-semibold">Repeat Programs</div>
-                        <div className="text-white/80">Various</div>
+                        <div className="opacity-80">Various</div>
                       </div>
                     </div>
                   </div>
@@ -267,19 +255,10 @@ export const SchedulePage = () => {
 
         {/* Legend */}
         <div className="mt-6 grid grid-cols-2 md:grid-cols-4 gap-4">
-          {Object.entries({
-            'Devotional': 'bg-blue-500',
-            'Worship': 'bg-purple-500',
-            'Youth': 'bg-green-500',
-            'Teaching': 'bg-orange-500',
-            'Fellowship': 'bg-pink-500',
-            'Prayer': 'bg-red-500',
-            'Music': 'bg-yellow-500',
-            'Family': 'bg-indigo-500'
-          }).map(([category, color]) => (
-            <div key={category} className="flex items-center space-x-2">
-              <div className={`w-4 h-4 rounded ${color}`}></div>
-              <span className="text-sm text-muted-foreground">{category}</span>
+          {Object.entries(categoryStyles).map(([cat, style]) => (
+            <div key={cat} className="flex items-center space-x-2">
+              <div className={`w-4 h-4 rounded ${style.split(" ")[0]}`} />
+              <span className="text-sm text-[#677E8A]">{cat}</span>
             </div>
           ))}
         </div>
