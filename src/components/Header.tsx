@@ -11,7 +11,6 @@ interface HeaderProps {
 
 export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
   const [isMobileMenuOpen, setIsMobileMenuOpen] = useState(false);
-  const [isAboutDropdownOpen, setIsAboutDropdownOpen] = useState(false);
 
   const navigationItems = [
     { id: "live", label: "Watch Live" },
@@ -28,17 +27,17 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
     { id: "vision", label: "Our Vision" },
     { id: "pastors", label: "Our Pastors" },
   ];
+
   const handleNavClick = (pageId: string) => {
     onPageChange(pageId);
     setIsMobileMenuOpen(false);
-    setIsAboutDropdownOpen(false);
   };
 
   const handleAboutDropdownClick = (section: string) => {
     onPageChange(section);
-    setIsAboutDropdownOpen(false);
     setIsMobileMenuOpen(false);
   };
+
   return (
     <>
       {/* Main Header */}
@@ -46,18 +45,12 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
         <div className="container mx-auto px-4">
           <div className="flex justify-between items-center h-20">
             {/* Logo */}
-            <div 
-              className="flex items-center cursor-pointer" 
-              onClick={() => handleNavClick('home')}
+            <div
+              className="flex items-center cursor-pointer"
+              onClick={() => handleNavClick("home")}
             >
-              <img 
-                src={agLogo} 
-                alt="Assemblies of God" 
-                className="h-12 w-auto mr-3"
-              />
-              <div className="text-3xl font-bold text-foreground font-display drop-shadow-sm">
-                AGTV
-              </div>
+              <img src={agLogo} alt="Assemblies of God" className="h-12 w-auto mr-3" />
+              <div className="text-3xl font-bold text-foreground font-display drop-shadow-sm">AGTV</div>
             </div>
 
             {/* Desktop Navigation */}
@@ -66,11 +59,8 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
                 {navigationItems.map((item) => (
                   <li key={item.id}>
                     {item.id === "about" ? (
-                      <div
-                        className="relative"
-                        onMouseEnter={() => setIsAboutDropdownOpen(true)}
-                        onMouseLeave={() => setIsAboutDropdownOpen(false)}
-                      >
+                      /* ------ FIXED HOVER DROPDOWN ------ */
+                      <div className="relative group">
                         <button
                           onClick={() => handleNavClick(item.id)}
                           className={cn(
@@ -82,21 +72,22 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
                         >
                           {item.label}
                         </button>
-                        
-                        {/* About Dropdown */}
-                        {isAboutDropdownOpen && (
-                          <div className="absolute top-full left-0 mt-1 w-48 bg-background border border-border rounded-lg shadow-lg z-50">
-                            {aboutDropdownItems.map((dropdownItem) => (
-                              <button
-                                key={dropdownItem.id}
-                                onClick={() => handleAboutDropdownClick(dropdownItem.id)}
-                                className="w-full text-left px-4 py-3 text-foreground hover:bg-muted hover:text-primary-dark transition-colors first:rounded-t-lg last:rounded-b-lg"
-                              >
-                                {dropdownItem.label}
-                              </button>
-                            ))}
-                          </div>
-                        )}
+
+                        {/* invisible bridge */}
+                        <div className="absolute top-full left-0 w-full h-1" />
+
+                        {/* dropdown panel */}
+                        <div className="absolute top-full left-0 mt-0 w-48 bg-background border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto">
+                          {aboutDropdownItems.map((drop) => (
+                            <button
+                              key={drop.id}
+                              onClick={() => handleAboutDropdownClick(drop.id)}
+                              className="w-full text-left px-4 py-3 text-foreground hover:bg-muted hover:text-primary-dark transition-colors first:rounded-t-lg last:rounded-b-lg"
+                            >
+                              {drop.label}
+                            </button>
+                          ))}
+                        </div>
                       </div>
                     ) : (
                       <button
@@ -121,13 +112,13 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
               variant="ghost"
               size="icon"
               className="lg:hidden"
-              onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
+              onClick={() => setIsMobileMenuOpen((o) => !o)}
             >
               {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
             </Button>
           </div>
 
-          {/* Mobile Navigation */}
+          {/* Mobile Navigation (unchanged) */}
           {isMobileMenuOpen && (
             <div className="lg:hidden border-t border-border py-4">
               <nav className="flex flex-col gap-4">
@@ -144,17 +135,16 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
                     >
                       {item.label}
                     </button>
-                    
-                    {/* Mobile About Submenu */}
+
                     {item.id === "about" && (
                       <div className="ml-4 mt-2 space-y-2">
-                        {aboutDropdownItems.map((dropdownItem) => (
+                        {aboutDropdownItems.map((d) => (
                           <button
-                            key={dropdownItem.id}
-                            onClick={() => handleAboutDropdownClick(dropdownItem.id)}
+                            key={d.id}
+                            onClick={() => handleAboutDropdownClick(d.id)}
                             className="block text-left font-medium py-1 px-4 text-muted-foreground hover:text-primary transition-colors w-full"
                           >
-                            {dropdownItem.label}
+                            {d.label}
                           </button>
                         ))}
                       </div>
