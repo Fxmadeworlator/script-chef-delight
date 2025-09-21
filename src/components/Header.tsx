@@ -35,9 +35,9 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
   };
 
   const handleAboutDropdownClick = (section: string) => {
-    // For now, navigate to about page - you can extend this to scroll to specific sections
-    onPageChange('about');
+    onPageChange(section);
     setIsAboutDropdownOpen(false);
+    setIsMobileMenuOpen(false);
   };
   return (
     <>

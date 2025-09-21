@@ -7,6 +7,9 @@ import { SchedulePage } from "@/pages/SchedulePage";
 import { EventsPage } from "@/pages/EventsPage";
 import { NewsPage } from "@/pages/NewsPage";
 import { AboutPage } from "@/pages/AboutPage";
+import { MissionPage } from "@/pages/MissionPage";
+import { VisionPage } from "@/pages/VisionPage";
+import { PastorsPage } from "@/pages/PastorsPage";
 import { LivePage } from "@/pages/LivePage";
 import { ContactPage } from "@/pages/ContactPage";
 
@@ -29,6 +32,12 @@ const Index = () => {
         return <NewsPage />;
       case "about":
         return <AboutPage />;
+      case "mission":
+        return <MissionPage />;
+      case "vision":
+        return <VisionPage />;
+      case "pastors":
+        return <PastorsPage />;
       case "contact":
         return <ContactPage />;
       default:
