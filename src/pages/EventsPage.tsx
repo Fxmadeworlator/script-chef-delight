@@ -1,12 +1,12 @@
+// src/pages/EventsPage.tsx  (left-aligned heading block)
+import { useState } from "react"; // kept for future extensibility
+
 interface Event {
   id: string;
   title: string;
   description: string;
   location: string;
-  date: {
-    day: string;
-    month: string;
-  };
+  date: { day: string; month: string };
   image: string;
 }
 
@@ -81,15 +81,17 @@ export const EventsPage = () => {
   return (
     <div className="min-h-screen pt-20 pb-16">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        {/* LEFT-ALIGNED HEADING BLOCK */}
+        <div className="mb-16 text-left">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-foreground font-display">
             Community Outreach Events
           </h1>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-lg text-muted-foreground max-w-3xl">
             Join us in serving our community and sharing God's love through action
           </p>
         </div>
-        
+
+        {/* EVENT CARDS GRID – unchanged */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {events.map((event) => (
             <div key={event.id} className="card-program group cursor-pointer">
@@ -100,13 +102,13 @@ export const EventsPage = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/70 via-black/20 to-transparent" />
-                
+
                 {/* Date Badge */}
                 <div className="absolute top-4 right-4 bg-primary text-primary-foreground px-3 py-2 rounded-lg font-bold text-center z-10 shadow-lg">
                   <div className="text-xl leading-none">{event.date.day}</div>
                   <div className="text-sm">{event.date.month}</div>
                 </div>
-                
+
                 {/* Text Overlay at Bottom Left */}
                 <div className="absolute bottom-4 left-4 text-white max-w-[calc(100%-2rem)]">
                   <h3 className="text-lg font-bold mb-2 font-display drop-shadow-lg">
