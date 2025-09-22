@@ -1,3 +1,4 @@
+]// src/components/Footer.tsx  (live social links)
 import { Facebook, Twitter, Youtube, Instagram } from "lucide-react";
 
 export const Footer = () => {
@@ -11,17 +12,18 @@ export const Footer = () => {
             <p className="text-sm leading-relaxed mb-4">
               Broadcasting faith that transforms lives across Africa. Join millions of viewers experiencing the power of God's word through inspiring programs.
             </p>
+            {/* Social Icons - LIVE LINKS */}
             <div className="flex gap-4">
-              <a href="#" className="text-gray-300 hover:text-primary transition-colors">
+              <a href="https://www.facebook.com/share/1FxTroga19/" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-primary transition-colors">
                 <Facebook size={20} />
               </a>
-              <a href="#" className="text-gray-300 hover:text-primary transition-colors">
+              <a href="https://x.com/myagtv" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-primary transition-colors">
                 <Twitter size={20} />
               </a>
-              <a href="#" className="text-gray-300 hover:text-primary transition-colors">
+              <a href="https://youtube.com/@myagtv?si=AkZCr_WwT4eFFfGe" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-primary transition-colors">
                 <Youtube size={20} />
               </a>
-              <a href="#" className="text-gray-300 hover:text-primary transition-colors">
+              <a href="https://www.instagram.com/myagtv/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer" className="text-gray-300 hover:text-primary transition-colors">
                 <Instagram size={20} />
               </a>
             </div>
