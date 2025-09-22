@@ -4,7 +4,8 @@ interface NewsItem {
   excerpt: string;
   category: string;
   date: string;
-  emoji: string;
+  image: string;
+  featured?: boolean;
 }
 
 const newsItems: NewsItem[] = [
@@ -14,7 +15,8 @@ const newsItems: NewsItem[] = [
     excerpt: "Our latest broadcasting facility will enable us to reach even more communities across Africa with high-quality Christian programming.",
     category: "Ministry News",
     date: "15 Nov 2024",
-    emoji: "📺"
+    image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800",
+    featured: true
   },
   {
     id: "partnership-announcement",
@@ -22,7 +24,7 @@ const newsItems: NewsItem[] = [
     excerpt: "AGTV announces new partnerships with major church networks to expand our reach and impact across the continent.",
     category: "Partnerships",
     date: "12 Nov 2024",
-    emoji: "🤝"
+    image: "https://images.pexels.com/photos/8468470/pexels-photo-8468470.jpeg?auto=compress&cs=tinysrgb&w=800"
   },
   {
     id: "youth-program-launch",
@@ -30,7 +32,7 @@ const newsItems: NewsItem[] = [
     excerpt: "Exciting new weekly show designed specifically for young adults, addressing relevant topics from a biblical perspective.",
     category: "Programs",
     date: "08 Nov 2024",
-    emoji: "🌟"
+    image: "https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=800"
   },
   {
     id: "community-outreach",
@@ -38,7 +40,7 @@ const newsItems: NewsItem[] = [
     excerpt: "Our latest humanitarian initiative has provided food, clothing, and spiritual support to communities in need across Ghana.",
     category: "Community",
     date: "05 Nov 2024",
-    emoji: "❤️"
+    image: "https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg?auto=compress&cs=tinysrgb&w=800"
   },
   {
     id: "awards-recognition",
@@ -46,7 +48,7 @@ const newsItems: NewsItem[] = [
     excerpt: "We are honored to receive this prestigious award recognizing our commitment to quality Christian television programming.",
     category: "Recognition",
     date: "01 Nov 2024",
-    emoji: "🏆"
+    image: "https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=800"
   },
   {
     id: "expansion-announcement",
@@ -54,9 +56,12 @@ const newsItems: NewsItem[] = [
     excerpt: "AGTV's signal will soon reach millions more viewers as we expand our broadcasting coverage across West and East Africa.",
     category: "Expansion",
     date: "28 Oct 2024",
-    emoji: "🌍"
+    image: "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=800"
   }
 ];
+
+const featuredNews = newsItems.find(item => item.featured);
+const regularNews = newsItems.filter(item => !item.featured);
 
 export const NewsPage = () => {
   return (
@@ -71,28 +76,75 @@ export const NewsPage = () => {
           </p>
         </div>
         
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-          {newsItems.map((item) => (
-            <div key={item.id} className="card-program group cursor-pointer">
-              <div className="relative h-48 bg-gradient-to-br from-primary to-primary-dark flex items-center justify-center text-6xl text-primary-foreground overflow-hidden">
-                {item.emoji}
-                
-                {/* Date Badge */}
-                <div className="absolute top-4 left-4 bg-white/90 text-foreground px-3 py-2 rounded-lg font-bold text-center z-10">
-                  <div className="text-xs">{item.date}</div>
-                </div>
+        {/* Featured News Section */}
+        {featuredNews && (
+          <div className="mb-16">
+            <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl group cursor-pointer">
+              <img
+                src={featuredNews.image}
+                alt={featuredNews.title}
+                className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
+              />
+              <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
+              
+              {/* Featured Badge */}
+              <div className="absolute top-6 left-6 bg-primary text-primary-foreground px-4 py-2 rounded-full font-bold text-sm shadow-lg">
+                FEATURED
               </div>
               
-              <div className="p-6">
-                <h3 className="text-xl font-bold mb-3 text-foreground font-display">
-                  {item.title}
-                </h3>
-                <p className="text-muted-foreground mb-4 leading-relaxed">
-                  {item.excerpt}
+              {/* Date Badge */}
+              <div className="absolute top-6 right-6 bg-white/90 text-foreground px-3 py-2 rounded-lg font-bold text-center shadow-lg">
+                <div className="text-sm">{featuredNews.date}</div>
+              </div>
+              
+              {/* Content Overlay */}
+              <div className="absolute bottom-8 left-8 right-8 text-white">
+                <div className="mb-3">
+                  <span className="bg-primary/80 text-primary-foreground px-3 py-1 rounded-full text-sm font-semibold">
+                    {featuredNews.category}
+                  </span>
+                </div>
+                <h2 className="text-3xl md:text-4xl font-bold mb-4 font-display drop-shadow-lg">
+                  {featuredNews.title}
+                </h2>
+                <p className="text-lg opacity-90 leading-relaxed drop-shadow-md max-w-3xl">
+                  {featuredNews.excerpt}
                 </p>
-                <div className="text-primary-dark font-bold text-sm flex items-center">
-                  <span className="mr-2">📂</span>
+              </div>
+            </div>
+          </div>
+        )}
+        
+        {/* Regular News Grid */}
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
+          {regularNews.map((item, index) => (
+            <div key={item.id} className={`card-program group cursor-pointer ${index === 0 ? 'md:col-span-2' : ''}`}>
+              <div className={`relative overflow-hidden ${index === 0 ? 'h-64' : 'h-48'}`}>
+                <img
+                  src={item.image}
+                  alt={item.title}
+                  className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
+                />
+                <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
+                
+                {/* Date Badge */}
+                <div className="absolute top-4 right-4 bg-white/90 text-foreground px-3 py-2 rounded-lg font-bold text-center z-10 shadow-lg">
+                  <div className="text-xs">{item.date}</div>
+                </div>
+                
+                {/* Category Badge */}
+                <div className="absolute top-4 left-4 bg-primary/80 text-primary-foreground px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
                   {item.category}
+                </div>
+                
+                {/* Content Overlay */}
+                <div className="absolute bottom-4 left-4 right-4 text-white">
+                  <h3 className={`font-bold mb-2 font-display drop-shadow-lg ${index === 0 ? 'text-xl' : 'text-lg'}`}>
+                    {item.title}
+                  </h3>
+                  <p className={`opacity-90 leading-relaxed drop-shadow-md ${index === 0 ? 'text-sm' : 'text-xs'} line-clamp-2`}>
+                    {item.excerpt}
+                  </p>
                 </div>
               </div>
             </div>
