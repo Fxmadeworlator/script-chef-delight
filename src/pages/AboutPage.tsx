@@ -1,6 +1,4 @@
-// src/pages/AboutPage.tsx  (social links added)
 import { Heart, Target, Users, Globe } from "lucide-react";
-import { Facebook, Instagram, YouTube, Twitter } from "lucide-react"; // add these
 
 const missionValues = [
   {
@@ -88,27 +86,6 @@ export const AboutPage = () => {
           })}
         </div>
       </div>
-
-      {/* FOOTER WITH LIVE LINKS */}
-      <footer className="bg-[#122E34] text-white py-8 mt-16">
-        <div className="container mx-auto px-4 text-center">
-          <div className="flex justify-center space-x-4 mt-4">
-            <a href="https://www.facebook.com/share/1FxTroga19/" target="_blank" rel="noopener noreferrer">
-              <Facebook className="h-6 w-6 hover:text-primary transition" />
-            </a>
-            <a href="https://youtube.com/@myagtv?si=AkZCr_WwT4eFFfGe" target="_blank" rel="noopener noreferrer">
-              <YouTube className="h-6 w-6 hover:text-primary transition" />
-            </a>
-            <a href="https://www.instagram.com/myagtv/?utm_source=ig_web_button_share_sheet" target="_blank" rel="noopener noreferrer">
-              <Instagram className="h-6 w-6 hover:text-primary transition" />
-            </a>
-            <a href="https://x.com/myagtv" target="_blank" rel="noopener noreferrer">
-              <Twitter className="h-6 w-6 hover:text-primary transition" />
-            </a>
-          </div>
-          <p className="mt-4 text-sm">&copy; {new Date().getFullYear()} AGTV. All rights reserved.</p>
-        </div>
-      </footer>
     </div>
   );
 };
