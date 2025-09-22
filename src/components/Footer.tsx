@@ -79,6 +79,3 @@ export const Footer = () => {
     </footer>
   );
 };
-
-
-https://x.com/myagtv
