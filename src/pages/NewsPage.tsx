@@ -1,3 +1,9 @@
+// src/pages/NewsPage.tsx  (left-aligned community block)
+import { useState } from "react"; // kept for future extensibility
+import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
+import { Button } from "@/components/ui/button";
+
+/* ---------- EXISTING DATA ---------- */
 interface NewsItem {
   id: string;
   title: string;
@@ -67,16 +73,18 @@ export const NewsPage = () => {
   return (
     <div className="min-h-screen pt-20 pb-16">
       <div className="container mx-auto px-4">
-        <div className="text-center mb-16">
+        {/* LEFT-ALIGNED HEADER BLOCK */}
+        <div className="mb-16 text-left">
           <h1 className="text-4xl md:text-5xl font-bold mb-6 text-foreground font-display">
-            Latest News
+            AGTV Guide
           </h1>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
-            Stay updated with the latest developments in our ministry and Christian broadcasting
+          <p className="text-lg text-muted-foreground max-w-3xl">
+            Community Outreach Events<br />
+            Join us in serving our community and sharing God's love through action
           </p>
         </div>
-        
-        {/* Featured News Section */}
+
+        {/* FEATURED NEWS – unchanged */}
         {featuredNews && (
           <div className="mb-16">
             <div className="relative h-96 rounded-2xl overflow-hidden shadow-2xl group cursor-pointer">
@@ -86,18 +94,12 @@ export const NewsPage = () => {
                 className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-500"
               />
               <div className="absolute inset-0 bg-gradient-to-t from-black/80 via-black/40 to-transparent" />
-              
-              {/* Featured Badge */}
               <div className="absolute top-6 left-6 bg-primary text-primary-foreground px-4 py-2 rounded-full font-bold text-sm shadow-lg">
                 FEATURED
               </div>
-              
-              {/* Date Badge */}
               <div className="absolute top-6 right-6 bg-white/90 text-foreground px-3 py-2 rounded-lg font-bold text-center shadow-lg">
                 <div className="text-sm">{featuredNews.date}</div>
               </div>
-              
-              {/* Content Overlay */}
               <div className="absolute bottom-8 left-8 right-8 text-white">
                 <div className="mb-3">
                   <span className="bg-primary/80 text-primary-foreground px-3 py-1 rounded-full text-sm font-semibold">
@@ -114,8 +116,8 @@ export const NewsPage = () => {
             </div>
           </div>
         )}
-        
-        {/* Regular News Grid */}
+
+        {/* REGULAR NEWS GRID – unchanged */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
           {regularNews.map((item, index) => (
             <div key={item.id} className={`card-program group cursor-pointer ${index === 0 ? 'md:col-span-2' : ''}`}>
@@ -126,18 +128,12 @@ export const NewsPage = () => {
                   className="w-full h-full object-cover group-hover:scale-105 transition-transform duration-300"
                 />
                 <div className="absolute inset-0 bg-gradient-to-t from-black/60 via-black/20 to-transparent" />
-                
-                {/* Date Badge */}
                 <div className="absolute top-4 right-4 bg-white/90 text-foreground px-3 py-2 rounded-lg font-bold text-center z-10 shadow-lg">
                   <div className="text-xs">{item.date}</div>
                 </div>
-                
-                {/* Category Badge */}
                 <div className="absolute top-4 left-4 bg-primary/80 text-primary-foreground px-3 py-1 rounded-full text-xs font-semibold shadow-lg">
                   {item.category}
                 </div>
-                
-                {/* Content Overlay */}
                 <div className="absolute bottom-4 left-4 right-4 text-white">
                   <h3 className={`font-bold mb-2 font-display drop-shadow-lg ${index === 0 ? 'text-xl' : 'text-lg'}`}>
                     {item.title}
