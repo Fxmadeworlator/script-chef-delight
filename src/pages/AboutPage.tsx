@@ -4,22 +4,22 @@ const missionValues = [
   {
     icon: Heart,
     title: "Our Mission",
-    description: "To broadcast the Gospel of Jesus Christ across Africa, transforming lives and strengthening communities through faith-based programming."
+    description: "Broadcasting the Gospel of Jesus Christ across Africa through innovative television programming that transforms lives and strengthens communities."
   },
   {
     icon: Target,
     title: "Our Vision",
-    description: "To be Africa's leading Christian television network, reaching every home with messages of hope, faith, and transformation."
+    description: "To be Africa's premier Christian television network, reaching every home with life-changing messages of hope, faith, and spiritual transformation."
   },
   {
     icon: Users,
     title: "Our Values",
-    description: "Integrity, Excellence, Compassion, and Unity guide everything we do as we serve God and His people across the continent."
+    description: "Integrity, Excellence, Compassion, and Unity guide our ministry as we faithfully serve God and His people across the African continent."
   },
   {
     icon: Globe,
     title: "Our Impact",
-    description: "Reaching millions of viewers across 14 African countries with programming that inspires, educates, and transforms lives daily."
+    description: "Currently reaching over 2.5 million viewers across 14 African countries with programming that inspires, educates, and transforms lives daily."
   }
 ];
 
@@ -40,24 +40,26 @@ export const AboutPage = () => {
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">
           <div className="relative">
-            <div className="aspect-video bg-gradient-to-br from-primary to-primary-dark rounded-2xl overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.1)] flex items-center justify-center text-8xl text-primary-foreground">
-              📺
-            </div>
+            <img
+              src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              alt="AGTV Broadcasting Studio"
+              className="aspect-video rounded-2xl overflow-hidden shadow-[0_15px_35px_rgba(0,0,0,0.1)] w-full object-cover"
+            />
           </div>
           
           <div>
             <h3 className="text-3xl font-bold mb-6 text-foreground font-display">
-              Transforming Lives Through Faith
+              Broadcasting Faith Across Africa
             </h3>
             <div className="space-y-5 text-muted-foreground leading-relaxed">
               <p>
-                Since our founding, AGTV has been committed to bringing the transformative power of God's word to every home across Africa. Through inspiring programs, uplifting worship, and life-changing messages, we've become a beacon of hope for millions.
+                Founded in 2018, AGTV has grown from a small local broadcast to Africa's fastest-growing Christian television network. Our commitment to bringing the transformative power of God's word to every home has made us a beacon of hope for millions across the continent.
               </p>
               <p>
-                Our programming covers every aspect of Christian living - from morning devotionals that start your day with purpose, to family shows that strengthen relationships, to business programs that integrate faith with professional life.
+                Our diverse programming lineup includes morning devotionals, family-centered shows, youth programs, business and entrepreneurship content, healing and deliverance services, and live worship experiences. Each program is carefully crafted to meet the spiritual needs of our African audience.
               </p>
               <p>
-                What started as a vision to reach one community has grown into a continental ministry, touching lives in 14 countries and continuing to expand God's kingdom through the power of Christian television.
+                From our state-of-the-art studios in Accra, Ghana, we broadcast 24/7 to viewers across West, East, and Southern Africa. Our multilingual programming in English, Twi, Hausa, and Swahili ensures that language is never a barrier to receiving God's word.
               </p>
             </div>
           </div>

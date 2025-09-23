@@ -61,16 +61,22 @@ export const VisionPage = () => {
         </div>
 
         {/* Vision Statement */}
-        <div className="bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-12 mb-16 text-center text-primary-foreground">
+        <div className="relative bg-gradient-to-br from-primary to-primary-dark rounded-2xl p-12 mb-16 text-center text-primary-foreground overflow-hidden">
+          <div className="absolute inset-0 opacity-10">
+            <img
+              src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              alt="Broadcasting Vision"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="relative z-10">
           <h2 className="text-3xl font-bold mb-6 font-display">
             Our Vision Statement
           </h2>
           <p className="text-xl leading-relaxed max-w-4xl mx-auto">
-            "To be Africa's premier Christian television network, reaching every home, hospital, prison, and village 
-            with life-transforming Gospel content. We envision a continent where the message of Jesus Christ is 
-            accessible to all, creating a generation of strong believers who will impact their communities and 
-            nations for the Kingdom of God."
+            "To be Africa's premier Christian television network by 2030, reaching every home, hospital, prison, and village with life-transforming Gospel content. We envision a spiritually awakened Africa where the message of Jesus Christ is accessible to all, creating a generation of strong believers who will impact their communities and nations for the Kingdom of God, establishing AGTV as the most trusted voice in Christian broadcasting across the continent."
           </p>
+          </div>
         </div>
 
         {/* Vision Elements */}
@@ -80,8 +86,19 @@ export const VisionPage = () => {
             return (
               <div
                 key={index}
-                className="bg-card rounded-xl p-6 text-center shadow-[0_10px_25px_rgba(0,0,0,0.08)] transition-all duration-300 hover:translate-y-[-10px] hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)]"
+                className="relative bg-card rounded-xl p-6 text-center shadow-[0_10px_25px_rgba(0,0,0,0.08)] transition-all duration-300 hover:translate-y-[-10px] hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] overflow-hidden"
               >
+                <div className="absolute inset-0 opacity-5">
+                  <img
+                    src={index === 0 ? "https://images.pexels.com/photos/3184339/pexels-photo-3184339.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                         index === 1 ? "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                         index === 2 ? "https://images.pexels.com/photos/8468470/pexels-photo-8468470.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                         "https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=800"}
+                    alt={element.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="relative z-10">
                 <div className="text-4xl text-primary mb-4">
                   <IconComponent size={40} className="mx-auto" />
                 </div>
@@ -91,6 +108,7 @@ export const VisionPage = () => {
                 <p className="text-sm text-muted-foreground leading-relaxed">
                   {element.description}
                 </p>
+                </div>
               </div>
             );
           })}

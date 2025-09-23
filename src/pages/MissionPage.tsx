@@ -38,16 +38,22 @@ export const MissionPage = () => {
         </div>
 
         {/* Mission Statement */}
-        <div className="bg-gradient-to-br from-primary/10 to-primary-dark/10 rounded-2xl p-12 mb-16 text-center">
+        <div className="relative bg-gradient-to-br from-primary/10 to-primary-dark/10 rounded-2xl p-12 mb-16 text-center overflow-hidden">
+          <div className="absolute inset-0 opacity-5">
+            <img
+              src="https://images.pexels.com/photos/8468470/pexels-photo-8468470.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+              alt="Community Gathering"
+              className="w-full h-full object-cover"
+            />
+          </div>
+          <div className="relative z-10">
           <h2 className="text-3xl font-bold mb-6 text-foreground font-display">
             Our Mission Statement
           </h2>
           <p className="text-xl text-muted-foreground leading-relaxed max-w-4xl mx-auto">
-            "To broadcast the Gospel of Jesus Christ across Africa through innovative Christian television programming, 
-            transforming lives, strengthening communities, and building the Kingdom of God one viewer at a time. 
-            We are committed to producing quality content that inspires, educates, and empowers believers while 
-            reaching the lost with the message of salvation."
+            "To be the leading voice of Christian broadcasting across Africa, bringing the Gospel of Jesus Christ to every home, hospital, prison, and village through innovative television programming. We exist to transform lives, strengthen communities, and build the Kingdom of God one viewer at a time, producing content that inspires faith, educates minds, and empowers believers to live victorious Christian lives."
           </p>
+          </div>
         </div>
 
         {/* Mission Values */}
@@ -57,8 +63,19 @@ export const MissionPage = () => {
             return (
               <div
                 key={index}
-                className="bg-card rounded-xl p-8 shadow-[0_10px_25px_rgba(0,0,0,0.08)] transition-all duration-300 hover:translate-y-[-10px] hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)]"
+                className="relative bg-card rounded-xl p-8 shadow-[0_10px_25px_rgba(0,0,0,0.08)] transition-all duration-300 hover:translate-y-[-10px] hover:shadow-[0_20px_40px_rgba(0,0,0,0.15)] overflow-hidden"
               >
+                <div className="absolute inset-0 opacity-5">
+                  <img
+                    src={index === 0 ? "https://images.pexels.com/photos/6646918/pexels-photo-6646918.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                         index === 1 ? "https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                         index === 2 ? "https://images.pexels.com/photos/8613089/pexels-photo-8613089.jpeg?auto=compress&cs=tinysrgb&w=800" :
+                         "https://images.pexels.com/photos/159711/books-bookstore-book-reading-159711.jpeg?auto=compress&cs=tinysrgb&w=800"}
+                    alt={value.title}
+                    className="w-full h-full object-cover"
+                  />
+                </div>
+                <div className="relative z-10">
                 <div className="text-4xl text-primary mb-6">
                   <IconComponent size={40} />
                 </div>
@@ -68,6 +85,7 @@ export const MissionPage = () => {
                 <p className="text-muted-foreground leading-relaxed">
                   {value.description}
                 </p>
+                </div>
               </div>
             );
           })}

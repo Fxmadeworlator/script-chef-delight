@@ -3,10 +3,10 @@ import { Instagram, Facebook, Youtube, Music } from "lucide-react";
 
 export const StayConnectedSection = () => {
   const socialLinks = [
-    { icon: Instagram, name: "Instagram", href: "#" },
-    { icon: Facebook, name: "Facebook", href: "#" },
-    { icon: Youtube, name: "YouTube", href: "#" },
-    { icon: Music, name: "Spotify", href: "#" }
+    { icon: Instagram, name: "Instagram", href: "https://www.instagram.com/myagtv/?utm_source=ig_web_button_share_sheet" },
+    { icon: Facebook, name: "Facebook", href: "https://www.facebook.com/share/1FxTroga19/" },
+    { icon: Youtube, name: "YouTube", href: "https://youtube.com/@myagtv?si=AkZCr_WwT4eFFfGe" },
+    { icon: Music, name: "Twitter", href: "https://x.com/myagtv" }
   ];
 
   return (
@@ -22,6 +22,8 @@ export const StayConnectedSection = () => {
                 <a
                   key={index}
                   href={social.href}
+                  target="_blank"
+                  rel="noopener noreferrer"
                   className="flex items-center p-4 rounded-xl border border-border hover:bg-muted/50 transition-colors group"
                 >
                   <div className="w-12 h-12 bg-foreground rounded-full flex items-center justify-center mr-4 group-hover:bg-primary transition-colors">

@@ -5,8 +5,8 @@ const pastors = [
     id: "senior-pastor",
     name: "Pastor Emmanuel Asante",
     title: "Senior Pastor & AGTV Director",
-    image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1",
-    bio: "Pastor Emmanuel Asante has been serving in ministry for over 20 years, with a heart for evangelism and media ministry. He founded AGTV with the vision of reaching every home in Africa with the Gospel. His dynamic preaching and leadership have transformed countless lives across the continent.",
+    image: "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1",
+    bio: "Pastor Emmanuel Asante is the visionary founder and Senior Pastor of AGTV, with over 25 years of ministry experience. A graduate of Trinity Theological Seminary, he holds a Master's in Divinity and has planted over 50 churches across Ghana. His passion for media evangelism led to the establishment of AGTV in 2018, and under his leadership, the network has grown to reach millions across Africa.",
     specialties: ["Television Ministry", "Evangelism", "Church Planting", "Leadership Development"],
     contact: {
       email: "pastor.emmanuel@agtv.org",
@@ -18,7 +18,7 @@ const pastors = [
     name: "Pastor Grace Owusu",
     title: "Associate Pastor & Youth Director",
     image: "https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1",
-    bio: "Pastor Grace Owusu is passionate about youth ministry and women's empowerment. She leads our youth programs and hosts several popular shows on AGTV. Her heart for the next generation has impacted thousands of young people across Ghana and beyond.",
+    bio: "Pastor Grace Owusu serves as Associate Pastor and Youth Director, bringing 15 years of ministry experience focused on youth and women's empowerment. She holds a Bachelor's in Christian Education and hosts the popular youth program 'Next Generation' on AGTV. Her innovative approach to youth ministry has reached over 100,000 young people across Africa through television and social media platforms.",
     specialties: ["Youth Ministry", "Women's Ministry", "Counseling", "Worship Leading"],
     contact: {
       email: "pastor.grace@agtv.org",
@@ -29,8 +29,8 @@ const pastors = [
     id: "teaching-pastor",
     name: "Dr. Isaac Adjei",
     title: "Teaching Pastor & Bible Scholar",
-    image: "https://images.pexels.com/photos/2182970/pexels-photo-2182970.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1",
-    bio: "Dr. Isaac Adjei holds a PhD in Biblical Studies and has been teaching God's Word for over 15 years. He leads our Bible study programs and ensures all AGTV content maintains sound biblical doctrine. His deep knowledge of Scripture enriches our programming.",
+    image: "https://images.pexels.com/photos/2379004/pexels-photo-2379004.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1",
+    bio: "Dr. Isaac Adjei is our Teaching Pastor and Chief Bible Scholar, holding a PhD in Biblical Theology from the University of Ghana and a Master's in Ancient Languages. With 20 years of teaching experience, he oversees all doctrinal content on AGTV and hosts the weekly program 'Deep in the Word.' He has authored three books on African Christianity and speaks fluent Hebrew and Greek.",
     specialties: ["Biblical Teaching", "Theology", "Bible Study", "Discipleship"],
     contact: {
       email: "dr.isaac@agtv.org",
@@ -42,7 +42,7 @@ const pastors = [
     name: "Pastor Mary Asante",
     title: "Outreach Pastor & Community Relations",
     image: "https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=400&h=400&dpr=1",
-    bio: "Pastor Mary Asante coordinates all community outreach programs and charitable initiatives. Her compassionate heart for the less privileged has led to numerous successful community projects, feeding programs, and medical outreaches across Ghana.",
+    bio: "Pastor Mary Asante leads our Community Outreach and Social Impact initiatives, with 18 years of experience in humanitarian work. She coordinates AGTV's charitable programs including the 'Feed the Hungry' initiative that has provided over 500,000 meals, and the 'Hope for Orphans' program supporting 200+ children. She holds a Master's in Social Work and has been recognized by the Ghana Ministry of Social Welfare for her outstanding community service.",
     specialties: ["Community Outreach", "Charitable Work", "Family Ministry", "Social Services"],
     contact: {
       email: "pastor.mary@agtv.org",
