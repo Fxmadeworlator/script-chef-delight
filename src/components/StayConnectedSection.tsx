@@ -6,7 +6,7 @@ export const StayConnectedSection = () => {
     { icon: Instagram, name: "Instagram", href: "https://www.instagram.com/myagtv/?utm_source=ig_web_button_share_sheet" },
     { icon: Facebook, name: "Facebook", href: "https://www.facebook.com/share/1FxTroga19/" },
     { icon: Youtube, name: "YouTube", href: "https://youtube.com/@myagtv?si=AkZCr_WwT4eFFfGe" },
-    { icon: Music, name: "Twitter", href: "https://x.com/myagtv" }
+    { icon: Music, name: "Twitter", href: "https://twitter.com/myagtv" }
   ];
 
   return (
