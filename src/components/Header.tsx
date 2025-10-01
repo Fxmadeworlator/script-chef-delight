@@ -22,11 +22,7 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
     { id: "contact", label: "Contact Us" },
   ];
 
-  const aboutDropdownItems = [
-    { id: "mission", label: "Our Mission" },
-    { id: "vision", label: "Our Vision" },
-    { id: "pastors", label: "Our Pastors" },
-  ];
+  const aboutDropdownItems: { id: string; label: string }[] = [];
 
   const handleNavClick = (pageId: string) => {
     onPageChange(pageId);

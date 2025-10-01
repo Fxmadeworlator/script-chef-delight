@@ -1,12 +1,12 @@
 import { Button } from "@/components/ui/button";
-import { Instagram, Facebook, Youtube, Music } from "lucide-react";
+import { Instagram, Facebook, Youtube, Twitter } from "lucide-react";
 
 export const StayConnectedSection = () => {
   const socialLinks = [
     { icon: Instagram, name: "Instagram", href: "https://www.instagram.com/myagtv/?utm_source=ig_web_button_share_sheet" },
     { icon: Facebook, name: "Facebook", href: "https://www.facebook.com/share/1FxTroga19/" },
     { icon: Youtube, name: "YouTube", href: "https://youtube.com/@myagtv?si=AkZCr_WwT4eFFfGe" },
-    { icon: Music, name: "Twitter", href: "https://twitter.com/myagtv" }
+    { icon: Twitter, name: "Twitter", href: "https://twitter.com/myagtv" }
   ];
 
   return (

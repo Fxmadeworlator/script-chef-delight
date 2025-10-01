@@ -5,7 +5,7 @@ import { Button } from "@/components/ui/button";
 
 /* 1. KILL VERTICAL SCROLLBAR */
 const hideVertCSS = (
-  <style jsx global>{`
+  <style>{`
     .no-v-scroll::-webkit-scrollbar {
       display: none;
     }
@@ -82,13 +82,34 @@ export const SchedulePage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen pt-20 pb-16 bg-gradient-to-br from-[#F5F7FA] to-[#E4E8EC]">
+    <div className="min-h-screen pt-20 pb-16 bg-background">
       {hideVertCSS}
 
+      {/* Hero Section with Overlay */}
+      <div 
+        className="relative h-[400px] mb-12"
+        style={{
+          backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url("https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")`,
+          backgroundSize: 'cover',
+          backgroundPosition: 'center',
+        }}
+      >
+        <div className="absolute inset-0 flex items-center justify-center">
+          <div className="text-center text-white px-4">
+            <h1 className="text-5xl md:text-7xl font-bold mb-4 font-display drop-shadow-lg">
+              Your TV Guide
+            </h1>
+            <p className="text-xl md:text-2xl text-white/90 max-w-2xl mx-auto drop-shadow-md">
+              Plan your viewing experience with our complete program schedule
+            </p>
+          </div>
+        </div>
+      </div>
+
       <div className="container mx-auto px-4">
-        {/* 3. TEXT CHANGED → “AGTV Guide” */}
+        {/* 3. TEXT CHANGED → "AGTV Guide" */}
         <div className="mb-6">
-          <h1 className="text-4xl md:text-5xl font-bold text-[#122E34] font-display">AGTV Guide</h1>
+          <h1 className="text-4xl md:text-5xl font-bold text-foreground font-display">AGTV Guide</h1>
         </div>
 
         {/* PINNED – SMALL DATE STRIP */}
@@ -100,8 +121,8 @@ export const SchedulePage = () => {
               onClick={() => setSelectedDate(d.index)}
               className={`min-w-[90px] h-12 flex flex-col items-center justify-center text-xs ${
                 selectedDate === d.index
-                  ? "bg-[#622347] text-white"
-                  : "bg-white text-[#122E34] border border-[#ABAFB5]"
+                  ? "bg-primary text-primary-foreground"
+                  : "bg-card text-foreground border border-border"
               }`}
             >
               <div className="font-medium">{d.label}</div>
@@ -116,10 +137,10 @@ export const SchedulePage = () => {
           className="w-full whitespace-nowrap cursor-grab active:cursor-grabbing no-v-scroll"
         >
           {/* TIME RULER */}
-          <div className="flex h-12 bg-[#E4E8EC] border-y">
-            <div className="min-w-[80px] h-full flex items-center justify-center border-r text-sm font-semibold text-[#122E34]">Time</div>
+          <div className="flex h-12 bg-muted border-y">
+            <div className="min-w-[80px] h-full flex items-center justify-center border-r text-sm font-semibold text-foreground">Time</div>
             {timeSlots.map((t) => (
-              <div key={t} className="min-w-[100px] h-full flex items-center justify-center border-r text-xs font-medium text-[#677E8A]">
+              <div key={t} className="min-w-[100px] h-full flex items-center justify-center border-r text-xs font-medium text-muted-foreground">
                 {formatTime(t)}
               </div>
             ))}

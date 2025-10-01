@@ -71,7 +71,7 @@ export const ProgramsGrid = () => {
       <section className="relative py-20 px-4 text-white text-center overflow-hidden">
         {/*  background picture – swap file name only  */}
         <img
-          src="/src/assets/support-bg.jpg"
+          src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           alt=""
           className="absolute inset-0 w-full h-96 object-cover object-center"
         />

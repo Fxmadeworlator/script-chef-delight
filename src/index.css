@@ -13,19 +13,19 @@ All colors MUST be HSL. Typography: Montserrat (body) + Playfair Display (headin
 
 @layer base {
   :root {
-    /* Core Brand Colors */
-    --background: 0 0% 100%;
-    --foreground: 0 0% 0%;
+    /* Core Brand Colors - Yellow & Black Theme */
+    --background: 45 100% 51%; /* Bright Yellow */
+    --foreground: 0 0% 0%; /* Black */
     
     /* AGTV Gold Theme */
-    --primary: 51 100% 50%; /* #FFD700 - Gold */
-    --primary-dark: 45 100% 47%; /* #FFC400 - Darker Gold */
-    --primary-foreground: 0 0% 0%; /* Black text on gold */
+    --primary: 0 0% 0%; /* Black for primary */
+    --primary-dark: 0 0% 15%; /* Dark Gray */
+    --primary-foreground: 45 100% 51%; /* Yellow text on black */
     
     /* Cards & Surfaces */
-    --card: 0 0% 100%;
-    --card-foreground: 0 0% 0%;
-    --card-secondary: 0 0% 98%; /* Light gray for alternating cards */
+    --card: 0 0% 7%; /* Dark cards */
+    --card-foreground: 45 100% 51%; /* Yellow text */
+    --card-secondary: 0 0% 12%; /* Slightly lighter dark */
     
     /* Interactive Elements */
     --popover: 0 0% 100%;
@@ -36,8 +36,8 @@ All colors MUST be HSL. Typography: Montserrat (body) + Playfair Display (headin
     --secondary-foreground: 0 0% 0%;
     
     /* Muted Elements */
-    --muted: 0 0% 98%;
-    --muted-foreground: 210 6% 21%; /* #2D3748 - Gray from original */
+    --muted: 0 0% 15%;
+    --muted-foreground: 45 90% 60%; /* Lighter yellow for muted text */
     
     /* Accent Colors */
     --accent: 210 40% 96.1%;
