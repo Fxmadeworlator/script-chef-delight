@@ -14,8 +14,8 @@ All colors MUST be HSL. Typography: Montserrat (body) + Playfair Display (headin
 @layer base {
   :root {
     /* Core Brand Colors - Yellow & Black Theme */
-    --background: 45 100% 51%; /* Bright Yellow */
-    --foreground: 0 0% 0%; /* Black */
+    --background: 220 25% 8%; /* Dark Blue-Black */
+    --foreground: 45 100% 51%; /* Yellow */
     
     /* AGTV Gold Theme */
     --primary: 0 0% 0%; /* Black for primary */
@@ -145,11 +145,6 @@ All colors MUST be HSL. Typography: Montserrat (body) + Playfair Display (headin
     font-family: var(--font-body);
     line-height: 1.6;
     overflow-x: hidden;
-    background-image: url('./assets/global-bg-gradient.jpg');
-    background-size: cover;
-    background-position: center;
-    background-attachment: fixed;
-    background-repeat: no-repeat;
   }
 
   h1, h2, h3, h4, h5, h6 {
