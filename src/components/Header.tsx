@@ -54,50 +54,17 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
               <ul className="flex gap-8">
                 {navigationItems.map((item) => (
                   <li key={item.id}>
-                    {item.id === "about" ? (
-                      /* ------ FIXED HOVER DROPDOWN ------ */
-                      <div className="relative group">
-                        <button
-                          onClick={() => handleNavClick(item.id)}
-                          className={cn(
-                            "font-semibold text-base py-2 border-b-3 border-transparent transition-all duration-300",
-                            currentPage === item.id
-                              ? "text-primary-dark border-primary"
-                              : "text-foreground hover:text-primary-dark hover:border-primary"
-                          )}
-                        >
-                          {item.label}
-                        </button>
-
-                        {/* invisible bridge */}
-                        <div className="absolute top-full left-0 w-full h-1" />
-
-                        {/* dropdown panel */}
-                        <div className="absolute top-full left-0 mt-0 w-48 bg-background border border-border rounded-lg shadow-lg opacity-0 invisible group-hover:opacity-100 group-hover:visible transition-all duration-200 pointer-events-none group-hover:pointer-events-auto">
-                          {aboutDropdownItems.map((drop) => (
-                            <button
-                              key={drop.id}
-                              onClick={() => handleAboutDropdownClick(drop.id)}
-                              className="w-full text-left px-4 py-3 text-foreground hover:bg-muted hover:text-primary-dark transition-colors first:rounded-t-lg last:rounded-b-lg"
-                            >
-                              {drop.label}
-                            </button>
-                          ))}
-                        </div>
-                      </div>
-                    ) : (
-                      <button
-                        onClick={() => handleNavClick(item.id)}
-                        className={cn(
-                          "font-semibold text-base py-2 border-b-3 border-transparent transition-all duration-300",
-                          currentPage === item.id
-                            ? "text-primary-dark border-primary"
-                            : "text-foreground hover:text-primary-dark hover:border-primary"
-                        )}
-                      >
-                        {item.label}
-                      </button>
-                    )}
+                    <button
+                      onClick={() => handleNavClick(item.id)}
+                      className={cn(
+                        "font-semibold text-base py-2 border-b-3 border-transparent transition-all duration-300",
+                        currentPage === item.id
+                          ? "text-primary-dark border-primary"
+                          : "text-foreground hover:text-primary-dark hover:border-primary"
+                      )}
+                    >
+                      {item.label}
+                    </button>
                   </li>
                 ))}
               </ul>
@@ -114,38 +81,23 @@ export const Header = ({ currentPage, onPageChange }: HeaderProps) => {
             </Button>
           </div>
 
-          {/* Mobile Navigation (unchanged) */}
+          {/* Mobile Navigation */}
           {isMobileMenuOpen && (
             <div className="lg:hidden border-t border-border py-4">
               <nav className="flex flex-col gap-4">
                 {navigationItems.map((item) => (
-                  <div key={item.id}>
-                    <button
-                      onClick={() => handleNavClick(item.id)}
-                      className={cn(
-                        "text-left font-semibold py-2 px-4 rounded-lg transition-colors w-full",
-                        currentPage === item.id
-                          ? "text-primary bg-primary/10"
-                          : "text-foreground hover:text-primary hover:bg-primary/5"
-                      )}
-                    >
-                      {item.label}
-                    </button>
-
-                    {item.id === "about" && (
-                      <div className="ml-4 mt-2 space-y-2">
-                        {aboutDropdownItems.map((d) => (
-                          <button
-                            key={d.id}
-                            onClick={() => handleAboutDropdownClick(d.id)}
-                            className="block text-left font-medium py-1 px-4 text-muted-foreground hover:text-primary transition-colors w-full"
-                          >
-                            {d.label}
-                          </button>
-                        ))}
-                      </div>
+                  <button
+                    key={item.id}
+                    onClick={() => handleNavClick(item.id)}
+                    className={cn(
+                      "text-left font-semibold py-2 px-4 rounded-lg transition-colors w-full",
+                      currentPage === item.id
+                        ? "text-primary bg-primary/10"
+                        : "text-foreground hover:text-primary hover:bg-primary/5"
                     )}
-                  </div>
+                  >
+                    {item.label}
+                  </button>
                 ))}
               </nav>
             </div>
