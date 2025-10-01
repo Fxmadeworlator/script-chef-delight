@@ -18,29 +18,29 @@ All colors MUST be HSL. Typography: Montserrat (body) + Playfair Display (headin
     --foreground: 45 100% 51%; /* Yellow */
     
     /* AGTV Gold Theme */
-    --primary: 0 0% 0%; /* Black for primary */
-    --primary-dark: 0 0% 15%; /* Dark Gray */
-    --primary-foreground: 45 100% 51%; /* Yellow text on black */
+    --primary: 45 100% 51%; /* Yellow for primary */
+    --primary-dark: 45 100% 45%; /* Darker Yellow */
+    --primary-foreground: 0 0% 0%; /* Black text on yellow */
     
     /* Cards & Surfaces */
-    --card: 0 0% 7%; /* Dark cards */
-    --card-foreground: 45 100% 51%; /* Yellow text */
-    --card-secondary: 0 0% 12%; /* Slightly lighter dark */
+    --card: 220 20% 12%; /* Slightly lighter than background for contrast */
+    --card-foreground: 0 0% 98%; /* Light text on cards */
+    --card-secondary: 220 20% 15%; /* Slightly lighter dark */
     
     /* Interactive Elements */
-    --popover: 0 0% 100%;
-    --popover-foreground: 0 0% 0%;
+    --popover: 220 20% 15%;
+    --popover-foreground: 0 0% 98%;
     
     /* Secondary Colors */
-    --secondary: 210 40% 96.1%;
-    --secondary-foreground: 0 0% 0%;
+    --secondary: 220 20% 20%;
+    --secondary-foreground: 0 0% 98%;
     
     /* Muted Elements */
-    --muted: 0 0% 15%;
-    --muted-foreground: 45 90% 60%; /* Lighter yellow for muted text */
+    --muted: 220 15% 25%;
+    --muted-foreground: 0 0% 70%; /* Light gray for muted text */
     
     /* Accent Colors */
-    --accent: 210 40% 96.1%;
+    --accent: 45 100% 51%;
     --accent-foreground: 0 0% 0%;
     
     /* Status Colors */
@@ -48,9 +48,9 @@ All colors MUST be HSL. Typography: Montserrat (body) + Playfair Display (headin
     --destructive-foreground: 0 0% 100%;
     
     /* Form Elements */
-    --border: 214.3 31.8% 91.4%;
-    --input: 214.3 31.8% 91.4%;
-    --ring: 51 100% 50%; /* Gold focus ring */
+    --border: 220 15% 25%;
+    --input: 220 20% 15%;
+    --ring: 45 100% 51%; /* Yellow focus ring */
     
     /* Design System Tokens */
     --radius: 0.75rem;
