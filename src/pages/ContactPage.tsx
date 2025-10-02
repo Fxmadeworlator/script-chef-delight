@@ -37,8 +37,10 @@ export const ContactPage = ({ onPageChange }: ContactPageProps) => {
   };
 
   const handleStaffLogin = (loginType: string) => {
-    // Open login pages in new tab since they're separate routes
-    window.open(`/${loginType}-login`, '_blank');
+    // Navigate internally to login pages
+    if (onPageChange) {
+      onPageChange(`${loginType}-login`);
+    }
   };
   return (
     <div className="min-h-screen pt-20 pb-16">

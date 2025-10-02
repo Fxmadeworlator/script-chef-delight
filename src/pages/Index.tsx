@@ -12,6 +12,9 @@ import { VisionPage } from "@/pages/VisionPage";
 import { PastorsPage } from "@/pages/PastorsPage";
 import { LivePage } from "@/pages/LivePage";
 import { ContactPage } from "@/pages/ContactPage";
+import { ClubLoginRoute } from "@/routes/ClubLoginRoute";
+import { NewsLoginRoute } from "@/routes/NewsLoginRoute";
+import { ProgramsLoginRoute } from "@/routes/ProgramsLoginRoute";
 
 const Index = () => {
   const [currentPage, setCurrentPage] = useState("home");
@@ -40,6 +43,12 @@ const Index = () => {
         return <PastorsPage />;
       case "contact":
         return <ContactPage onPageChange={setCurrentPage} />;
+      case "club-login":
+        return <ClubLoginRoute />;
+      case "news-login":
+        return <NewsLoginRoute />;
+      case "programs-login":
+        return <ProgramsLoginRoute />;
       default:
         return <HomePage onPageChange={setCurrentPage} />;
     }
