@@ -10,16 +10,26 @@ export const NewsPage = () => {
   const regularNews = newsItems.filter(item => !item.featured);
   return (
     <div className="min-h-screen pt-20 pb-16">
-      <div className="container mx-auto px-4">
-        {/* 1. EXACT HEADING TEXT REQUESTED + LEFT-ALIGNED COMMUNITY BLOCK */}
-        <div className="mb-16 text-left">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-foreground font-display">
+      {/* Hero Section with Background Image */}
+      <section className="relative py-20 px-4 text-white overflow-hidden mb-16">
+        <img
+          src="https://images.pexels.com/photos/3184338/pexels-photo-3184338.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-black/60" />
+        
+        <div className="relative z-10 max-w-4xl mx-auto text-left">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 font-display">
             Latest News
           </h1>
-          <p className="text-lg text-muted-foreground max-w-3xl">
+          <p className="text-lg md:text-xl opacity-90 leading-relaxed">
             Stay updated with the latest developments in our ministry and Christian broadcasting
           </p>
         </div>
+      </section>
+
+      <div className="container mx-auto px-4">
 
         {/* FEATURED NEWS – unchanged */}
         {featuredNews && (

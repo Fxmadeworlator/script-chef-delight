@@ -26,16 +26,26 @@ const missionValues = [
 export const AboutPage = () => {
   return (
     <div className="min-h-screen pt-20 pb-16">
-      <div className="container mx-auto px-4">
-        {/* Header */}
-        <div className="text-center mb-16">
-          <h1 className="text-4xl md:text-5xl font-bold mb-6 text-foreground font-display">
+      {/* Hero Section with Background Image */}
+      <section className="relative py-20 px-4 text-white overflow-hidden mb-16">
+        <img
+          src="https://images.pexels.com/photos/3184291/pexels-photo-3184291.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
+          alt=""
+          className="absolute inset-0 w-full h-full object-cover object-center"
+        />
+        <div className="absolute inset-0 bg-black/60" />
+        
+        <div className="relative z-10 max-w-4xl mx-auto text-left">
+          <h1 className="text-4xl md:text-5xl font-bold mb-6 font-display">
             About AGTV
           </h1>
-          <p className="text-lg text-muted-foreground max-w-3xl mx-auto">
+          <p className="text-lg md:text-xl opacity-90 leading-relaxed">
             Faith That Transforms Lives - Broadcasting hope and inspiration across Africa
           </p>
         </div>
+      </section>
+
+      <div className="container mx-auto px-4">
 
         {/* Main Content */}
         <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center mb-16">

@@ -99,6 +99,34 @@ export const ContactPage = () => {
                 <p>Sunday: Closed (Broadcasting continues)</p>
               </div>
             </div>
+
+            <div className="mt-8 pt-8 border-t border-border">
+              <h4 className="font-semibold text-foreground mb-4">Staff Login</h4>
+              <p className="text-sm text-muted-foreground mb-4">Access your department dashboard</p>
+              <div className="flex flex-col gap-3">
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start"
+                  onClick={() => window.location.href = '/club-login'}
+                >
+                  Club 1000+ Login
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start"
+                  onClick={() => window.location.href = '/news-login'}
+                >
+                  News Team Login
+                </Button>
+                <Button 
+                  variant="outline" 
+                  className="w-full justify-start"
+                  onClick={() => window.location.href = '/programs-login'}
+                >
+                  Programs Login
+                </Button>
+              </div>
+            </div>
           </div>
 
           {/* Contact Form */}
