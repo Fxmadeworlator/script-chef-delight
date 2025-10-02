@@ -39,7 +39,7 @@ const Index = () => {
       case "pastors":
         return <PastorsPage />;
       case "contact":
-        return <ContactPage />;
+        return <ContactPage onPageChange={setCurrentPage} />;
       default:
         return <HomePage onPageChange={setCurrentPage} />;
     }

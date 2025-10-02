@@ -6,7 +6,11 @@ import { Textarea } from "@/components/ui/textarea";
 import { Label } from "@/components/ui/label";
 import { useToast } from "@/hooks/use-toast";
 
-export const ContactPage = () => {
+interface ContactPageProps {
+  onPageChange?: (page: string) => void;
+}
+
+export const ContactPage = ({ onPageChange }: ContactPageProps) => {
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -32,6 +36,10 @@ export const ContactPage = () => {
     setFormData({ name: "", email: "", subject: "", message: "" });
   };
 
+  const handleStaffLogin = (loginType: string) => {
+    // Open login pages in new tab since they're separate routes
+    window.open(`/${loginType}-login`, '_blank');
+  };
   return (
     <div className="min-h-screen pt-20 pb-16">
       <div className="container mx-auto px-4">
@@ -107,21 +115,21 @@ export const ContactPage = () => {
                 <Button 
                   variant="outline" 
                   className="w-full justify-start"
-                  onClick={() => window.location.href = '/club-login'}
+                  onClick={() => handleStaffLogin('club')}
                 >
                   Club 1000+ Login
                 </Button>
                 <Button 
                   variant="outline" 
                   className="w-full justify-start"
-                  onClick={() => window.location.href = '/news-login'}
+                  onClick={() => handleStaffLogin('news')}
                 >
                   News Team Login
                 </Button>
                 <Button 
                   variant="outline" 
                   className="w-full justify-start"
-                  onClick={() => window.location.href = '/programs-login'}
+                  onClick={() => handleStaffLogin('programs')}
                 >
                   Programs Login
                 </Button>
