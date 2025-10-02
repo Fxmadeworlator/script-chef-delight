@@ -1,77 +1,22 @@
 import { Crown, Sprout, Heart, HandHeart, Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
+import { useClub } from "@/contexts/ClubContext";
 
-const subscriptionOptions = [
-  {
-    id: "basic",
-    icon: Sprout,
-    amount: "₵200",
-    subTiers: [
-      { name: "Monthly", price: "₵200" },
-      { name: "Quarterly", price: "₵540", savings: "Save ₵60" },
-      { name: "Yearly", price: "₵2,000", savings: "Save ₵400" }
-    ],
-    frequency: "Monthly",
-    title: "Basic Club Member",
-    features: [
-      "Access to live streams",
-      "Monthly devotionals", 
-      "AGTV club member badge",
-      "Weekly inspirational emails",
-      "Prayer request submissions"
-    ]
-  },
-  {
-    id: "premium",
-    icon: Heart,
-    amount: "₵500",
-    subTiers: [
-      { name: "Monthly", price: "₵500" },
-      { name: "Quarterly", price: "₵1,350", savings: "Save ₵150" },
-      { name: "Yearly", price: "₵5,000", savings: "Save ₵1,000" }
-    ],
-    frequency: "Monthly",
-    title: "Premium Club Member",
-    featured: true,
-    features: [
-      "All basic benefits",
-      "Exclusive premium content library",
-      "Monthly pastor Q&A sessions",
-      "Early access to new programs",
-      "Quarterly ministry impact reports",
-      "Priority prayer line access"
-    ]
-  },
-  {
-    id: "platinum",
-    icon: Crown,
-    amount: "₵1,000",
-    subTiers: [
-      { name: "Monthly", price: "₵1,000" },
-      { name: "Quarterly", price: "₵2,700", savings: "Save ₵300" },
-      { name: "Yearly", price: "₵10,000", savings: "Save ₵2,000" }
-    ],
-    frequency: "Monthly",
-    title: "Platinum Club Member",
-    features: [
-      "All premium benefits",
-      "Personal ministry consultation calls",
-      "Annual exclusive retreat invitations",
-      "Behind-the-scenes content access",
-      "Direct pastor communication line",
-      "Custom prayer and blessing videos"
-    ]
-  }
-];
-
-const stats = [
-  { number: "1,247", label: "Club Members" },
-  { number: "$62,350", label: "Monthly Support" },
-  { number: "14", label: "Countries Reached" }
-];
+const iconMap: Record<string, any> = {
+  Crown,
+  Sprout,
+  Heart,
+  HandHeart
+};
 
 export const ClubSection = () => {
+  const { tiers, stats } = useClub();
+
+  const subscriptionOptions = tiers.map(tier => ({
+    ...tier,
+    icon: iconMap[tier.icon] || Heart
+  }));
   return (
     <section className="section-bg py-24 relative overflow-hidden">
       {/* Background Pattern */}

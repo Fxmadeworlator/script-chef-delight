@@ -3,61 +3,10 @@ import { useState } from "react";
 import { Check } from "lucide-react";
 import { Button } from "@/components/ui/button";
 import { cn } from "@/lib/utils";
-
-/*  SUBSCRIPTION TIERS  –  Ghana benefits  */
-interface Tier {
-  id: string;
-  name: string;
-  price: number;
-  description: string;
-  features: string[];
-  recommended?: boolean;
-}
-
-const tiers: Tier[] = [
-  {
-    id: "bronze",
-    name: "Bronze",
-    price: 5,
-    description: "Perfect for those starting their faith journey",
-    features: [
-      "Early access to episodes",
-      "Monthly newsletter (Twi + English)",
-      "Community forum access",
-      "Basic prayer support"
-    ]
-  },
-  {
-    id: "silver",
-    name: "Silver",
-    price: 15,
-    description: "Enhanced experience for growing believers",
-    features: [
-      "All Bronze benefits",
-      "HD video downloads (Twi subtitles)",
-      "Exclusive live Q&A sessions",
-      "Priority prayer support",
-      "Monthly devotionals"
-    ],
-    recommended: true
-  },
-  {
-    id: "gold",
-    name: "Gold",
-    price: 25,
-    description: "Premium support for dedicated partners",
-    features: [
-      "All Silver benefits",
-      "Direct pastor access (Accra studio)",
-      "Priority prayer chain",
-      "Exclusive village crusade invites",
-      "Quarterly retreats in Ghana",
-      "Personal mentorship (Twi/English)"
-    ]
-  }
-];
+import { usePrograms } from "@/contexts/ProgramsContext";
 
 export const ProgramsGrid = () => {
+  const { tiers, headerContent } = usePrograms();
   const [selectedTier, setSelectedTier] = useState<string | null>(null);
 
   const handleTierSelect = (tierId: string) => {
@@ -78,22 +27,21 @@ export const ProgramsGrid = () => {
         <div className="absolute inset-0 bg-black/55" />
 
         <div className="relative z-10 max-w-4xl mx-auto text-left">
-          <h2 className="text-4xl md:text-5xl font-bold mb-6 font-display">Support AGTV</h2>
+          <h2 className="text-4xl md:text-5xl font-bold mb-6 font-display">{headerContent.title}</h2>
 
-          <p className="text-lg md:text-xl opacity-90 leading-relaxed">
-            AGTV is Ghana’s 24-hour Christian television network, broadcasting from Accra to every region, village and hospital.
-            Every cedi you give keeps the signal on air, produces fresh Twi/English Gospel content, and reaches millions who have never heard the name of Jesus.
-          </p>
-
-          <p className="text-lg md:text-xl opacity-90 leading-relaxed mt-4">
-            When you subscribe you don’t just watch — you <strong>partner</strong>.
-            You fund village crusades in the Northern Region, youth outreaches in Kumasi, emergency relief in Takoradi, and the daily costs of our Accra studio uplink.
-            In return you get early access, HD downloads with Twi subtitles, direct pastor chat, and the joy of knowing you are literally sending the Gospel into homes, hospitals, prisons and remote villages across Ghana.
-          </p>
-
-          <p className="text-lg md:text-xl opacity-90 leading-relaxed mt-4">
-            Join the family today. Cancel anytime. 100 % of every cedi goes to ministry operations — no admin fees, no middle-men, just Jesus on air, 24/7.
-          </p>
+          {headerContent.description.map((paragraph, index) => (
+            <p key={index} className="text-lg md:text-xl opacity-90 leading-relaxed mt-4">
+              {paragraph.includes('partner') ? (
+                <>
+                  {paragraph.split('partner')[0]}
+                  <strong>partner</strong>
+                  {paragraph.split('partner')[1]}
+                </>
+              ) : (
+                paragraph
+              )}
+            </p>
+          ))}
         </div>
       </section>
 
