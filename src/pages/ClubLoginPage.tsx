@@ -3,13 +3,14 @@ import { Button } from '@/components/ui/button';
 import { Input } from '@/components/ui/input';
 import { Label } from '@/components/ui/label';
 import { useToast } from '@/hooks/use-toast';
-import { Crown } from 'lucide-react';
+import { Crown, ArrowLeft } from 'lucide-react';
 
 interface ClubLoginPageProps {
   onLogin: () => void;
+  onBack?: () => void;
 }
 
-export const ClubLoginPage = ({ onLogin }: ClubLoginPageProps) => {
+export const ClubLoginPage = ({ onLogin, onBack }: ClubLoginPageProps) => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
   const { toast } = useToast();
@@ -35,6 +36,17 @@ export const ClubLoginPage = ({ onLogin }: ClubLoginPageProps) => {
 
   return (
     <div className="min-h-screen flex items-center justify-center p-4">
+      {onBack && (
+        <Button
+          onClick={onBack}
+          variant="ghost"
+          className="absolute top-4 left-4 flex items-center gap-2"
+        >
+          <ArrowLeft className="w-4 h-4" />
+          Back to Site
+        </Button>
+      )}
+      
       <div className="w-full max-w-md">
         <div className="text-center mb-8">
           <div className="inline-flex items-center justify-center w-16 h-16 bg-primary rounded-full mb-4">

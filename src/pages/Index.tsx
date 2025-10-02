@@ -44,11 +44,11 @@ const Index = () => {
       case "contact":
         return <ContactPage onPageChange={setCurrentPage} />;
       case "club-login":
-        return <ClubLoginRoute />;
+        return <ClubLoginRoute onBack={() => setCurrentPage("contact")} />;
       case "news-login":
-        return <NewsLoginRoute />;
+        return <NewsLoginRoute onBack={() => setCurrentPage("contact")} />;
       case "programs-login":
-        return <ProgramsLoginRoute />;
+        return <ProgramsLoginRoute onBack={() => setCurrentPage("contact")} />;
       default:
         return <HomePage onPageChange={setCurrentPage} />;
     }
