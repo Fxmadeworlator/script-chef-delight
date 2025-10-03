@@ -2,6 +2,7 @@
 import { useState, useEffect, useRef } from "react";
 import { ScrollArea, ScrollBar } from "@/components/ui/scroll-area";
 import { Button } from "@/components/ui/button";
+import { usePrograms } from "@/contexts/ProgramsContext";
 
 /* 1. KILL VERTICAL SCROLLBAR */
 const hideVertCSS = (
@@ -24,31 +25,6 @@ interface ScheduleProgram {
   day: number;
 }
 
-/* ---------- LONGER SHOWS – 60-120 min + BLANK HOURS ---------- */
-const schedulePrograms = [
-  // SUN (day 0)
-  { id: "sun-06:00", title: "Morning Glory", startTime: 360, duration: 120, day: 0 },
-  { id: "sun-08:00", title: "Sun-rise Music", startTime: 480, duration: 60, day: 0 },
-  { id: "sun-09:00", title: "Sunday Service Live", startTime: 540, duration: 120, day: 0 },
-  { id: "sun-12:00", title: "Mid-Day Encouragement", startTime: 720, duration: 60, day: 0 },
-  { id: "sun-14:00", title: "Teaching Time", startTime: 840, duration: 60, day: 0 },
-  { id: "sun-15:00", title: "Healing & Miracle", startTime: 900, duration: 120, day: 0 },
-  { id: "sun-18:00", title: "Evening Word", startTime: 1080, duration: 60, day: 0 },
-  { id: "sun-19:00", title: "Youth Fire", startTime: 1140, duration: 90, day: 0 },
-  { id: "sun-21:00", title: "Gospel Music Hour", startTime: 1260, duration: 60, day: 0 },
-  { id: "sun-22:00", title: "Late-Night Sermon", startTime: 1320, duration: 60, day: 0 },
-
-  // MON-THU (days 1-4) – longer random shows
-  ...[1, 2, 3, 4].flatMap((d) =>
-    [6, 8, 10, 12, 14, 16, 18, 20, 22].map((h, i) => ({
-      id: `d${d}-${h}:00`,
-      title: ["Mon", "Tue", "Wed", "Thu"][d - 1] + " Show " + (i + 1),
-      startTime: h * 60,
-      duration: [60, 90, 120][Math.floor(Math.random() * 3)],
-      day: d,
-    }))
-  ),
-];
 
 const days = ["Sun", "Mon", "Tue", "Wed", "Thu", "Fri", "Sat"];
 const calendar = Array.from({ length: 14 }, (_, i) => {
@@ -68,6 +44,7 @@ const formatTime = (minutes: number) => {
 };
 
 export const SchedulePage = () => {
+  const { schedulePrograms } = usePrograms();
   const [selectedDate, setSelectedDate] = useState(0);
   const timeSlots = Array.from({ length: 48 }, (_, i) => i * 30);
   const programmesToday = schedulePrograms.filter((p) => p.day === selectedDate % 7);
