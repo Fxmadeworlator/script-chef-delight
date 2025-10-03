@@ -5,7 +5,7 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useClub } from '@/contexts/ClubContext';
 import { useToast } from '@/hooks/use-toast';
-import { LogOut, Crown, Save } from 'lucide-react';
+import { LogOut, Crown, Save, Trash2 } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
 
 interface ClubDashboardProps {
@@ -13,21 +13,9 @@ interface ClubDashboardProps {
 }
 
 export const ClubDashboard = ({ onLogout }: ClubDashboardProps) => {
-  const { tiers, stats, updateTier, updateStats } = useClub();
+  const { tiers, stats, donations, updateTier, updateStats, deleteDonation } = useClub();
   const { toast } = useToast();
-  const [selectedTier, setSelectedTier] = useState(tiers[0].id);
-  const currentTier = tiers.find(t => t.id === selectedTier) || tiers[0];
-
-  const [editedTier, setEditedTier] = useState(currentTier);
   const [editedStats, setEditedStats] = useState(stats);
-
-  const handleSaveTier = () => {
-    updateTier(selectedTier, editedTier);
-    toast({
-      title: "Changes Saved",
-      description: "Tier updated successfully",
-    });
-  };
 
   const handleSaveStats = () => {
     updateStats(editedStats);
@@ -37,10 +25,19 @@ export const ClubDashboard = ({ onLogout }: ClubDashboardProps) => {
     });
   };
 
-  const updateFeature = (index: number, value: string) => {
-    const newFeatures = [...editedTier.features];
-    newFeatures[index] = value;
-    setEditedTier({ ...editedTier, features: newFeatures });
+  const handleDeleteDonation = (id: string) => {
+    deleteDonation(id);
+    toast({
+      title: "Donation Deleted",
+      description: "Donation record removed successfully",
+    });
+  };
+
+  const formatCurrency = (amount: number) => {
+    return new Intl.NumberFormat('en-US', {
+      style: 'currency',
+      currency: 'USD'
+    }).format(amount);
   };
 
   return (
@@ -60,69 +57,90 @@ export const ClubDashboard = ({ onLogout }: ClubDashboardProps) => {
           </Button>
         </div>
 
-        <Tabs defaultValue="tiers" className="space-y-6">
+        <Tabs defaultValue="giving" className="space-y-6">
           <TabsList>
-            <TabsTrigger value="tiers">Membership Tiers</TabsTrigger>
+            <TabsTrigger value="giving">Give Online</TabsTrigger>
+            <TabsTrigger value="donations">Donation Records</TabsTrigger>
             <TabsTrigger value="stats">Statistics</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="tiers" className="space-y-6">
-            <div className="bg-card rounded-lg p-6 border">
-              <Label>Select Tier to Edit</Label>
-              <div className="flex gap-2 mt-2 mb-6">
-                {tiers.map(tier => (
-                  <Button
-                    key={tier.id}
-                    variant={selectedTier === tier.id ? "default" : "outline"}
-                    onClick={() => {
-                      setSelectedTier(tier.id);
-                      setEditedTier(tiers.find(t => t.id === tier.id) || tiers[0]);
-                    }}
-                  >
-                    {tier.name}
-                  </Button>
-                ))}
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <Label>Tier Name</Label>
-                  <Input
-                    value={editedTier.name}
-                    onChange={(e) => setEditedTier({ ...editedTier, name: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <Label>Title</Label>
-                  <Input
-                    value={editedTier.title}
-                    onChange={(e) => setEditedTier({ ...editedTier, title: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <Label>Monthly Amount</Label>
-                  <Input
-                    value={editedTier.amount}
-                    onChange={(e) => setEditedTier({ ...editedTier, amount: e.target.value })}
-                  />
-                </div>
+          <TabsContent value="giving" className="space-y-6">
+            <div className="bg-card rounded-lg p-8 border">
+              <div className="max-w-4xl mx-auto">
+                <h2 className="text-2xl font-bold mb-8 text-center">Ways to Give</h2>
                 
-                <div>
-                  <Label className="mb-2 block">Features</Label>
-                  {editedTier.features.map((feature, index) => (
-                    <Input
-                      key={index}
-                      value={feature}
-                      onChange={(e) => updateFeature(index, e.target.value)}
-                      className="mb-2"
-                    />
-                  ))}
+                <div className="bg-primary/10 rounded-2xl p-8 border-2 border-primary/20">
+                  <div className="flex items-start gap-4 mb-6">
+                    <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
+                      <Crown className="w-6 h-6 text-primary" />
+                    </div>
+                    <div className="flex-1">
+                      <h3 className="text-2xl font-bold mb-3">Give Online</h3>
+                      <p className="text-muted-foreground text-lg mb-6">
+                        Give once or give regularly by setting up a recurring gift.
+                      </p>
+                      <Button size="lg" className="rounded-full px-8">
+                        Give Now
+                      </Button>
+                    </div>
+                  </div>
                 </div>
 
-                <Button onClick={handleSaveTier} className="w-full">
-                  <Save className="w-4 h-4 mr-2" />
-                  Save Tier Changes
-                </Button>
+                <div className="mt-8 p-6 bg-muted/50 rounded-lg">
+                  <p className="text-sm text-muted-foreground text-center">
+                    Your generosity helps us continue our mission and impact lives in our community.
+                    All donations are tax-deductible.
+                  </p>
+                </div>
+              </div>
+            </div>
+          </TabsContent>
+
+          <TabsContent value="donations" className="space-y-6">
+            <div className="bg-card rounded-lg p-6 border">
+              <h2 className="text-xl font-bold mb-4">Donation Records</h2>
+              <div className="overflow-x-auto">
+                <table className="w-full">
+                  <thead>
+                    <tr className="border-b">
+                      <th className="text-left p-3 font-semibold">Donor Name</th>
+                      <th className="text-left p-3 font-semibold">Amount</th>
+                      <th className="text-left p-3 font-semibold">Date</th>
+                      <th className="text-left p-3 font-semibold">Frequency</th>
+                      <th className="text-left p-3 font-semibold">Payment Method</th>
+                      <th className="text-left p-3 font-semibold">Actions</th>
+                    </tr>
+                  </thead>
+                  <tbody>
+                    {donations.map((donation) => (
+                      <tr key={donation.id} className="border-b hover:bg-muted/50">
+                        <td className="p-3">{donation.donorName}</td>
+                        <td className="p-3 font-semibold text-primary">
+                          {formatCurrency(donation.amount)}
+                        </td>
+                        <td className="p-3">{new Date(donation.date).toLocaleDateString()}</td>
+                        <td className="p-3">{donation.frequency}</td>
+                        <td className="p-3">{donation.paymentMethod}</td>
+                        <td className="p-3">
+                          <Button
+                            variant="destructive"
+                            size="sm"
+                            onClick={() => handleDeleteDonation(donation.id)}
+                          >
+                            <Trash2 className="w-4 h-4" />
+                          </Button>
+                        </td>
+                      </tr>
+                    ))}
+                  </tbody>
+                </table>
+              </div>
+              <div className="mt-4 p-4 bg-muted rounded-lg">
+                <p className="text-sm text-muted-foreground">
+                  Total Donations: <span className="font-bold text-foreground">
+                    {formatCurrency(donations.reduce((sum, d) => sum + d.amount, 0))}
+                  </span>
+                </p>
               </div>
             </div>
           </TabsContent>

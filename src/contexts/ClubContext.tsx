@@ -17,11 +17,24 @@ export interface ClubStats {
   label: string;
 }
 
+export interface ClubDonation {
+  id: string;
+  donorName: string;
+  amount: number;
+  date: string;
+  frequency: string;
+  paymentMethod: string;
+}
+
 interface ClubContextType {
   tiers: ClubTier[];
   stats: ClubStats[];
+  donations: ClubDonation[];
   updateTier: (id: string, tier: ClubTier) => void;
   updateStats: (stats: ClubStats[]) => void;
+  addDonation: (donation: ClubDonation) => void;
+  updateDonation: (id: string, updatedDonation: ClubDonation) => void;
+  deleteDonation: (id: string) => void;
 }
 
 const ClubContext = createContext<ClubContextType | undefined>(undefined);
@@ -98,9 +111,53 @@ const defaultStats: ClubStats[] = [
   { number: "14", label: "Countries Reached" }
 ];
 
+const defaultDonations: ClubDonation[] = [
+  {
+    id: "don-1",
+    donorName: "John Smith",
+    amount: 1000,
+    date: "2024-01-15",
+    frequency: "Monthly",
+    paymentMethod: "Credit Card"
+  },
+  {
+    id: "don-2",
+    donorName: "Sarah Johnson",
+    amount: 500,
+    date: "2024-01-18",
+    frequency: "One-time",
+    paymentMethod: "Bank Transfer"
+  },
+  {
+    id: "don-3",
+    donorName: "Michael Brown",
+    amount: 2500,
+    date: "2024-01-20",
+    frequency: "Quarterly",
+    paymentMethod: "Check"
+  },
+  {
+    id: "don-4",
+    donorName: "Emily Davis",
+    amount: 750,
+    date: "2024-01-22",
+    frequency: "Monthly",
+    paymentMethod: "Credit Card"
+  },
+  {
+    id: "don-5",
+    donorName: "David Wilson",
+    amount: 5000,
+    date: "2024-01-25",
+    frequency: "Annually",
+    paymentMethod: "Wire Transfer"
+  },
+];
+
 export const ClubProvider: React.FC<{ children: ReactNode }> = ({ children }) => {
   const [tiers, setTiers] = useState<ClubTier[]>(defaultTiers);
   const [stats, setStats] = useState<ClubStats[]>(defaultStats);
+  const [donations, setDonations] = useState<ClubDonation[]>(defaultDonations);
 
   const updateTier = (id: string, tier: ClubTier) => {
     setTiers(prevTiers => prevTiers.map(t => t.id === id ? tier : t));
@@ -110,8 +167,29 @@ export const ClubProvider: React.FC<{ children: ReactNode }> = ({ children }) =>
     setStats(newStats);
   };
 
+  const addDonation = (donation: ClubDonation) => {
+    setDonations([...donations, donation]);
+  };
+
+  const updateDonation = (id: string, updatedDonation: ClubDonation) => {
+    setDonations(donations.map(d => d.id === id ? updatedDonation : d));
+  };
+
+  const deleteDonation = (id: string) => {
+    setDonations(donations.filter(d => d.id !== id));
+  };
+
   return (
-    <ClubContext.Provider value={{ tiers, stats, updateTier, updateStats }}>
+    <ClubContext.Provider value={{ 
+      tiers, 
+      stats, 
+      donations,
+      updateTier, 
+      updateStats,
+      addDonation,
+      updateDonation,
+      deleteDonation
+    }}>
       {children}
     </ClubContext.Provider>
   );

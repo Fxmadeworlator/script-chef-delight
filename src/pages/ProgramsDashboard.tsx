@@ -185,8 +185,6 @@ export const ProgramsDashboard = ({ onLogout }: ProgramsDashboardProps) => {
             <TabsTrigger value="schedule">Schedule</TabsTrigger>
             <TabsTrigger value="events">Events</TabsTrigger>
             <TabsTrigger value="news">News</TabsTrigger>
-            <TabsTrigger value="tiers">Subscription Tiers</TabsTrigger>
-            <TabsTrigger value="header">Header Content</TabsTrigger>
           </TabsList>
 
           {/* SCHEDULE TAB */}
@@ -420,102 +418,6 @@ export const ProgramsDashboard = ({ onLogout }: ProgramsDashboardProps) => {
             </div>
           </TabsContent>
 
-          {/* SUBSCRIPTION TIERS TAB */}
-          <TabsContent value="tiers" className="space-y-6">
-            <div className="bg-card rounded-lg p-6 border">
-              <Label>Select Tier to Edit</Label>
-              <div className="flex gap-2 mt-2 mb-6">
-                {tiers.map(tier => (
-                  <Button
-                    key={tier.id}
-                    variant={selectedTier === tier.id ? "default" : "outline"}
-                    onClick={() => {
-                      setSelectedTier(tier.id);
-                      setEditedTier(tiers.find(t => t.id === tier.id) || tiers[0]);
-                    }}
-                  >
-                    {tier.name}
-                  </Button>
-                ))}
-              </div>
-
-              <div className="space-y-4">
-                <div>
-                  <Label>Tier Name</Label>
-                  <Input
-                    value={editedTier.name}
-                    onChange={(e) => setEditedTier({ ...editedTier, name: e.target.value })}
-                  />
-                </div>
-                <div>
-                  <Label>Price (USD)</Label>
-                  <Input
-                    type="number"
-                    value={editedTier.price}
-                    onChange={(e) => setEditedTier({ ...editedTier, price: parseFloat(e.target.value) })}
-                  />
-                </div>
-                <div>
-                  <Label>Description</Label>
-                  <Textarea
-                    value={editedTier.description}
-                    onChange={(e) => setEditedTier({ ...editedTier, description: e.target.value })}
-                  />
-                </div>
-                
-                <div>
-                  <Label className="mb-2 block">Features</Label>
-                  {editedTier.features.map((feature, index) => (
-                    <Input
-                      key={index}
-                      value={feature}
-                      onChange={(e) => updateFeature(index, e.target.value)}
-                      className="mb-2"
-                    />
-                  ))}
-                </div>
-
-                <Button onClick={handleSaveTier} className="w-full">
-                  <Save className="w-4 h-4 mr-2" />
-                  Save Tier Changes
-                </Button>
-              </div>
-            </div>
-          </TabsContent>
-
-          {/* HEADER CONTENT TAB */}
-          <TabsContent value="header" className="space-y-6">
-            <div className="bg-card rounded-lg p-6 border">
-              <h2 className="text-xl font-bold mb-4">Header Content</h2>
-              <div className="space-y-4">
-                <div>
-                  <Label>Title</Label>
-                  <Input
-                    value={editedHeader.title}
-                    onChange={(e) => setEditedHeader({ ...editedHeader, title: e.target.value })}
-                  />
-                </div>
-                
-                <div>
-                  <Label className="mb-2 block">Description Paragraphs</Label>
-                  {editedHeader.description.map((desc, index) => (
-                    <Textarea
-                      key={index}
-                      value={desc}
-                      onChange={(e) => updateDescription(index, e.target.value)}
-                      rows={4}
-                      className="mb-2"
-                    />
-                  ))}
-                </div>
-
-                <Button onClick={handleSaveHeader} className="w-full">
-                  <Save className="w-4 h-4 mr-2" />
-                  Save Header Changes
-                </Button>
-              </div>
-            </div>
-          </TabsContent>
         </Tabs>
       </div>
     </div>
