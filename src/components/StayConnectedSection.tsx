@@ -49,8 +49,9 @@ export const StayConnectedSection = () => {
               </p>
               <Button 
                 className="bg-white text-purple-600 hover:bg-gray-100 font-semibold w-fit"
+                disabled
               >
-                Download →
+                Coming Soon
               </Button>
             </div>
             

@@ -14,6 +14,7 @@ interface ClubDashboardProps {
 
 export const ClubDashboard = ({ onLogout }: ClubDashboardProps) => {
   const { tiers, stats, donations, updateTier, updateStats, deleteDonation } = useClub();
+  const [editedTiers, setEditedTiers] = useState(tiers);
   const { toast } = useToast();
   const [editedStats, setEditedStats] = useState(stats);
 
@@ -23,6 +24,17 @@ export const ClubDashboard = ({ onLogout }: ClubDashboardProps) => {
       title: "Statistics Updated",
       description: "Club statistics saved successfully",
     });
+  };
+
+  const handleSaveTier = (id: string) => {
+    const tier = editedTiers.find(t => t.id === id);
+    if (tier) {
+      updateTier(id, tier);
+      toast({
+        title: "Tier Updated",
+        description: "Membership tier saved successfully",
+      });
+    }
   };
 
   const handleDeleteDonation = (id: string) => {
@@ -57,43 +69,127 @@ export const ClubDashboard = ({ onLogout }: ClubDashboardProps) => {
           </Button>
         </div>
 
-        <Tabs defaultValue="giving" className="space-y-6">
+        <Tabs defaultValue="tiers" className="space-y-6">
           <TabsList>
-            <TabsTrigger value="giving">Give Online</TabsTrigger>
+            <TabsTrigger value="tiers">Membership Tiers</TabsTrigger>
             <TabsTrigger value="donations">Donation Records</TabsTrigger>
             <TabsTrigger value="stats">Statistics</TabsTrigger>
           </TabsList>
 
-          <TabsContent value="giving" className="space-y-6">
-            <div className="bg-card rounded-lg p-8 border">
-              <div className="max-w-4xl mx-auto">
-                <h2 className="text-2xl font-bold mb-8 text-center">Ways to Give</h2>
-                
-                <div className="bg-primary/10 rounded-2xl p-8 border-2 border-primary/20">
-                  <div className="flex items-start gap-4 mb-6">
-                    <div className="w-12 h-12 rounded-full bg-primary/20 flex items-center justify-center flex-shrink-0">
-                      <Crown className="w-6 h-6 text-primary" />
+          <TabsContent value="tiers" className="space-y-6">
+            {editedTiers.map((tier) => (
+              <div key={tier.id} className="bg-card rounded-lg p-6 border">
+                <h2 className="text-xl font-bold mb-4">{tier.title}</h2>
+                <div className="space-y-4">
+                  <div className="grid grid-cols-2 gap-4">
+                    <div>
+                      <Label>Title</Label>
+                      <Input
+                        value={tier.title}
+                        onChange={(e) => {
+                          const newTiers = editedTiers.map(t => 
+                            t.id === tier.id ? { ...t, title: e.target.value } : t
+                          );
+                          setEditedTiers(newTiers);
+                        }}
+                      />
                     </div>
-                    <div className="flex-1">
-                      <h3 className="text-2xl font-bold mb-3">Give Online</h3>
-                      <p className="text-muted-foreground text-lg mb-6">
-                        Give once or give regularly by setting up a recurring gift.
-                      </p>
-                      <Button size="lg" className="rounded-full px-8">
-                        Give Now
-                      </Button>
+                    <div>
+                      <Label>Amount</Label>
+                      <Input
+                        value={tier.amount}
+                        onChange={(e) => {
+                          const newTiers = editedTiers.map(t => 
+                            t.id === tier.id ? { ...t, amount: e.target.value } : t
+                          );
+                          setEditedTiers(newTiers);
+                        }}
+                      />
                     </div>
                   </div>
-                </div>
+                  
+                  <div>
+                    <Label>Features (one per line)</Label>
+                    <Textarea
+                      value={tier.features.join('\n')}
+                      rows={6}
+                      onChange={(e) => {
+                        const newTiers = editedTiers.map(t => 
+                          t.id === tier.id 
+                            ? { ...t, features: e.target.value.split('\n').filter(f => f.trim()) } 
+                            : t
+                        );
+                        setEditedTiers(newTiers);
+                      }}
+                    />
+                  </div>
 
-                <div className="mt-8 p-6 bg-muted/50 rounded-lg">
-                  <p className="text-sm text-muted-foreground text-center">
-                    Your generosity helps us continue our mission and impact lives in our community.
-                    All donations are tax-deductible.
-                  </p>
+                  <div>
+                    <Label className="mb-3 block">Sub-Tiers</Label>
+                    {tier.subTiers.map((subTier, index) => (
+                      <div key={index} className="grid grid-cols-3 gap-2 mb-2">
+                        <Input
+                          placeholder="Name"
+                          value={subTier.name}
+                          onChange={(e) => {
+                            const newTiers = editedTiers.map(t => 
+                              t.id === tier.id 
+                                ? { 
+                                    ...t, 
+                                    subTiers: t.subTiers.map((st, i) => 
+                                      i === index ? { ...st, name: e.target.value } : st
+                                    )
+                                  }
+                                : t
+                            );
+                            setEditedTiers(newTiers);
+                          }}
+                        />
+                        <Input
+                          placeholder="Price"
+                          value={subTier.price}
+                          onChange={(e) => {
+                            const newTiers = editedTiers.map(t => 
+                              t.id === tier.id 
+                                ? { 
+                                    ...t, 
+                                    subTiers: t.subTiers.map((st, i) => 
+                                      i === index ? { ...st, price: e.target.value } : st
+                                    )
+                                  }
+                                : t
+                            );
+                            setEditedTiers(newTiers);
+                          }}
+                        />
+                        <Input
+                          placeholder="Savings (optional)"
+                          value={subTier.savings || ''}
+                          onChange={(e) => {
+                            const newTiers = editedTiers.map(t => 
+                              t.id === tier.id 
+                                ? { 
+                                    ...t, 
+                                    subTiers: t.subTiers.map((st, i) => 
+                                      i === index ? { ...st, savings: e.target.value } : st
+                                    )
+                                  }
+                                : t
+                            );
+                            setEditedTiers(newTiers);
+                          }}
+                        />
+                      </div>
+                    ))}
+                  </div>
+
+                  <Button onClick={() => handleSaveTier(tier.id)} className="w-full">
+                    <Save className="w-4 h-4 mr-2" />
+                    Save {tier.name} Tier
+                  </Button>
                 </div>
               </div>
-            </div>
+            ))}
           </TabsContent>
 
           <TabsContent value="donations" className="space-y-6">
