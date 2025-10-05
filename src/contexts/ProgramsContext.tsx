@@ -49,43 +49,32 @@ const ProgramsContext = createContext<ProgramsContextType | undefined>(undefined
 
 const defaultTiers: ProgramTier[] = [
   {
-    id: "bronze",
-    name: "Bronze",
-    price: 5,
-    description: "Perfect for those starting their faith journey",
+    id: "online",
+    name: "Give Online",
+    price: 0,
+    description: "Support AGTV conveniently through secure online giving",
     features: [
-      "Early access to episodes",
-      "Monthly newsletter (Twi + English)",
-      "Community forum access",
-      "Basic prayer support"
-    ]
-  },
-  {
-    id: "silver",
-    name: "Silver",
-    price: 15,
-    description: "Enhanced experience for growing believers",
-    features: [
-      "All Bronze benefits",
-      "HD video downloads (Twi subtitles)",
-      "Exclusive live Q&A sessions",
-      "Priority prayer support",
-      "Monthly devotionals"
+      "Instant digital receipt",
+      "Secure payment processing",
+      "Multiple payment methods",
+      "Set up recurring donations",
+      "Tax-deductible contributions",
+      "Track your giving history"
     ],
     recommended: true
   },
   {
-    id: "gold",
-    name: "Gold",
-    price: 25,
-    description: "Premium support for dedicated partners",
+    id: "in-person",
+    name: "Give In Person",
+    price: 0,
+    description: "Make your contribution during service or at our office",
     features: [
-      "All Silver benefits",
-      "Direct pastor access (Accra studio)",
-      "Priority prayer chain",
-      "Exclusive village crusade invites",
-      "Quarterly retreats in Ghana",
-      "Personal mentorship (Twi/English)"
+      "Cash or check accepted",
+      "Give during Sunday service",
+      "Visit our office location",
+      "Personal receipt provided",
+      "Envelope giving available",
+      "Direct hand delivery"
     ]
   }
 ];
@@ -93,9 +82,9 @@ const defaultTiers: ProgramTier[] = [
 const defaultHeaderContent = {
   title: "Support AGTV",
   description: [
-    "AGTV is Ghana's 24-hour Christian television network, broadcasting from Accra to every region, village and hospital. Every cedi you give keeps the signal on air, produces fresh Twi/English Gospel content, and reaches millions who have never heard the name of Jesus.",
-    "When you subscribe you don't just watch — you partner. You fund village crusades in the Northern Region, youth outreaches in Kumasi, emergency relief in Takoradi, and the daily costs of our Accra studio uplink. In return you get early access, HD downloads with Twi subtitles, direct pastor chat, and the joy of knowing you are literally sending the Gospel into homes, hospitals, prisons and remote villages across Ghana.",
-    "Join the family today. Cancel anytime. 100 % of every cedi goes to ministry operations — no admin fees, no middle-men, just Jesus on air, 24/7."
+    "AGTV is Ghana's 24-hour Christian television network, broadcasting from Accra to every region, village and hospital. Your support keeps the signal on air, produces fresh Twi/English Gospel content, and reaches millions who have never heard the name of Jesus.",
+    "When you give, you don't just watch — you partner. You fund village crusades in the Northern Region, youth outreaches in Kumasi, emergency relief in Takoradi, and the daily costs of our Accra studio uplink. Together, we're sending the Gospel into homes, hospitals, prisons and remote villages across Ghana.",
+    "Join us today in making a difference. Choose your preferred way to give below. 100% of every cedi goes to ministry operations — no admin fees, no middle-men, just Jesus on air, 24/7."
   ]
 };
 

@@ -11,7 +11,8 @@ export const ProgramsGrid = () => {
 
   const handleTierSelect = (tierId: string) => {
     setSelectedTier(tierId);
-    alert(`You selected the ${tierId} tier! Payment integration coming soon.`);
+    const tierName = tierId === 'online' ? 'Give Online' : 'Give In Person';
+    alert(`You selected ${tierName}! ${tierId === 'online' ? 'Payment integration coming soon.' : 'Visit us during service or office hours.'}`);
   };
 
   return (
@@ -45,9 +46,9 @@ export const ProgramsGrid = () => {
         </div>
       </section>
 
-      {/*  SUBSCRIPTION TIERS  –  bigger, minimal, no captions  */}
+      {/*  GIVING OPTIONS  –  bigger, minimal, no prices  */}
       <section className="py-16 container mx-auto px-4">
-        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto">
+        <div className="grid grid-cols-1 md:grid-cols-2 gap-8 max-w-4xl mx-auto">
           {tiers.map((tier) => (
             <div
               key={tier.id}
@@ -68,11 +69,7 @@ export const ProgramsGrid = () => {
               )}
 
               <div className="text-center mb-6">
-                <h3 className="text-2xl font-bold mb-2">{tier.name}</h3>
-                <div className="text-4xl font-extrabold mb-2">
-                  ${tier.price}
-                  <span className="text-lg font-normal text-muted-foreground">/month</span>
-                </div>
+                <h3 className="text-2xl font-bold mb-4">{tier.name}</h3>
                 <p className="text-muted-foreground">{tier.description}</p>
               </div>
 
@@ -87,15 +84,15 @@ export const ProgramsGrid = () => {
 
               <Button
                 className={cn(
-                  "w-full",
-                  tier.recommended ? "bg-primary text-primary-foreground" : "bg-secondary"
+                  "w-full text-base py-6",
+                  tier.recommended ? "bg-primary text-primary-foreground hover:bg-primary/90" : "bg-secondary hover:bg-secondary/90"
                 )}
                 onClick={(e) => {
                   e.stopPropagation();
                   handleTierSelect(tier.id);
                 }}
               >
-                Choose {tier.name}
+                {tier.name === "Give Online" ? "Give Online Now" : "Learn More"}
               </Button>
             </div>
           ))}
@@ -103,8 +100,7 @@ export const ProgramsGrid = () => {
 
         <div className="text-center mt-12">
           <p className="text-sm text-muted-foreground">
-            All subscriptions auto-renew monthly. Cancel anytime.
-            100 % of proceeds go directly to ministry operations.
+            All donations are tax-deductible. 100% of proceeds go directly to ministry operations.
           </p>
         </div>
       </section>
