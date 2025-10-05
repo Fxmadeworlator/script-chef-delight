@@ -59,12 +59,12 @@ export const SchedulePage = () => {
   }, []);
 
   return (
-    <div className="min-h-screen pt-20 pb-16 bg-background">
+    <div className="min-h-screen bg-background">
       {hideVertCSS}
 
       {/* Hero Section with Overlay */}
       <div 
-        className="relative h-[400px] mb-12"
+        className="relative h-[400px] pt-20"
         style={{
           backgroundImage: `linear-gradient(rgba(0,0,0,0.6), rgba(0,0,0,0.7)), url("https://images.pexels.com/photos/1190297/pexels-photo-1190297.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1")`,
           backgroundSize: 'cover',
@@ -83,7 +83,7 @@ export const SchedulePage = () => {
         </div>
       </div>
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 pt-16 pb-16">
         {/* 3. TEXT CHANGED → "AGTV Guide" */}
         <div className="mb-6">
           <h1 className="text-4xl md:text-5xl font-bold text-foreground font-display">AGTV Guide</h1>

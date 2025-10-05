@@ -12,9 +12,9 @@ export const EventsPage = () => {
   };
 
   return (
-    <div className="min-h-screen pt-20 pb-16">
+    <div className="min-h-screen">
       {/* Hero Section with Background Image */}
-      <section className="relative py-20 px-4 text-white overflow-hidden mb-16">
+      <section className="relative py-20 px-4 text-white overflow-hidden pt-20">
         <img
           src="https://images.pexels.com/photos/8674576/pexels-photo-8674576.jpeg?auto=compress&cs=tinysrgb&w=1260&h=750&dpr=1"
           alt=""
@@ -33,7 +33,7 @@ export const EventsPage = () => {
         </div>
       </section>
 
-      <div className="container mx-auto px-4">
+      <div className="container mx-auto px-4 pb-16">
 
         {/* EVENT CARDS GRID */}
         <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
