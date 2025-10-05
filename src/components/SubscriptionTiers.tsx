@@ -15,43 +15,32 @@ interface Tier {
 
 const tiers: Tier[] = [
   {
-    id: "bronze",
-    name: "Bronze",
-    price: 5,
-    description: "Perfect for those starting their faith journey",
+    id: "online",
+    name: "Give Online",
+    price: 0,
+    description: "Support AGTV conveniently through secure online giving",
     features: [
-      "Early access to episodes",
-      "Monthly newsletter",
-      "Community forum access",
-      "Basic prayer support"
-    ]
-  },
-  {
-    id: "silver",
-    name: "Silver",
-    price: 15,
-    description: "Enhanced experience for growing believers",
-    features: [
-      "All Bronze benefits",
-      "Exclusive live Q&A sessions",
-      "HD video downloads",
-      "Priority prayer support",
-      "Monthly devotionals"
+      "Instant digital receipt",
+      "Secure payment processing",
+      "Monthly giving options",
+      "Tax-deductible contributions",
+      "Automatic recurring donations available",
+      "Multiple payment methods accepted"
     ],
     recommended: true
   },
   {
-    id: "gold",
-    name: "Gold",
-    price: 25,
-    description: "Premium support for dedicated partners",
+    id: "in-person",
+    name: "Give In Person",
+    price: 0,
+    description: "Make your contribution during service or at our office",
     features: [
-      "All Silver benefits",
-      "Direct pastor access",
-      "Priority prayer chain",
-      "Exclusive events",
-      "Quarterly retreats",
-      "Personal mentorship"
+      "Cash or check accepted",
+      "Give during Sunday service",
+      "Visit our office during business hours",
+      "Personal receipt provided",
+      "Envelope giving available",
+      "Direct hand delivery"
     ]
   }
 ];
@@ -61,7 +50,8 @@ export const SubscriptionTiers = () => {
 
   const handleTierSelect = (tierId: string) => {
     setSelectedTier(tierId);
-    alert(`You selected the ${tierId} tier! Payment integration coming soon.`);
+    const tierName = tierId === 'online' ? 'Give Online' : 'Give In Person';
+    alert(`You selected ${tierName}! ${tierId === 'online' ? 'Payment integration coming soon.' : 'Visit us during service or office hours.'}`);
   };
 
   return (
@@ -98,11 +88,7 @@ export const SubscriptionTiers = () => {
 
             <div className="text-center mb-6">
               <h3 className="text-2xl font-bold mb-2">{tier.name}</h3>
-              <div className="text-4xl font-extrabold mb-2">
-                ${tier.price}
-                <span className="text-lg font-normal text-muted-foreground">/month</span>
-              </div>
-              <p className="text-muted-foreground">{tier.description}</p>
+              <p className="text-muted-foreground mt-4">{tier.description}</p>
             </div>
 
             <ul className="space-y-3 mb-8">
