@@ -36,36 +36,34 @@ export const ClubSection = () => {
           </div>
 
           <h2 className="text-4xl md:text-5xl font-bold mb-6 text-foreground font-display">
-            Join AGTV Club 1000+
+            Support AGTV
           </h2>
           <p className="text-lg md:text-xl text-muted-foreground mb-12 max-w-4xl mx-auto leading-relaxed">
-            Join our exclusive Club 1000+ community and become a vital partner in keeping AGTV on air! Your monthly subscription ensures we continue reaching millions across Africa with transformative Gospel content, quality programming, and life-changing messages.
+            Join our community of partners and help spread the Gospel across Africa. Your support keeps AGTV on air and reaching millions with transformative content. Choose your preferred way to give below.
           </p>
           
-          {/* Membership Explanation */}
+          {/* Giving Methods Explanation */}
           <div className="bg-card rounded-xl p-8 mb-12 max-w-4xl mx-auto shadow-lg border">
-            <h3 className="text-2xl font-bold mb-4 text-foreground font-display">Choose Your Membership Level</h3>
+            <h3 className="text-2xl font-bold mb-4 text-foreground font-display">Choose Your Giving Method</h3>
             <p className="text-muted-foreground leading-relaxed mb-4">
-              Our Club 1000+ membership program offers three distinct levels of partnership, each designed to fit different commitment levels while maximizing your impact on Gospel broadcasting across Africa.
+              We offer two convenient ways to support AGTV's mission. Whether you prefer the convenience of online giving or the personal touch of giving in person, every contribution makes a difference.
             </p>
-            <div className="grid grid-cols-1 md:grid-cols-3 gap-4 text-sm">
-              <div className="text-center">
-                <div className="text-primary font-bold mb-1">Basic Membership</div>
-                <div className="text-muted-foreground">Perfect for individuals starting their partnership journey</div>
+            <div className="grid grid-cols-1 md:grid-cols-2 gap-6 text-sm">
+              <div className="text-center p-4 bg-primary/5 rounded-lg">
+                <Heart className="h-8 w-8 text-primary mx-auto mb-2" />
+                <div className="text-primary font-bold mb-1">Give Online</div>
+                <div className="text-muted-foreground">Fast, secure, and convenient digital giving with instant receipts and recurring options</div>
               </div>
-              <div className="text-center">
-                <div className="text-primary font-bold mb-1">Premium Membership</div>
-                <div className="text-muted-foreground">Ideal for committed supporters seeking deeper engagement</div>
-              </div>
-              <div className="text-center">
-                <div className="text-primary font-bold mb-1">Platinum Membership</div>
-                <div className="text-muted-foreground">For dedicated partners wanting maximum ministry impact</div>
+              <div className="text-center p-4 bg-muted/50 rounded-lg">
+                <HandHeart className="h-8 w-8 text-primary mx-auto mb-2" />
+                <div className="text-primary font-bold mb-1">Give In Person</div>
+                <div className="text-muted-foreground">Traditional giving during service or at our office with personal receipts</div>
               </div>
             </div>
           </div>
 
-          {/* Subscription Options */}
-          <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-12 items-stretch">
+          {/* Giving Options */}
+          <div className="grid grid-cols-1 md:grid-cols-2 gap-8 mb-12 items-stretch max-w-4xl mx-auto">
             {subscriptionOptions.map((option) => {
               const IconComponent = option.icon;
               return (
@@ -100,16 +98,13 @@ export const ClubSection = () => {
                     {option.frequency}
                   </div>
                   
-                  {/* Sub-tiers */}
-                  <div className="mb-6 space-y-2">
+                  {/* Giving Times/Methods */}
+                  <div className="mb-6 space-y-2 bg-muted/30 p-4 rounded-lg">
                     {option.subTiers.map((tier, index) => (
                       <div key={index} className="flex justify-between items-center text-sm">
-                        <span className="text-muted-foreground">{tier.name}</span>
+                        <span className="text-muted-foreground font-medium">{tier.name}</span>
                         <div className="text-right">
-                          <span className="font-semibold text-foreground">{tier.price}</span>
-                          {tier.savings && (
-                            <div className="text-xs text-primary">{tier.savings}</div>
-                          )}
+                          <span className="font-semibold text-foreground text-xs">{tier.price}</span>
                         </div>
                       </div>
                     ))}
@@ -132,13 +127,13 @@ export const ClubSection = () => {
                   
                   <Button 
                     className={cn(
-                      "w-full font-bold",
+                      "w-full font-bold text-base py-6",
                       option.featured 
-                        ? "bg-foreground text-primary hover:bg-foreground/90" 
-                        : "btn-primary"
+                        ? "bg-primary text-primary-foreground hover:bg-primary/90" 
+                        : "bg-secondary hover:bg-secondary/90"
                     )}
                   >
-                    Join Now
+                    {option.name === "Online" ? "Give Online Now" : "Learn More"}
                   </Button>
                 </div>
               );

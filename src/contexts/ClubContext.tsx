@@ -41,66 +41,46 @@ const ClubContext = createContext<ClubContextType | undefined>(undefined);
 
 const defaultTiers: ClubTier[] = [
   {
-    id: "basic",
-    icon: "Sprout",
-    amount: "₵200",
-    subTiers: [
-      { name: "Monthly", price: "₵200" },
-      { name: "Quarterly", price: "₵540", savings: "Save ₵60" },
-      { name: "Yearly", price: "₵2,000", savings: "Save ₵400" }
-    ],
-    frequency: "Monthly",
-    name: "Basic",
-    title: "Basic Club Member",
-    features: [
-      "Access to live streams",
-      "Monthly devotionals",
-      "AGTV club member badge",
-      "Weekly inspirational emails",
-      "Prayer request submissions"
-    ]
-  },
-  {
-    id: "premium",
+    id: "online",
     icon: "Heart",
-    amount: "₵500",
+    amount: "Flexible",
     subTiers: [
-      { name: "Monthly", price: "₵500" },
-      { name: "Quarterly", price: "₵1,350", savings: "Save ₵150" },
-      { name: "Yearly", price: "₵5,000", savings: "Save ₵1,000" }
+      { name: "One-time", price: "Any Amount" },
+      { name: "Monthly", price: "Recurring" },
+      { name: "Quarterly", price: "Every 3 Months" }
     ],
-    frequency: "Monthly",
-    name: "Premium",
-    title: "Premium Club Member",
+    frequency: "Choose Your Amount",
+    name: "Online",
+    title: "Give Online",
     featured: true,
     features: [
-      "All basic benefits",
-      "Exclusive premium content library",
-      "Monthly pastor Q&A sessions",
-      "Early access to new programs",
-      "Quarterly ministry impact reports",
-      "Priority prayer line access"
+      "Instant digital receipt",
+      "Secure payment processing",
+      "Multiple payment methods",
+      "Set up recurring donations",
+      "Tax-deductible contributions",
+      "Track your giving history"
     ]
   },
   {
-    id: "platinum",
-    icon: "Crown",
-    amount: "₵1,000",
+    id: "in-person",
+    icon: "HandHeart",
+    amount: "Flexible",
     subTiers: [
-      { name: "Monthly", price: "₵1,000" },
-      { name: "Quarterly", price: "₵2,700", savings: "Save ₵300" },
-      { name: "Yearly", price: "₵10,000", savings: "Save ₵2,000" }
+      { name: "During Service", price: "Sundays" },
+      { name: "Office Hours", price: "Mon-Fri 9AM-5PM" },
+      { name: "Special Events", price: "As Scheduled" }
     ],
-    frequency: "Monthly",
-    name: "Platinum",
-    title: "Platinum Club Member",
+    frequency: "Choose Your Method",
+    name: "In Person",
+    title: "Give In Person",
     features: [
-      "All premium benefits",
-      "Personal ministry consultation calls",
-      "Annual exclusive retreat invitations",
-      "Behind-the-scenes content access",
-      "Direct pastor communication line",
-      "Custom prayer and blessing videos"
+      "Cash or check accepted",
+      "Give during Sunday service",
+      "Visit our office location",
+      "Personal receipt provided",
+      "Envelope giving available",
+      "Direct hand delivery"
     ]
   }
 ];
