@@ -5,8 +5,11 @@ import { Label } from '@/components/ui/label';
 import { Textarea } from '@/components/ui/textarea';
 import { useClub } from '@/contexts/ClubContext';
 import { useToast } from '@/hooks/use-toast';
-import { LogOut, Crown, Save, Trash2 } from 'lucide-react';
+import { LogOut, Crown, Save, Trash2, Mail, CheckCircle2, XCircle } from 'lucide-react';
 import { Tabs, TabsContent, TabsList, TabsTrigger } from '@/components/ui/tabs';
+import { Badge } from '@/components/ui/badge';
+import { BarChart, Bar, XAxis, YAxis, CartesianGrid, Tooltip, Legend, ResponsiveContainer } from 'recharts';
+import { ChartContainer, ChartTooltip, ChartTooltipContent } from '@/components/ui/chart';
 
 interface ClubDashboardProps {
   onLogout: () => void;
@@ -44,6 +47,28 @@ export const ClubDashboard = ({ onLogout }: ClubDashboardProps) => {
       description: "Donation record removed successfully",
     });
   };
+
+  const handleRemindUnpaid = () => {
+    const unpaidDonors = donations.filter(d => !d.isPaid);
+    if (unpaidDonors.length === 0) {
+      toast({
+        title: "No Unpaid Donations",
+        description: "All donors have paid!",
+      });
+      return;
+    }
+    
+    const emails = unpaidDonors.map(d => d.email).join(', ');
+    toast({
+      title: "Reminder Sent",
+      description: `Reminders sent to ${unpaidDonors.length} unpaid donor(s): ${emails}`,
+    });
+  };
+
+  const chartData = stats.map(stat => ({
+    label: stat.label,
+    value: parseInt(stat.number) || 0
+  }));
 
   const formatCurrency = (amount: number) => {
     return new Intl.NumberFormat('en-US', {
@@ -194,12 +219,20 @@ export const ClubDashboard = ({ onLogout }: ClubDashboardProps) => {
 
           <TabsContent value="donations" className="space-y-6">
             <div className="bg-card rounded-lg p-6 border">
-              <h2 className="text-xl font-bold mb-4">Donation Records</h2>
+              <div className="flex justify-between items-center mb-4">
+                <h2 className="text-xl font-bold">Donation Records</h2>
+                <Button onClick={handleRemindUnpaid} variant="outline">
+                  <Mail className="w-4 h-4 mr-2" />
+                  Remind Unpaid
+                </Button>
+              </div>
               <div className="overflow-x-auto">
                 <table className="w-full">
                   <thead>
                     <tr className="border-b">
+                      <th className="text-left p-3 font-semibold">Status</th>
                       <th className="text-left p-3 font-semibold">Donor Name</th>
+                      <th className="text-left p-3 font-semibold">Email</th>
                       <th className="text-left p-3 font-semibold">Amount</th>
                       <th className="text-left p-3 font-semibold">Date</th>
                       <th className="text-left p-3 font-semibold">Frequency</th>
@@ -210,12 +243,26 @@ export const ClubDashboard = ({ onLogout }: ClubDashboardProps) => {
                   <tbody>
                     {donations.map((donation) => (
                       <tr key={donation.id} className="border-b hover:bg-muted/50">
+                        <td className="p-3">
+                          {donation.isPaid ? (
+                            <Badge variant="default" className="bg-green-500">
+                              <CheckCircle2 className="w-3 h-3 mr-1" />
+                              Paid
+                            </Badge>
+                          ) : (
+                            <Badge variant="destructive">
+                              <XCircle className="w-3 h-3 mr-1" />
+                              Unpaid
+                            </Badge>
+                          )}
+                        </td>
                         <td className="p-3">{donation.donorName}</td>
+                        <td className="p-3 text-sm text-muted-foreground">{donation.email}</td>
                         <td className="p-3 font-semibold text-primary">
                           {formatCurrency(donation.amount)}
                         </td>
                         <td className="p-3">{new Date(donation.date).toLocaleDateString()}</td>
-                        <td className="p-3">{donation.frequency}</td>
+                        <td className="p-3 capitalize">{donation.frequency}</td>
                         <td className="p-3">{donation.paymentMethod}</td>
                         <td className="p-3">
                           <Button
@@ -231,20 +278,72 @@ export const ClubDashboard = ({ onLogout }: ClubDashboardProps) => {
                   </tbody>
                 </table>
               </div>
-              <div className="mt-4 p-4 bg-muted rounded-lg">
-                <p className="text-sm text-muted-foreground">
-                  Total Donations: <span className="font-bold text-foreground">
-                    {formatCurrency(donations.reduce((sum, d) => sum + d.amount, 0))}
-                  </span>
-                </p>
+              <div className="mt-4 grid grid-cols-1 md:grid-cols-3 gap-4">
+                <div className="p-4 bg-muted rounded-lg">
+                  <p className="text-sm text-muted-foreground">
+                    Total Donations: <span className="font-bold text-foreground">
+                      {formatCurrency(donations.reduce((sum, d) => sum + d.amount, 0))}
+                    </span>
+                  </p>
+                </div>
+                <div className="p-4 bg-green-500/10 rounded-lg">
+                  <p className="text-sm text-muted-foreground">
+                    Paid: <span className="font-bold text-green-600">
+                      {formatCurrency(donations.filter(d => d.isPaid).reduce((sum, d) => sum + d.amount, 0))}
+                    </span>
+                    <span className="ml-2 text-xs">({donations.filter(d => d.isPaid).length} donors)</span>
+                  </p>
+                </div>
+                <div className="p-4 bg-red-500/10 rounded-lg">
+                  <p className="text-sm text-muted-foreground">
+                    Unpaid: <span className="font-bold text-red-600">
+                      {formatCurrency(donations.filter(d => !d.isPaid).reduce((sum, d) => sum + d.amount, 0))}
+                    </span>
+                    <span className="ml-2 text-xs">({donations.filter(d => !d.isPaid).length} donors)</span>
+                  </p>
+                </div>
               </div>
             </div>
           </TabsContent>
 
           <TabsContent value="stats" className="space-y-6">
             <div className="bg-card rounded-lg p-6 border">
-              <h2 className="text-xl font-bold mb-4">Club Statistics</h2>
+              <h2 className="text-xl font-bold mb-6">Club Statistics</h2>
+              
+              {/* Visual Chart */}
+              <div className="mb-8 h-[300px]">
+                <ChartContainer
+                  config={{
+                    value: {
+                      label: "Value",
+                      color: "hsl(var(--primary))",
+                    },
+                  }}
+                >
+                  <ResponsiveContainer width="100%" height="100%">
+                    <BarChart data={chartData}>
+                      <CartesianGrid strokeDasharray="3 3" />
+                      <XAxis 
+                        dataKey="label" 
+                        angle={-45}
+                        textAnchor="end"
+                        height={80}
+                      />
+                      <YAxis />
+                      <ChartTooltip content={<ChartTooltipContent />} />
+                      <Bar 
+                        dataKey="value" 
+                        fill="hsl(var(--primary))"
+                        radius={[8, 8, 0, 0]}
+                      />
+                    </BarChart>
+                  </ResponsiveContainer>
+                </ChartContainer>
+              </div>
+
+              {/* Edit Statistics */}
               <div className="space-y-4">
+                <h3 className="font-semibold">Edit Statistics</h3>
                 {editedStats.map((stat, index) => (
                   <div key={index} className="grid grid-cols-2 gap-4">
                     <div>

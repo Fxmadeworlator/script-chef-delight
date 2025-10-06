@@ -20,10 +20,12 @@ export interface ClubStats {
 export interface ClubDonation {
   id: string;
   donorName: string;
+  email: string;
   amount: number;
   date: string;
   frequency: string;
   paymentMethod: string;
+  isPaid: boolean;
 }
 
 interface ClubContextType {
@@ -95,42 +97,52 @@ const defaultDonations: ClubDonation[] = [
   {
     id: "don-1",
     donorName: "John Smith",
+    email: "john.smith@example.com",
     amount: 1000,
     date: "2024-01-15",
     frequency: "Monthly",
-    paymentMethod: "Credit Card"
+    paymentMethod: "Credit Card",
+    isPaid: true
   },
   {
     id: "don-2",
     donorName: "Sarah Johnson",
+    email: "sarah.j@example.com",
     amount: 500,
     date: "2024-01-18",
     frequency: "One-time",
-    paymentMethod: "Bank Transfer"
+    paymentMethod: "Bank Transfer",
+    isPaid: false
   },
   {
     id: "don-3",
     donorName: "Michael Brown",
+    email: "mbrown@example.com",
     amount: 2500,
     date: "2024-01-20",
     frequency: "Quarterly",
-    paymentMethod: "Check"
+    paymentMethod: "Check",
+    isPaid: true
   },
   {
     id: "don-4",
     donorName: "Emily Davis",
+    email: "emily.davis@example.com",
     amount: 750,
     date: "2024-01-22",
     frequency: "Monthly",
-    paymentMethod: "Credit Card"
+    paymentMethod: "Credit Card",
+    isPaid: false
   },
   {
     id: "don-5",
     donorName: "David Wilson",
+    email: "d.wilson@example.com",
     amount: 5000,
     date: "2024-01-25",
     frequency: "Annually",
-    paymentMethod: "Wire Transfer"
+    paymentMethod: "Wire Transfer",
+    isPaid: true
   },
 ];
 
