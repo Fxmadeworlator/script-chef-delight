@@ -61,6 +61,7 @@ export const ProgramsDashboard = ({ onLogout }: ProgramsDashboardProps) => {
   const [newNews, setNewNews] = useState({
     title: '',
     excerpt: '',
+    content: '',
     category: '',
     image: ''
   });
@@ -134,7 +135,7 @@ export const ProgramsDashboard = ({ onLogout }: ProgramsDashboardProps) => {
     };
     
     addNewsItem(news);
-    setNewNews({ title: '', excerpt: '', category: '', image: '' });
+    setNewNews({ title: '', excerpt: '', content: '', category: '', image: '' });
     toast({ title: "News Added", description: "News item created successfully" });
   };
 
@@ -379,7 +380,16 @@ export const ProgramsDashboard = ({ onLogout }: ProgramsDashboardProps) => {
                     value={newNews.excerpt}
                     onChange={(e) => setNewNews({ ...newNews, excerpt: e.target.value })}
                     placeholder="Brief description"
-                    rows={3}
+                    rows={2}
+                  />
+                </div>
+                <div>
+                  <Label>Full Content</Label>
+                  <Textarea
+                    value={newNews.content}
+                    onChange={(e) => setNewNews({ ...newNews, content: e.target.value })}
+                    placeholder="Full article content"
+                    rows={4}
                   />
                 </div>
                 <div>

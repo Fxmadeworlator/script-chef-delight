@@ -22,6 +22,7 @@ export const NewsDashboard = ({ onLogout }: NewsDashboardProps) => {
     id: '',
     title: '',
     excerpt: '',
+    content: '',
     category: '',
     date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }),
     image: '',
@@ -58,6 +59,7 @@ export const NewsDashboard = ({ onLogout }: NewsDashboardProps) => {
       id: '',
       title: '',
       excerpt: '',
+      content: '',
       category: '',
       date: new Date().toLocaleDateString('en-GB', { day: '2-digit', month: 'short', year: 'numeric' }),
       image: '',
@@ -122,7 +124,17 @@ export const NewsDashboard = ({ onLogout }: NewsDashboardProps) => {
                     <Textarea
                       value={formData.excerpt}
                       onChange={(e) => setFormData({ ...formData, excerpt: e.target.value })}
-                      rows={3}
+                      rows={2}
+                      required
+                    />
+                  </div>
+                  <div>
+                    <Label>Full Content</Label>
+                    <Textarea
+                      value={formData.content}
+                      onChange={(e) => setFormData({ ...formData, content: e.target.value })}
+                      rows={6}
+                      placeholder="Full article content (use double line breaks for paragraphs)"
                       required
                     />
                   </div>
