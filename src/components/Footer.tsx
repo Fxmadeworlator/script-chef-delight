@@ -31,11 +31,8 @@ export const Footer = () => {
           <div>
             <h3 className="text-primary font-bold text-xl mb-5 font-display">Quick Links</h3>
             <ul className="space-y-2">
-              <li><a href="#" className="text-gray-300 hover:text-primary transition-colors">Live Stream</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-primary transition-colors">Program Schedule</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-primary transition-colors">Prayer Requests</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-primary transition-colors">Testimonies</a></li>
-              <li><a href="#" className="text-gray-300 hover:text-primary transition-colors">Ministry Partners</a></li>
+              <li><a href="/live" className="text-gray-300 hover:text-primary transition-colors">Live Stream</a></li>
+              <li><a href="/schedule" className="text-gray-300 hover:text-primary transition-colors">Program Schedule</a></li>
             </ul>
           </div>
 

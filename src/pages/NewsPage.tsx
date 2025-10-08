@@ -1,7 +1,7 @@
 import { useState } from "react";
 import { Button } from "@/components/ui/button";
 import { useNews, NewsItem } from "@/contexts/NewsContext";
-import { ArrowLeft, Facebook, Twitter, Linkedin, Link as LinkIcon } from "lucide-react";
+import { ArrowLeft, Facebook, Twitter, Instagram, Link as LinkIcon } from "lucide-react";
 import { toast } from "sonner";
 
 export const NewsPage = () => {
@@ -22,9 +22,11 @@ export const NewsPage = () => {
       case "twitter":
         shareUrl = `https://twitter.com/intent/tweet?url=${encodeURIComponent(url)}&text=${encodeURIComponent(title)}`;
         break;
-      case "linkedin":
-        shareUrl = `https://www.linkedin.com/sharing/share-offsite/?url=${encodeURIComponent(url)}`;
-        break;
+      case "instagram":
+        // Instagram doesn't support direct sharing via URL, so we'll copy the link
+        navigator.clipboard.writeText(url);
+        toast.success("Link copied! Share it on Instagram.");
+        return;
       case "copy":
         navigator.clipboard.writeText(url);
         toast.success("Link copied to clipboard!");
@@ -105,11 +107,11 @@ export const NewsPage = () => {
               </Button>
               <Button
                 variant="outline"
-                onClick={() => handleShare("linkedin")}
+                onClick={() => handleShare("instagram")}
                 className="flex items-center gap-2"
               >
-                <Linkedin className="h-4 w-4" />
-                LinkedIn
+                <Instagram className="h-4 w-4" />
+                Instagram
               </Button>
               <Button
                 variant="outline"
